@@ -143,7 +143,7 @@ class RatePlanController extends Controller
 
         $events = [];
 
-        $rateTypes = ['EP' => 1, 'CP' => 2, 'MAP' => 3];
+        $rateTypes = ['EP' => 1, 'CP' => 2, 'MAP' => 3,'AP'=>4];
 
         foreach ($ratePlans as $ratePlan) {
 
@@ -154,6 +154,8 @@ class RatePlanController extends Controller
                     'EP'            => $ratePlan->total_amount_ep,
                     'CP'            => $ratePlan->total_amount_cp,
                     'MAP'           => $ratePlan->total_amount_map,
+                    'AP'           => $ratePlan->total_amount_ap,
+
                 };
 
                 $events[] = [
@@ -166,6 +168,7 @@ class RatePlanController extends Controller
                         'total_amount_ep' => $ratePlan->total_amount_ep,
                         'total_amount_cp' => $ratePlan->total_amount_cp,
                         'total_amount_map' => $ratePlan->total_amount_map,
+                        'total_amount_ap' => $ratePlan->total_amount_ap,
                         'sortOrder' => $sortOrder,
                     ],
                 ];
@@ -180,6 +183,7 @@ class RatePlanController extends Controller
                     'total_amount_ep' => $ratePlan->total_amount_ep,
                     'total_amount_cp' => $ratePlan->total_amount_cp,
                     'total_amount_map' => $ratePlan->total_amount_map,
+                    'total_amount_ap' => $ratePlan->total_amount_ap,
                     'sortOrder' => 4,
 
                 ],
@@ -229,18 +233,21 @@ class RatePlanController extends Controller
         $ratePlan->b2b_rate_ep          = $request->b2b_rate_ep;
         $ratePlan->b2b_rate_cp          = $request->b2b_rate_cp;
         $ratePlan->b2b_rate_map         = $request->b2b_rate_map;
+        $ratePlan->b2b_rate_ap         = $request->b2b_rate_ap;
         $ratePlan->markup_ep            = $request->markup_ep;
         $ratePlan->markup_cp            = $request->markup_cp;
         $ratePlan->markup_map           = $request->markup_map;
+        $ratePlan->markup_ap           = $request->markup_ap;
         $ratePlan->total_amount_ep      = $request->b2b_rate_ep + ($request->markup_ep ?? 0);
         $ratePlan->total_amount_cp      = $request->b2b_rate_cp + ($request->markup_cp ?? 0);
         $ratePlan->total_amount_map     = $request->b2b_rate_map + ($request->markup_map ?? 0);
+        $ratePlan->total_amount_ap     = $request->b2b_rate_ap + ($request->markup_ap ?? 0);
         $ratePlan->non_refundable_rate  = $request->non_refundable_rate;
         $ratePlan->weekly_rate          = $request->weekly_rate;
         $ratePlan->availability         = $request->availability ?? 0;
         $ratePlan->status               = 'active';
         $ratePlan->save();
-        return response()->json(['status' => 200, 'message' => 'Rate Plan Saved Successfully!'], 200);
+        return response()->json(['status' => 200, 'message' => 'Rate Plan Saved Successfully!','redirect'=>'index'], 200);
     }
 
 
@@ -254,6 +261,8 @@ class RatePlanController extends Controller
 
     public function showExtraBed(Request $request)
     {
+
+
         $planId = decode($request->planId);
         $ratePlan = RatePlan::find($planId);
         $html =  view('rateplans.show_extra_bed', compact('ratePlan'))->render();
@@ -346,7 +355,7 @@ class RatePlanController extends Controller
                 'min_child_age'           => $request->min_child_age ?? 0,
                 'child_with_no_bed'       => $request->child_with_no_bed == 'on' ? 1 : 0,
             ]);
-            $plans = ['ep', 'cp', 'map'];
+            $plans = ['ep', 'cp', 'map','ap'];
             foreach ($plans as $plan) {
 
                 RatePlanConfig::updateOrCreate(

@@ -308,6 +308,81 @@
         </div>
 
     </div>
+
+    <!-- AP Rates -->
+    <div class="row mb-5 py-1 align-items-center" id="ap_rates">
+        <div class="col-sm-3">
+            <div class="d-flex flex-column">
+                <span class="text-color fs-7 fw-bold">AP Rates</span>
+                <span class="text-color-secondary fw-semibold fs-8">Includes room, breakfast,lunch & dinner</span>
+            </div>
+        </div>
+        <div class="col-sm-4 mt-4 mt-sm-0">
+        </div>
+        <div class="col-sm-4 mt-4 mt-sm-0">
+        </div>
+
+        <div class="col-sm-3 no_of_extra_person hidden-div">
+            <span class="text-color text-sm">Extra Person Rates & Markup</span>
+        </div>
+
+        <div class="col-sm-4 mt-4 mt-sm-0 no_of_extra_person hidden-div">
+            <div class="input-group input-group-solid">
+                <span class="input-group-text bg-dark-gray-f2 text-color-secondary" id="basic-addon3">₹</span>
+                <input type="number" class="form-control form-control-solid text-color-secondary"
+                    name="extra_person_price[ap]" placeholder="Extra Person Rate" value="">
+            </div>
+        </div>
+
+        <div class="col-sm-4 mt-4 mt-sm-0 no_of_extra_person hidden-div">
+            <div class="input-group input-group-solid">
+                <span class="input-group-text bg-dark-gray-f2 text-color-secondary" id="basic-addon3">₹</span>
+                <input type="number" class="form-control form-control-solid text-color-secondary"
+                    name="extra_person_markup[ap]" placeholder="Extra Person Markup" value="" />
+            </div>
+        </div>
+
+        <div class="col-sm-3 child_with_bed hidden-div">
+            <span class="text-color text-sm">Child with Bed Rates & Markup</span>
+        </div>
+
+        <div class="col-sm-4 mt-4 mt-sm-0 child_with_bed hidden-div">
+            <div class="input-group input-group-solid">
+                <span class="input-group-text bg-dark-gray-f2 text-color-secondary" id="basic-addon3">₹</span>
+                <input type="number" class="form-control form-control-solid text-color-secondary"
+                    name="child_with_bed_price[ap]" placeholder="Child with Bed Rate" value="">
+            </div>
+        </div>
+
+        <div class="col-sm-4 mt-4 mt-sm-0 child_with_bed hidden-div">
+            <div class="input-group input-group-solid">
+                <span class="input-group-text bg-dark-gray-f2 text-color-secondary" id="basic-addon3">₹</span>
+                <input type="number" class="form-control form-control-solid text-color-secondary"
+                    name="child_with_bed_markup[ap]" placeholder="Child with Bed Markup" value="" />
+            </div>
+        </div>
+
+        <div class="col-sm-3 child_with_no_bed hidden-div">
+            <span class="text-color text-sm">Child with No Bed Rates & Markup</span>
+        </div>
+
+        <div class="col-sm-4 mt-4 mt-sm-0 child_with_no_bed hidden-div">
+            <div class="input-group input-group-solid">
+                <span class="input-group-text bg-dark-gray-f2 text-color-secondary" id="basic-addon3">₹</span>
+                <input type="number" class="form-control form-control-solid text-color-secondary"
+                    name="child_with_no_bed_price[ap]" placeholder="Child with No Bed Rate" value="">
+            </div>
+        </div>
+
+        <div class="col-sm-4 mt-4 mt-sm-0 child_with_no_bed hidden-div">
+            <div class="input-group input-group-solid">
+                <span class="input-group-text bg-dark-gray-f2 text-color-secondary" id="basic-addon3">₹</span>
+                <input type="number" class="form-control form-control-solid text-color-secondary"
+                    name="child_with_no_bed_markup[ap]" placeholder="Child with No Bed Markup" value=""/>
+            </div>
+        </div>
+
+    </div>
     <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">Save</button>
     </div>

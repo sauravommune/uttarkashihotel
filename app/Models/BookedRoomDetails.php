@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class BookedRoomDetails extends Model
 {
     //
-    protected $guarded= ['id'];
+    protected $guarded = ['id'];
     protected $fillable = [];
 
     protected $appends = ['plan_name'];
 
-    public function roomDetails(){
-        return $this->hasOne(Room::class,'id','room_id');
+    public function roomDetails()
+    {
+        return $this->hasOne(Room::class, 'id', 'room_id');
     }
-    public function roomCategory(){
-        return $this->hasOne(RoomCategory::class,'id','room_category');
+    public function roomCategory()
+    {
+        return $this->hasOne(RoomCategory::class, 'id', 'room_category');
     }
 
     public function getPlanNameAttribute()
@@ -29,6 +31,8 @@ class BookedRoomDetails extends Model
                 return 'CP';
             case 'With Breakfast Dinner':
                 return 'MAP';
+            case 'With Breakfast Lunch Dinner':
+                return 'AP';
             default:
                 return 'N/A';
         }

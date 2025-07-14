@@ -380,3 +380,34 @@ if (!function_exists('personExtraBedPriceMap')) {
         ];
     }
 }
+
+
+if (!function_exists('personExtraBedPriceAp')) {
+    function personExtraBedPriceAp($ratePlans)
+    {
+        $totalPrice = 0;
+        $totalMarkup = 0;
+        $totalExtraPrice = 0;
+        $count = 0;
+
+        foreach ($ratePlans as $ratePlan) {
+            $extraPerson = $ratePlan->RatePlanConfig->where('plan_type', 'ap')->first();
+
+            if ($extraPerson && $extraPerson->extra_person_price > 0) {
+                $count++;
+                $extraPersonPrice = $extraPerson->extra_person_price ?? 0;
+                $extraPersonMarkup = $extraPerson->extra_person_markup ?? 0;
+                $totalPrice += $extraPersonPrice;
+                $totalMarkup += $extraPersonMarkup;
+                $totalExtraPrice += ($extraPersonPrice + $extraPersonMarkup);
+            }
+        }
+
+        return [
+            'ap_extra_person_price' => $totalPrice,
+            'ap_extra_person_markup' => $totalMarkup,
+            'ap_total_extra_person_price' => $totalExtraPrice,
+            'ap_average_extra_person_price' => $count > 0 ? round($totalExtraPrice / $count, 2) : 0,
+        ];
+    }
+}

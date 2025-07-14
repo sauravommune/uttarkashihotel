@@ -21,10 +21,11 @@ class RatePlansRepository extends BaseRepository
 
     public function savePlans(RatePlansRequest $request)
     {
+
         $startDate = Carbon::createFromFormat('Y-m-d', $request->start_date);
         $endDate = Carbon::createFromFormat('Y-m-d', $request->end_date);
         $daysNumbers = $request->days??[0,1,2,3,4,5,6];
-        $plans = ['ep', 'cp', 'map'];
+        $plans = ['ep', 'cp', 'map','ap'];
 
         while ($startDate <= $endDate) {
 
@@ -42,12 +43,15 @@ class RatePlansRepository extends BaseRepository
             $this->ratePlan->b2b_rate_ep            = $request->b2b_rate_ep;
             $this->ratePlan->b2b_rate_cp            = $request->b2b_rate_cp;
             $this->ratePlan->b2b_rate_map           = $request->b2b_rate_map;
+            $this->ratePlan->b2b_rate_ap           = $request->b2b_rate_ap;
             $this->ratePlan->markup_ep              = $request->markup_ep;
             $this->ratePlan->markup_cp              = $request->markup_cp;
             $this->ratePlan->markup_map             = $request->markup_map;
+            $this->ratePlan->markup_ap             = $request->markup_ap;
             $this->ratePlan->total_amount_ep        = $request->b2b_rate_ep + ($request->markup_ep ?? 0);
             $this->ratePlan->total_amount_cp        = $request->b2b_rate_cp + ($request->markup_cp ?? 0);
             $this->ratePlan->total_amount_map       = $request->b2b_rate_map + ($request->markup_map ?? 0);
+            $this->ratePlan->total_amount_ap       = $request->b2b_rate_ap + ($request->markup_ap ?? 0);
             $this->ratePlan->non_refundable_rate    = $request->non_refundable_rate;
             $this->ratePlan->margin_updated_on      = $request->margin_updated_on;
             $this->ratePlan->room_type              = $request->room_type;
@@ -66,7 +70,9 @@ class RatePlansRepository extends BaseRepository
             $this->ratePlan->save();
 
             
-            if( $request->is_extra_person_allowed == 'on' ||  $request->child_with_bed == 'on' || $request->child_with_no_bed == 'on'){
+            if($request->is_extra_person_allowed == 'on' ||  $request->child_with_bed == 'on' || $request->child_with_no_bed == 'on'){
+
+                // dd($this->ratePlan);
                 $this->ratePlan->room->update([
                     'extra_persons' => $request->no_of_extra_person??0
                 ]);
@@ -127,7 +133,7 @@ class RatePlansRepository extends BaseRepository
 
     public function getRatePlans($startDate, $endDate, $hotel, $roomType)
     {
-        $query = RatePlan::where('hotel_id', $hotel)
+        $query = RatePlan::with(['RatePlanConfig'])->where('hotel_id', $hotel)
             ->where('room_type', $roomType)
             // ->whereBetween('pricing_date', [$startDate, $endDate])
             ->where('pricing_date', '>=', $startDate)->where('pricing_date', '<', $endDate)

@@ -34,8 +34,7 @@ span.select2-dropdown.custom-dropdown-class.select2-dropdown--below {
     }
 }
 </style>
-{{-- <section class="top-bg lazy bg-image-style d-none d-xl-block" data-bg="{{ asset('assets/front/images/search-result.png') }}"
-id="top-bg-class"></section> --}}
+
 <section class="top-bg lazy bg-image-style " data-bg="{{ asset('assets/front/images/search-result.png') }}"
     id="top-bg-class"></section>
 <section class="top-bg top-bg-II lazy bg-image-style bg-image-style-II d-block d-xl-none"
@@ -353,10 +352,9 @@ id="top-bg-class"></section> --}}
                         </ul>
                     </div>
                     <div class="col-5 p-0">
-                        <div class="d-flex justify-content-between w-100">
+                        <div class="d-flex justify-content-end justify-content-md-between w-100 flex-wrap gap-2">
                             <div class="d-flex align-items-center">
                                 <div class="p-btn">
-
                                     @php
                                     $parkingClass = '';
                                     $available = '';
@@ -379,7 +377,7 @@ id="top-bg-class"></section> --}}
                                 </div>
                                 <div class="rating mx-0 ms-2 border-0">
                                     <div class="d-flex align-items-center mx-0 px-0 pe-2">
-                                        <p><b>{{intval($hotelDetails['details']['rating'])??''}}</b><span
+                                        <p class="d-flex flex-wrap align-items-center"><b>{{intval($hotelDetails['details']['rating'])??''}}</b><span
                                                 class="bi bi-star-fill fs-8 text-warning rated pe-2 ps-1"></span><b
                                                 class=>Property</b></p>
 
@@ -389,8 +387,7 @@ id="top-bg-class"></section> --}}
                             </div>
                             <div class="d-block d-sm-block d-md-block  d-lg-block d-xl-none ">
                                 {{-- @if ($hotelDetails['details']?->sold_out == 1 || empty($allAvailableRoom)) --}}
-                             @if ($hotelDetails['details']?->sold_out == 1 || (int)$hotelDetails['availability'] < (int)$hotelDetails['totalRoom'])
-
+                                @if ($hotelDetails['details']?->sold_out == 1 || (int)$hotelDetails['availability'] < (int)$hotelDetails['totalRoom'])
                                 <div class="text-end">
                                     <span class="sold-out">Sold Out</span>
                                 </div>
@@ -435,10 +432,9 @@ id="top-bg-class"></section> --}}
                 </div>
 
                 <div class="btn-section mt-xl-3 mt-2">
-                    <div class="d-flex align-items-center">
-                        {{-- @if ($hotelDetails['details']?->sold_out == 1 || empty($allAvailableRoom)) --}}
-                         @if ($hotelDetails['details']?->sold_out == 1 || (int)$hotelDetails['availability'] < (int)$hotelDetails['totalRoom'])
-
+                    <div class="d-flex align-items-center">   
+                       {{-- @if ($hotelDetails['details']?->sold_out == 1 || empty($allAvailableRoom)) --}}
+                        @if ($hotelDetails['details']?->sold_out == 1 ||(int)$hotelDetails['availability'] < (int)$hotelDetails['totalRoom'])
                         <div class="text-end d-none d-sm-none d-md-none  d-lg-none d-xl-block">
                             <span class="sold-out">Sold Out</span>
                         </div>
@@ -536,6 +532,8 @@ id="top-bg-class"></section> --}}
     <!-- copied section -->
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-9" id="target_div">
         
+
+        {{-- @dd($allAvailableRoom) --}}
         <div class="choose-room-section mt-xl-3 mt-2">
             <div class="title py-2">
                 <h2 class="mb-xl-0 mb-3">Choose your room</h2>
@@ -655,8 +653,7 @@ id="top-bg-class"></section> --}}
 
                 <div class="col  repeat-section mb-xl-0 mb-4 d-flex align-items-center">
                     <div class="btn-box">
-                        <button class="btn btn-outline-primary" id="clickRoomSearch" title="Search"><span
-                                class="icon-search-1 pe-2"></span>Search</button>
+                        <button class="btn btn-outline-primary" id="clickRoomSearch" title="Search"><span class="icon-search-1 pe-2"></span>Search</button>
                     </div>
                 </div>
             </div>
@@ -762,8 +759,7 @@ id="top-bg-class"></section> --}}
                         </div>
                         @else
                         <div class="my-2">
-                            <button class="btn btn-outline-primary btn-block w-100">Book
-                                Now</button>
+                            <button class="btn btn-outline-primary btn-block w-100">Book Now</button>
                         </div>
                         @endif
                     </div>
@@ -1076,6 +1072,7 @@ id="top-bg-class"></section> --}}
         </div>
     </div>
 </div>
+
 {{-- Nearest Location modal Create --}}
 <div class="modal fade hotel-amenities" id="nearest-location" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel">
@@ -1222,6 +1219,7 @@ id="top-bg-class"></section> --}}
 </div>
 
 @endsection
+
 
 
 @section('scripts')
@@ -1504,6 +1502,38 @@ $(document).on("click", ".total_price_with_break_fast_and_dinner", function() {
     updateTotal($input, amount, roomType, category, roomId, roomTypeId);
 });
 
+
+$(document).on("click", ".total_price_with_break_fast_lunch_and_dinner", function() {
+
+    var currentValue = 0;
+    $(this).parents('.parent-section').find('input[type="number"]').each(function() {
+        currentValue += (parseInt($(this).val()) || 0);
+    });
+    var availability = parseInt($(this).data('availability'));
+    // $('small.availability-error').text('');
+     $(this).closest('.room-section').find('small.availability-error').text('');
+    if (currentValue >= availability) {
+       // $('small.availability-error').text('Only ' + availability + ' rooms are available');
+         $(this).closest('.room-section').find('small.availability-error').text('Only ' + availability + ' rooms are available');
+         return;
+    }
+
+    var section = $(this).data("section");
+    $(`#break-fast-lunch-dinner-box-${section}`).removeClass("d-none");
+    $(`#select-break-fast-lunch-dinner-box-${section}`).addClass("d-none");
+    var $input = $(`#section-break-fast-lunch-dinner-box-${section}`).find("input[type='number']");
+    var roomType = $(`#section-break-fast-lunch-dinner-box-${section}`).data('type');
+    var roomTypeId = $(`#section-break-fast-lunch-dinner-box-${section}`).data('type-id');
+    var category = $(`#section-break-fast-lunch-dinner-box-${section}`).data('category');
+    var amount = $(`#section-break-fast-lunch-dinner-box-${section}`).data('amount');
+    var roomId = $(`#section-break-fast-lunch-dinner-box-${section}`).data('room-id');
+    var quantity = parseInt($input.val());
+    if (quantity == 0) {
+        $input.val(1);
+    }
+    updateTotal($input, amount, roomType, category, roomId, roomTypeId);
+});
+
 $(document).on("click", ".plusBtn", function() {
 
     var $input = $(this).closest(
@@ -1551,25 +1581,15 @@ $(document).on("click", ".minusBtn", function() {
     // $('small.availability-error').text('');
      $(this).closest('.room-section').find('small.availability-error').text('');
 
-    var $input = $(this).closest(
-        ".quantity-section").find(
-        "input[type='number']");
+    var $input = $(this).closest(".quantity-section").find("input[type='number']");
 
-    var roomType = $(this).closest(
-        ".quantity-section"
-    ).data('type');
+    var roomType = $(this).closest(".quantity-section").data('type');
 
-    var roomTypeId = $(this).closest(
-        ".quantity-section"
-    ).data('type-id');
+    var roomTypeId = $(this).closest(".quantity-section").data('type-id');
 
-    var category = $(this).closest(
-        ".quantity-section"
-    ).data('category');
+    var category = $(this).closest(".quantity-section").data('category');
 
-    var roomId = $(this).closest(
-        ".quantity-section"
-    ).data('room-id');
+    var roomId = $(this).closest(".quantity-section").data('room-id');
 
     var currentValue = parseInt($input.val()) || 0;
     var amount = $(this).data('amount');
@@ -1591,6 +1611,10 @@ $(document).on("click", ".minusBtn", function() {
         } else if (type == "Room Only") {
             $(`#only-room-box-${section}`).addClass("d-none");
             $(`#select-only-room-box-${section}`).removeClass("d-none");
+        } else if (type == "With Breakfast Lunch Dinner") {
+
+            $(`#break-fast-lunch-dinner-box-${section}`).addClass("d-none");
+            $(`#select-break-fast-lunch-dinner-box-${section}`).removeClass("d-none");
         }
     
         updateTotal($input, amount, roomType, category, roomId, roomTypeId);
@@ -1767,10 +1791,12 @@ function initializeMultipleSliders(sliderConfigs) {
 
 $(document).ready(function() {
     $('#searchBtn').on('click', function() {
+        $('#searchBtn').on('click', function() {
         var cityName = $('#data-city-name').data('city_name').toLowerCase();;
         var url = `{{ url('hotels-in-') }}${cityName}/`;
         $('#searchForm').attr('action', url);
         $('#searchForm').submit();
+    });
     });
 
     $('body').on('click', 'a[data-bs-target="#exampleModalToggle3"]', function() {

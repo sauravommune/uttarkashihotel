@@ -158,23 +158,13 @@
                         <div class="row pb-5" id="extra_bed_config">
                             <div class="col-sm-3"></div>
                             <div class="col-md-2 no_of_extra_person hidden-div">
-                                <input type="number"
-                                    class="form-control text-color-secondary"
-                                    name="no_of_extra_person" placeholder="No of Allowed Persons"
-                                    value="{{ old('no_of_extra_person') }}" />
+                                <input type="number" class="form-control text-color-secondary" name="no_of_extra_person" placeholder="No of Allowed Persons" value="{{ old('no_of_extra_person') }}" />
                             </div>
                             <div class="col-md-2 child_with_bed hidden-div">
-                                <input type="number"
-                                    class="form-control text-color-secondary"
-                                    name="min_child_age" placeholder="Minimum Child Age"
-                                    value="{{ old('min_child_age') }}" />
+                                <input type="number" class="form-control text-color-secondary" name="min_child_age" placeholder="Minimum Child Age" value="{{ old('min_child_age') }}" />
                             </div>
                         </div>
-
-
-
-
-
+                        
                         <!-- EP Rates -->
                         <div class="row mb-5 py-1 align-items-center" id="ep_rates">
                             <div class="col-sm-3">
@@ -281,10 +271,6 @@
                             </div>
 
                         </div>
-
-
-
-
 
 
                         <!-- CP Rates -->
@@ -401,10 +387,6 @@
 
 
 
-
-
-
-
                         <!-- MAP Rates -->
                         <div class="row mb-5 py-1 align-items-center" id="map_rates">
                             <div class="col-sm-3">
@@ -517,11 +499,116 @@
                             </div>
                         </div>
 
+                           <!-- AP Rates -->
+                        <div class="row mb-5 py-1 align-items-center" id="ap_rates">
+                            <div class="col-sm-3">
+                                <div class="d-flex flex-column">
+                                    <span class="text-color fs-7 fw-bold">AP Rates</span>
+                                    <span class="text-color-secondary fw-semibold fs-8">Includes room, breakfast,lunch & dinner</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt-4 mt-sm-0">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="b2b_rate_ap" placeholder="Enter AP rate"
+                                        value="{{ old('b2b_rate_ap') }}">
+                                </div>
+                                @error('b2b_rate_ap')
+                                <span class="text-danger mt-1 d-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-4 mt-4 mt-sm-0">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="markup_ap" placeholder="Enter AP Markup"
+                                        value="{{ old('markup_ap') }}">
+                                </div>
+                                @error('markup_ap')
+                                <span class="text-danger mt-1 d-block">{{ $message }}</span>
+                                @enderror
+                            </div>
 
+                            <div class="col-sm-3 no_of_extra_person hidden-div">
+                                <span class="text-color text-sm">Extra Person Rates & Markup</span>
+                            </div>
 
+                            <div class="col-sm-4 mt-4 mt-sm-0 no_of_extra_person hidden-div">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="extra_person_price[ap]" placeholder="Extra Person Rate"
+                                        value="">
+                                </div>
+                            </div>
 
+                            <div class="col-sm-4 mt-4 mt-sm-0 no_of_extra_person hidden-div">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="extra_person_markup[ap]" placeholder="Extra Person Markup" />
+                                </div>
+                            </div>
 
+                            <div class="col-sm-3 child_with_bed hidden-div">
+                                <span class="text-color text-sm">Child with Bed Rates & Markup</span>
+                            </div>
 
+                            <div class="col-sm-4 mt-4 mt-sm-0 child_with_bed hidden-div">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="child_with_bed_price[ap]" placeholder="Child with Bed Rate"
+                                        value="">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-4 mt-sm-0 child_with_bed hidden-div">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="child_with_bed_markup[ap]" placeholder="Child with Bed Markup" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 child_with_no_bed hidden-div">
+                                <span class="text-color text-sm">Child with No Bed Rates & Markup</span>
+                            </div>
+
+                            <div class="col-sm-4 mt-4 mt-sm-0 child_with_no_bed hidden-div">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="child_with_no_bed_price[ap]" placeholder="Child with No Bed Rate"
+                                        value="">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-4 mt-sm-0 child_with_no_bed hidden-div">
+                                <div class="input-group input-group-solid">
+                                    <span class="input-group-text bg-dark-gray-f2 text-color-secondary"
+                                        id="basic-addon3">₹</span>
+                                    <input type="number"
+                                        class="form-control form-control-solid text-color-secondary"
+                                        name="child_with_no_bed_markup[ap]" placeholder="Child with No Bed Markup" />
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Non-Refundable Rate -->
                         <div class="row mb-5 py-1">

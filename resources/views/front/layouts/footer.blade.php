@@ -13,21 +13,21 @@
                                 <div class="modal-inner">
                                     <div class="logo text-center mb-3">
                                         <img decoding="async"
-                                            data-src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}" class="lazy"
-                                            alt="logo" height="" width="" title="logo">
+                                            data-src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}"
+                                            class="lazy" alt="logo" height="" width="" title="logo">
                                     </div>
                                     <div class="modal-title text-center">
                                         <p>Login</p>
                                         <span>Please Sign In to your account</span>
                                     </div>
                                     <div class="form-part mt-4">
-                                        <form action="{{route('login')}}" method="post" class="global-ajax-form"
+                                        <form action="{{ route('login') }}" method="post" class="global-ajax-form"
                                             data-modal-form="#loginModel" id="loginM">
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                                <input type="text" class="form-control" placeholder="Enter your email"
-                                                    name="email" value="">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Enter your email" name="email" value="">
                                             </div>
                                             <div class="mb-4">
                                                 <label for="Password" class="form-label">Password</label>
@@ -41,8 +41,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {!! RecaptchaV3::field('login') !!}
-                                            <input type="hidden" name="login_type" value="{{encode('front')}}">
+                                            @if (app()->environment() !== 'local')
+                                                {!! RecaptchaV3::field('login') !!}
+                                            @endif
+                                            <input type="hidden" name="login_type" value="{{ encode('front') }}">
                                             <div class="mb-3">
                                                 <div
                                                     class="d-flex justify-content-between align-items-center keep-logged">
@@ -84,14 +86,15 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-11 col-md-11 mb-4 my-4">
                         <div class="google-sign-up">
-                            <a href="{{route('google.login')}}" class="btn btn-primary" title="login">
+                            <a href="{{ route('google.login') }}" class="btn btn-primary" title="login">
                                 <div class="d-flex justify-content-center">
 
                                     <div class="d-flex align-items-center text-center">
                                         <div>
                                             <img decoding="async"
                                                 src="{{ asset('assets/front/images/google-icon.png') }}"
-                                                class="lazy mx-2" alt="" height="" width="" title="">
+                                                class="lazy mx-2" alt="" height="" width=""
+                                                title="">
                                         </div>
                                         <div>
                                             Sign In with Google
@@ -116,7 +119,8 @@
             <div class="modal-content ">
                 <div class="modal-outer">
                     <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -124,8 +128,9 @@
                                 <div class="modal-inner">
                                     <div class="logo text-center mb-3">
                                         <img decoding="async"
-                                            data-src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}" class="lazy"
-                                            alt="logo" height="" width="" title="logo">
+                                            data-src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}"
+                                            class="lazy" alt="logo" height="" width=""
+                                            title="logo">
                                     </div>
                                     <div class="modal-title text-center">
                                         <p>
@@ -136,7 +141,8 @@
                                         </span>
                                     </div>
                                     <div class="form-part">
-                                        <form action="{{route('register')}}" method="post" class="global-ajax-form">
+                                        <form action="{{ route('register') }}" method="post"
+                                            class="global-ajax-form">
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Full Name</label>
@@ -144,9 +150,10 @@
                                                     placeholder="Enter your full name" name="name">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                                <input type="email" class="form-control" placeholder="Enter your email"
-                                                    name="email">
+                                                <label for="exampleInputEmail1" class="form-label">Email
+                                                    address</label>
+                                                <input type="email" class="form-control"
+                                                    placeholder="Enter your email" name="email">
                                             </div>
 
                                             <div class="row">
@@ -167,8 +174,9 @@
                                                 <div class="mb-2 col-md-6 col-12">
                                                     <label for="password" class="form-label">Confirm Password</label>
                                                     <div class="password-icon">
-                                                        <input type="password" class="form-control" id="confirmPassword"
-                                                            placeholder="Confirm Password" name="password_confirmation">
+                                                        <input type="password" class="form-control"
+                                                            id="confirmPassword" placeholder="Confirm Password"
+                                                            name="password_confirmation">
                                                         <div class="icon-show">
                                                             <span toggle="#password-field_reg"
                                                                 class="material-symbols-outlined"
@@ -207,8 +215,9 @@
                                             </div>
                                             <div class="text-center mb-0">
                                                 <div class="create-free">
-                                                    <p> Already Have an Account? <a href="{{route('login')}}" data-bs-target="#signup"
-                                                            data-bs-toggle="modal"> Login </a> </p>
+                                                    <p> Already Have an Account? <a href="{{ route('login') }}"
+                                                            data-bs-target="#signup" data-bs-toggle="modal"> Login
+                                                        </a> </p>
                                                 </div>
                                             </div>
                                         </form>
@@ -221,13 +230,14 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-11 col-md-11 mb-4 my-4">
                         <div class="google-sign-up">
-                            <a href="{{route('google.login')}}" class="btn btn-primary" title="login">
+                            <a href="{{ route('google.login') }}" class="btn btn-primary" title="login">
                                 <div class="d-flex justify-content-center">
                                     <div class="d-flex align-items-center text-center">
                                         <div>
                                             <img decoding="async"
                                                 src="{{ asset('assets/front/images/google-icon.png') }}"
-                                                class="lazy mx-2" alt="" height="" width="" title="">
+                                                class="lazy mx-2" alt="" height="" width=""
+                                                title="">
                                         </div>
                                         <div>
                                             Sign Up with Google
@@ -253,7 +263,8 @@
             <div class="modal-content ">
                 <div class="modal-outer">
                     <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -261,8 +272,9 @@
                                 <div class="modal-inner">
                                     <div class="logo text-center mb-xl-3 mb-2">
                                         <img decoding="async"
-                                            data-src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}" class="lazy"
-                                            alt="logo" height="" width="" title="logo">
+                                            data-src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}"
+                                            class="lazy" alt="logo" height="" width=""
+                                            title="logo">
                                     </div>
                                     <div class="modal-title text-center mb-xl-3 mb-2">
                                         <p>
@@ -273,14 +285,15 @@
                                         </span> --}}
                                     </div>
                                     <div class="form-part">
-                                        <form action="{{route('password.email')}}" method="post"
+                                        <form action="{{ route('password.email') }}" method="post"
                                             class="global-ajax-form">
                                             @csrf
 
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                                <input type="text" class="form-control" placeholder="Enter your email"
-                                                    name="email">
+                                                <label for="exampleInputEmail1" class="form-label">Email
+                                                    address</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Enter your email" name="email">
                                             </div>
 
                                             <div class="my-xl-4 my-3">
@@ -379,8 +392,8 @@
             </div> --}}
         </div>
     </div>
-    <form action="{{route('logout')}}" method="post" class="d-none" id="logout_frm" data-redirect="{{route('home')}}"
-        class="global-ajax-from">
+    <form action="{{ route('logout') }}" method="post" class="d-none" id="logout_frm"
+        data-redirect="{{ route('home') }}" class="global-ajax-from">
         @csrf
         <button type="submit"></button>
     </form>
@@ -391,8 +404,9 @@
             <div class="col-lg-12 col-xl-2 mb-4">
                 <div class="d-xl-block me-4">
                     <div class="footer-logo pb-4">
-                        <img decoding="async" class="lazy" src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}"
-                            alt="Footer Logo" width="auto">
+                        <img decoding="async" class="lazy"
+                            src="{{ asset('assets/front/images/Uttarkashi-hotel-Icon-Blk.png') }}" alt="Footer Logo"
+                            width="auto">
                     </div>
                     <div class="container-footer row">
                         <div class="col-6 col-md-4 col-lg-12 col-xl-12">
@@ -419,11 +433,19 @@
                         <div>
                             <h4>Important Link</h4>
                             <ul>
-                                <li><a href="https://haridwartourtrip.com/do-dham-yatra-package-from-haridwar/" target="_blank" title="Varanasi">Do Dham Yatra Package From Haridwar</a></li>
-                                <li><a href="https://haridwartourtrip.com/do-dham-yatra-package-from-delhi/" target="_blank" title="Varanasi">Do Dham Yatra Package From Delhi</a></li>
-                                <li><a href="https://haridwartourtrip.com/chardham-yatra-package-from-haridwar/" target="_blank" title="Varanasi">Chardham Yatra Tour Package From Haridwar</a></li>
-                                <li><a href="https://haridwartourtrip.com/chardham-yatra-package-from-delhi/" target="_blank" title="Varanasi">Chardham Yatra Tour Package From Delhi</a></li>
-                                <li><a href="https://haridwartourtrip.com/chardham-yatra-tour-package-by-helicopter-5n-6d/" target="_blank" title="Varanasi">Chardham Yatra Tour Package By Helicopter</a></li>
+                                <li><a href="https://haridwartourtrip.com/do-dham-yatra-package-from-haridwar/"
+                                        target="_blank" title="Varanasi">Do Dham Yatra Package From Haridwar</a></li>
+                                <li><a href="https://haridwartourtrip.com/do-dham-yatra-package-from-delhi/"
+                                        target="_blank" title="Varanasi">Do Dham Yatra Package From Delhi</a></li>
+                                <li><a href="https://haridwartourtrip.com/chardham-yatra-package-from-haridwar/"
+                                        target="_blank" title="Varanasi">Chardham Yatra Tour Package From Haridwar</a>
+                                </li>
+                                <li><a href="https://haridwartourtrip.com/chardham-yatra-package-from-delhi/"
+                                        target="_blank" title="Varanasi">Chardham Yatra Tour Package From Delhi</a>
+                                </li>
+                                <li><a href="https://haridwartourtrip.com/chardham-yatra-tour-package-by-helicopter-5n-6d/"
+                                        target="_blank" title="Varanasi">Chardham Yatra Tour Package By Helicopter</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -432,12 +454,15 @@
                         <div>
                             <h4>Company</h4>
                             <ul>
-                                <li><a href="{{route('terms-and-conditions')}}" title="Terms and Conditions">Terms and
+                                <li><a href="{{ route('terms-and-conditions') }}" title="Terms and Conditions">Terms
+                                        and
                                         Conditions</a></li>
-                                <li><a href="{{route('cancellation-policy')}}" title="Cancellation Policy">Cancellation
+                                <li><a href="{{ route('cancellation-policy') }}"
+                                        title="Cancellation Policy">Cancellation
                                         Policy</a></li>
-                                <li><a href="{{route('privacy-policy')}}" title="Privacy Policy">Privacy Policy</a></li>
-                                <li><a href="{{route('contact-us')}}" title="Contact Us">Contact Us</a></li>
+                                <li><a href="{{ route('privacy-policy') }}" title="Privacy Policy">Privacy Policy</a>
+                                </li>
+                                <li><a href="{{ route('contact-us') }}" title="Contact Us">Contact Us</a></li>
                             </ul>
                         </div>
 
@@ -446,8 +471,8 @@
                         <div>
                             <h4>Quick Links</h4>
                             <ul>
-                                <li><a href="{{route('consult-now')}}" title="Consult Now">Consult Now</a></li>
-                                <li><a href="{{url('faq')}}" title="FAQs">FAQs</a></li>
+                                <li><a href="{{ route('consult-now') }}" title="Consult Now">Consult Now</a></li>
+                                <li><a href="{{ url('faq') }}" title="FAQs">FAQs</a></li>
                             </ul>
                         </div>
                     </div>
@@ -459,8 +484,8 @@
                                 <svg width="260" height="120" viewBox="0 0 260 116" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_3830_1693)">
-                                        <rect x="179.25" y="0.25" width="80.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="179.25" y="0.25" width="80.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <path
                                             d="M201.842 27.0053V18.3486H211.132L212.129 19.6311L213.159 18.3486H246.86V26.4083C246.86 26.4083 245.981 26.9943 244.962 27.0053H226.297L225.171 25.64V27.0053H221.492V24.6726C221.492 24.6726 220.988 24.9987 219.902 24.9987H218.647V27.0053H213.075L212.079 25.6952L211.071 27.0053H201.842Z"
                                             fill="white" />
@@ -512,8 +537,8 @@
                                             fill="#016FD0" />
                                     </g>
                                     <g clip-path="url(#clip1_3830_1693)">
-                                        <rect x="68.25" y="0.25" width="102.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="68.25" y="0.25" width="102.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <g clip-path="url(#clip2_3830_1693)">
                                             <path
                                                 d="M113.791 19.1892V16.0117C113.791 14.8042 113.029 13.9993 111.8 13.9993C111.08 13.9569 110.402 14.2958 110.021 14.9102C109.66 14.317 109.025 13.9781 108.347 13.9993C107.754 13.9781 107.182 14.2535 106.864 14.7619V14.1264H105.763V19.1892H106.885V16.393C106.885 15.5033 107.373 15.0373 108.135 15.0373C108.877 15.0373 109.237 15.5245 109.237 16.3718V19.1892H110.359V16.393C110.359 15.5033 110.868 15.0373 111.609 15.0373C112.372 15.0373 112.732 15.5245 112.732 16.3718V19.1892H113.791ZM130.293 14.1264H128.492V12.58H127.37V14.1264H126.332V15.1432H127.37V17.4522C127.37 18.6384 127.836 19.3375 129.128 19.3375C129.615 19.3375 130.102 19.2104 130.505 18.935L130.187 17.9817C129.891 18.1512 129.552 18.2571 129.213 18.2783C128.662 18.2783 128.471 17.9394 128.471 17.431V15.122H130.272V14.1264H130.293ZM139.698 13.9993C139.148 13.9781 138.639 14.2747 138.364 14.7407V14.1264H137.262V19.1892H138.364V16.3506C138.364 15.5033 138.724 15.0373 139.444 15.0373C139.677 15.0373 139.91 15.0796 140.143 15.1644L140.482 14.1264C140.228 14.0416 139.974 13.9993 139.698 13.9993ZM125.463 14.5289C124.849 14.1476 124.129 13.9781 123.387 13.9993C122.095 13.9993 121.269 14.6136 121.269 15.6304C121.269 16.4565 121.883 16.9649 123.027 17.1344L123.557 17.2191C124.171 17.3039 124.446 17.4733 124.446 17.7487C124.446 18.1512 124.044 18.363 123.281 18.363C122.667 18.3842 122.074 18.1936 121.587 17.8335L121.057 18.702C121.693 19.1468 122.476 19.3798 123.26 19.3587C124.722 19.3587 125.569 18.6596 125.569 17.7064C125.569 16.8167 124.891 16.3506 123.79 16.1812L123.26 16.0964C122.773 16.0329 122.392 15.927 122.392 15.588C122.392 15.2067 122.752 14.9949 123.366 14.9949C123.917 14.9949 124.468 15.1432 124.955 15.4397L125.463 14.5289ZM155.035 13.9993C154.484 13.9781 153.976 14.2747 153.701 14.7407V14.1264H152.599V19.1892H153.701V16.3506C153.701 15.5033 154.061 15.0373 154.781 15.0373C155.014 15.0373 155.247 15.0796 155.48 15.1644L155.819 14.1264C155.565 14.0416 155.289 13.9993 155.035 13.9993ZM140.8 16.6684C140.8 18.2148 141.88 19.3375 143.511 19.3375C144.168 19.3798 144.825 19.1468 145.333 18.7232L144.804 17.8335C144.422 18.13 143.956 18.2783 143.469 18.2995C142.579 18.2995 141.944 17.6428 141.944 16.6684C141.944 15.6939 142.601 15.0584 143.469 15.0373C143.956 15.0373 144.422 15.2067 144.804 15.5033L145.333 14.6136C144.825 14.1899 144.168 13.9781 143.511 13.9993C141.88 13.9993 140.8 15.122 140.8 16.6684ZM151.137 16.6684V14.1264H150.036V14.7407C149.655 14.2535 149.061 13.9781 148.426 13.9993C147.007 13.9993 145.884 15.122 145.884 16.6684C145.884 18.2148 147.007 19.3375 148.426 19.3375C149.04 19.3587 149.655 19.0833 150.036 18.5961V19.2104H151.137V16.6684ZM147.028 16.6684C147.028 15.7787 147.621 15.0373 148.574 15.0373C149.485 15.0373 150.099 15.7363 150.099 16.6684C150.099 17.6004 149.485 18.2995 148.574 18.2995C147.621 18.2783 147.028 17.5581 147.028 16.6684ZM133.725 13.9993C132.242 13.9993 131.204 15.0796 131.204 16.6684C131.204 18.2783 132.284 19.3375 133.809 19.3375C134.572 19.3587 135.313 19.1045 135.885 18.6172L135.335 17.7911C134.911 18.13 134.403 18.3207 133.852 18.3207C133.132 18.3207 132.496 17.9817 132.327 17.0709H136.097C136.118 16.9226 136.118 16.7955 136.118 16.6472C136.118 15.0796 135.144 13.9993 133.725 13.9993ZM133.704 14.9737C134.424 14.9737 134.869 15.4186 134.996 16.2023H132.348C132.475 15.4821 132.92 14.9737 133.704 14.9737ZM161.39 16.6684V12.0928H160.289V14.7407C159.907 14.2535 159.314 13.9781 158.679 13.9993C157.259 13.9993 156.137 15.122 156.137 16.6684C156.137 18.2148 157.259 19.3375 158.679 19.3375C159.293 19.3587 159.907 19.0833 160.289 18.5961V19.2104H161.39V16.6684ZM162.682 18.7232C162.725 18.7232 162.767 18.7232 162.809 18.7443C162.852 18.7655 162.873 18.7867 162.915 18.8079C162.937 18.8291 162.979 18.8714 162.979 18.9138C163.021 18.9985 163.021 19.0833 162.979 19.168C162.958 19.2104 162.937 19.2316 162.915 19.2739C162.894 19.2951 162.852 19.3163 162.809 19.3375C162.767 19.3587 162.725 19.3587 162.682 19.3587C162.555 19.3587 162.428 19.2739 162.386 19.168C162.343 19.0833 162.343 18.9985 162.386 18.9138C162.428 18.8291 162.492 18.7655 162.555 18.7443C162.576 18.7443 162.619 18.7232 162.682 18.7232ZM162.682 19.2951C162.725 19.2951 162.746 19.2951 162.788 19.2739C162.809 19.2527 162.852 19.2527 162.873 19.2104C162.979 19.1045 162.979 18.9562 162.873 18.8503C162.852 18.8291 162.831 18.8079 162.788 18.7867C162.767 18.7655 162.725 18.7655 162.682 18.7655C162.64 18.7655 162.619 18.7655 162.576 18.7867C162.449 18.8503 162.386 18.9985 162.449 19.1256C162.471 19.1468 162.471 19.1892 162.492 19.2104C162.513 19.2316 162.534 19.2527 162.576 19.2739C162.598 19.2951 162.64 19.2951 162.682 19.2951ZM162.682 18.8926C162.704 18.8926 162.746 18.8926 162.767 18.9138C162.788 18.935 162.809 18.9562 162.788 18.9774C162.788 18.9985 162.788 19.0197 162.767 19.0409C162.746 19.0621 162.725 19.0621 162.704 19.0621L162.809 19.168H162.725L162.64 19.0621H162.619V19.168H162.555V18.8714L162.682 18.8926ZM162.619 18.9562V19.0409H162.682C162.704 19.0409 162.704 19.0409 162.725 19.0409L162.746 19.0197C162.746 18.9985 162.746 18.9985 162.725 18.9985C162.704 18.9985 162.704 18.9985 162.682 18.9985H162.619V18.9562ZM157.281 16.6684C157.281 15.7787 157.874 15.0373 158.827 15.0373C159.738 15.0373 160.352 15.7363 160.352 16.6684C160.352 17.6004 159.738 18.2995 158.827 18.2995C157.853 18.2783 157.281 17.5581 157.281 16.6684ZM120.019 16.6684V14.1264H118.918V14.7407C118.536 14.2535 117.943 13.9781 117.308 13.9993C115.888 13.9993 114.766 15.122 114.766 16.6684C114.766 18.2148 115.888 19.3375 117.308 19.3375C117.922 19.3587 118.536 19.0833 118.918 18.5961V19.2104H120.019V16.6684ZM115.91 16.6684C115.91 15.7787 116.503 15.0373 117.456 15.0373C118.367 15.0373 118.981 15.7363 118.981 16.6684C118.981 17.6004 118.367 18.2995 117.456 18.2995C116.481 18.2783 115.91 17.5581 115.91 16.6684Z"
@@ -532,8 +557,8 @@
                                         </g>
                                     </g>
                                     <g clip-path="url(#clip3_3830_1693)">
-                                        <rect x="0.25" y="0.25" width="60.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="0.25" y="0.25" width="60.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <g clip-path="url(#clip4_3830_1693)">
                                             <path d="M27.3358 23.7605H24.0918L26.1198 11.2285H29.3598L27.3358 23.7605Z"
                                                 fill="#1434CB" />
@@ -552,15 +577,15 @@
                                         </g>
                                     </g>
                                     <g clip-path="url(#clip5_3830_1693)">
-                                        <rect x="0.25" y="40.25" width="86.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="0.25" y="40.25" width="86.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <path
                                             d="M34.3629 60.2168V60.1896C34.3629 58.9352 33.4556 57.8985 32.1674 57.8985C30.8523 57.8985 30.0122 58.9238 30.0122 60.1623V60.1896C30.0122 61.4304 30.9195 62.467 32.1943 62.467C33.5228 62.467 34.3629 61.4417 34.3629 60.2168ZM28.3723 60.2168V60.1896C28.3723 58.1548 29.9988 56.4694 32.1943 56.4694C34.3897 56.4694 36.0027 58.1276 36.0027 60.1623V60.1896C36.0027 62.2106 34.3763 63.8961 32.1674 63.8961C29.9853 63.8961 28.3723 62.2379 28.3723 60.2168ZM42.643 60.1918V60.1646C42.643 58.7899 41.7088 57.8871 40.5976 57.8871C39.4864 57.8871 38.5097 58.8036 38.5097 60.1646V60.1918C38.5097 61.5528 39.4864 62.4693 40.5975 62.4693C41.7222 62.4693 42.643 61.5937 42.643 60.1918ZM36.91 54.6366C36.91 54.1784 37.2618 53.8267 37.7233 53.8267C38.1848 53.8267 38.55 54.1761 38.55 54.6366V57.8055C39.0787 57.0637 39.8247 56.4717 40.9896 56.4717C42.6699 56.4717 44.3097 57.7919 44.3097 60.1646V60.1918C44.3097 62.551 42.6833 63.8847 40.9896 63.8847C39.7978 63.8847 39.0518 63.2927 38.55 62.6303V62.9956C38.55 63.4401 38.1848 63.8054 37.7233 63.8054C37.2752 63.8054 36.91 63.4424 36.91 62.9955V54.6366ZM45.3403 57.3609C45.3403 56.9027 45.692 56.5397 46.1535 56.5397C46.615 56.5397 46.9802 56.9027 46.9802 57.3609V62.9956C46.9802 63.4538 46.615 63.8054 46.1535 63.8054C45.7054 63.8054 45.3403 63.456 45.3403 62.9955V57.3609ZM45.217 54.7046C45.217 54.2192 45.6225 53.9084 46.1513 53.9084C46.68 53.9084 47.0855 54.2192 47.0855 54.7046V54.7863C47.0855 55.2717 46.68 55.5961 46.1513 55.5961C45.6225 55.5961 45.217 55.2717 45.217 54.7863V54.7046ZM48.5506 55.0539C48.5506 54.5957 48.9158 54.2305 49.3907 54.2305C49.8522 54.2305 50.2174 54.5957 50.2174 55.0539V59.044L54.7159 54.5413C54.9063 54.3394 55.1079 54.2306 55.4059 54.2306C55.8674 54.2306 56.1788 54.5957 56.1788 54.9995C56.1788 55.2559 56.0713 55.4441 55.8808 55.6188L52.9259 58.4497L56.125 62.399C56.2617 62.5736 56.3558 62.7369 56.3558 62.9933C56.3558 63.4515 55.9906 63.8031 55.5156 63.8031C55.1908 63.8031 54.987 63.642 54.81 63.4129L51.761 59.5431L50.2151 61.0266V62.9819C50.2151 63.4401 49.8499 63.8031 49.3885 63.8031C48.9135 63.8031 48.5483 63.4401 48.5483 62.9819V55.0562L48.5506 55.0539ZM58.3093 63.1294L56.3849 57.7102C56.3446 57.6036 56.3042 57.4267 56.3042 57.2928C56.3042 56.9027 56.6156 56.5375 57.104 56.5375C57.5095 56.5375 57.7806 56.8074 57.9038 57.1839L59.286 61.4984L60.6818 57.1839C60.8027 56.8074 61.1007 56.5375 61.5219 56.5375H61.616C62.0371 56.5375 62.3351 56.8074 62.4561 57.1839L63.8652 61.4984L65.2609 57.1703C65.3685 56.8188 65.6261 56.5374 66.0607 56.5374C66.5087 56.5374 66.8336 56.8891 66.8336 57.2928C66.8336 57.413 66.7932 57.5764 66.7664 57.6558L64.815 63.1294C64.6381 63.6284 64.2998 63.8576 63.9077 63.8576H63.8539C63.4484 63.8576 63.1079 63.6284 62.9601 63.1566L61.5644 58.9238L60.1552 63.1566C60.0052 63.6284 59.6669 63.8576 59.2748 63.8576H59.221C58.8155 63.8576 58.475 63.6284 58.3137 63.1294L58.3093 63.1294ZM67.714 57.3609C67.714 56.9027 68.0657 56.5397 68.5272 56.5397C68.9888 56.5397 69.3539 56.9027 69.3539 57.3609V62.9956C69.3539 63.4538 68.9888 63.8054 68.5272 63.8054C68.0792 63.8054 67.714 63.456 67.714 62.9955V57.3609ZM67.5908 54.7046C67.5908 54.2192 67.9963 53.9084 68.525 53.9084C69.0537 53.9084 69.4592 54.2192 69.4592 54.7046V54.7863C69.4592 55.2717 69.0537 55.5961 68.525 55.5961C67.9963 55.5961 67.5908 55.2717 67.5908 54.7863L67.5908 54.7046ZM70.7362 54.6366C70.7362 54.192 71.0879 53.8267 71.5494 53.8267C72.0109 53.8267 72.376 54.1897 72.376 54.6366V59.8947L75.452 56.8891C75.6693 56.6736 75.8731 56.5397 76.1576 56.5397C76.5923 56.5397 76.8768 56.8891 76.8768 57.2815C76.8768 57.5514 76.7401 57.7533 76.5116 57.9688L74.6141 59.7086L76.7827 62.526C76.9328 62.7279 77 62.8776 77 63.0659C77 63.5105 76.6483 63.8076 76.2271 63.8076C75.9023 63.8076 75.7118 63.701 75.508 63.4447L73.4626 60.734L72.3783 61.7593V63.0001C72.3783 63.4583 72.0132 63.8099 71.5516 63.8099C71.1036 63.8099 70.7384 63.4605 70.7384 63.0001V54.6411L70.7362 54.6366ZM28.5628 56.7189C28.1506 56.7189 27.8145 56.3854 27.8145 55.9749C27.8145 55.5643 28.1506 55.2286 28.5628 55.2286C28.9772 55.2286 29.3132 55.5643 29.3132 55.9749C29.3132 56.3854 28.9772 56.7189 28.5628 56.7189ZM29.945 55.5733C29.8017 54.2441 28.4507 54.7772 28.4507 54.7772C27.4919 55.1469 27.2724 54.9904 27.2724 54.9904L27.4516 52.4021C27.3508 51.1931 25.7534 51.6128 25.7534 51.6128C26.6182 52.0097 26.4412 52.4747 26.4412 52.4747C26.4412 52.4747 25.5003 62.0019 25.3927 62.6121C25.2852 63.2223 24.4519 62.9728 24.4519 62.9728V64.0162H25.5361C26.3314 64.0162 26.4031 62.9365 26.4031 62.9365L26.9341 57.878C27.7719 57.7374 28.4283 57.5446 28.4283 57.5446C30.2071 56.9435 29.945 55.5757 29.945 55.5757V55.5733ZM28.9817 55.9749C28.9817 56.204 28.7935 56.39 28.5628 56.39C28.3342 56.39 28.1461 56.2017 28.1461 55.9749C28.1461 55.748 28.3342 55.5575 28.5628 55.5575C28.7935 55.5575 28.9817 55.7435 28.9817 55.9749ZM18.7503 58.1821L21.3737 53.1508C21.3782 53.144 21.3827 53.1372 21.3872 53.1326C21.5104 52.8196 21.7972 52.5927 22.1399 52.5474C21.8016 52.5565 21.4746 52.7379 21.3065 53.06L18.7503 57.9688V58.1843V58.1821ZM11.0348 63.8757C10.571 63.6329 10.3895 63.0545 10.636 62.5963L16.9581 50.6578C17.0925 50.4015 17.3344 50.2359 17.6011 50.1792C17.6167 50.1747 17.6302 50.1724 17.6436 50.1679C17.6794 50.1633 17.722 50.1565 17.7623 50.1565C17.778 50.1565 17.7959 50.152 17.8094 50.152C17.8207 50.1522 17.832 50.1537 17.843 50.1565C17.8721 50.1565 17.899 50.1611 17.9281 50.1656C17.9662 50.1701 18.0043 50.177 18.0446 50.1883C18.0603 50.1905 18.076 50.1974 18.0916 50.2041C18.1387 50.2178 18.1835 50.2359 18.2283 50.2586C18.2328 50.2608 18.2396 50.2608 18.2396 50.2654C18.2455 50.2668 18.251 50.27 18.2552 50.2745C18.3068 50.2994 18.347 50.3289 18.3873 50.3629C18.3963 50.3697 18.4053 50.3743 18.412 50.3811L18.4636 50.4333C18.4479 50.4106 18.4344 50.3833 18.4165 50.3629C18.4094 50.3578 18.404 50.3507 18.4008 50.3425C18.365 50.3017 18.3291 50.2654 18.2843 50.2292C18.2776 50.2245 18.2687 50.2155 18.2597 50.2087C18.2171 50.1792 18.1746 50.1475 18.1275 50.1225C18.123 50.1202 18.1163 50.1134 18.1118 50.1089C18.1051 50.1066 18.0984 50.1066 18.0917 50.1043C18.0491 50.0839 18.0065 50.0635 17.9572 50.0499C17.9393 50.0431 17.9236 50.0385 17.9035 50.0317C17.8676 50.0227 17.8273 50.0182 17.7892 50.0113C17.7603 50.0068 17.7311 50.0046 17.7018 50.0046C17.6884 50.0046 17.6794 50 17.666 50C17.6526 50 17.6369 50.0046 17.6168 50.0046C17.5763 50.0072 17.536 50.011 17.4958 50.0159C17.4801 50.0204 17.4667 50.0227 17.451 50.0272C17.1799 50.0839 16.9335 50.2518 16.7946 50.5149L10.3448 62.6983C10.0938 63.1679 10.2753 63.7577 10.7502 64.0049C11.0773 64.1773 11.4582 64.1387 11.7471 63.9459C11.5164 64.014 11.2566 63.9981 11.028 63.8802L11.0348 63.8757ZM17.8116 62.9139C17.2964 62.9139 16.8707 62.4919 16.8707 61.9793V54.8861L16.7139 55.181V62.0678C16.7139 62.5918 17.1463 63.0228 17.6727 63.0228C17.9326 63.0228 18.1678 62.9185 18.3425 62.7483C18.188 62.8527 18.0065 62.9139 17.8094 62.9139H17.8116ZM22.2609 62.4103C21.7433 62.4103 21.3199 61.9884 21.3199 61.4757V57.3201L21.1698 57.6172V61.6209C21.1698 62.1562 21.6089 62.5986 22.1488 62.5986C22.5722 62.5986 22.9352 62.3218 23.0695 61.943C22.9083 62.222 22.6059 62.4126 22.2608 62.4126L22.2609 62.4103ZM24.9962 50.6057C24.9962 50.6057 21.9875 51.1115 18.7503 51.6491V58.1821L21.3737 53.1508C21.3782 53.144 21.3827 53.1372 21.3872 53.1326C21.5261 52.7856 21.8644 52.5383 22.2587 52.5383C22.7761 52.5383 23.1996 52.9602 23.1996 53.4729V61.4735C23.1996 61.9884 22.7761 62.408 22.2587 62.408C21.7411 62.408 21.3177 61.9861 21.3177 61.4735V57.3178L18.8198 62.1222C18.7842 62.1873 18.7406 62.2476 18.6898 62.3014C18.5555 62.6576 18.2126 62.9139 17.8094 62.9139C17.2941 62.9139 16.8685 62.4919 16.8685 61.9793V54.8861L12.3184 63.4764C12.0764 63.9346 11.494 64.1161 11.0325 63.8734C10.5687 63.6307 10.3873 63.0522 10.6337 62.594L16.2076 52.0665C13.5394 52.5088 11.2252 52.8899 10.925 52.9285C10.179 53.0237 10.011 53.6702 10.011 53.6702C10.011 53.6702 9.98631 63.8529 10.011 64.3588C10.0334 64.8623 10.5665 64.9577 10.5665 64.9577C10.5665 64.9577 23.1413 65.0529 23.7909 64.9577C24.4429 64.8623 24.5616 64.1206 24.5616 64.1206L25.8386 51.2498C25.7915 50.4106 24.9962 50.6011 24.9962 50.6011V50.6057Z"
                                             fill="#0072CF" />
                                     </g>
                                     <g clip-path="url(#clip6_3830_1693)">
-                                        <rect x="183.25" y="82.25" width="61.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="183.25" y="82.25" width="61.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <g clip-path="url(#clip7_3830_1693)">
                                             <path
                                                 d="M212.069 99.2683V104.281H210.491V91.9033H214.676C215.736 91.9033 216.641 92.2596 217.381 92.972C218.137 93.6845 218.515 94.5544 218.515 95.5817C218.515 96.6338 218.137 97.5037 217.381 98.2079C216.649 98.9121 215.744 99.26 214.676 99.26H212.069V99.2683ZM212.069 93.4277V97.744H214.709C215.333 97.744 215.86 97.5286 216.271 97.106C216.69 96.6835 216.904 96.1699 216.904 95.59C216.904 95.0183 216.69 94.513 216.271 94.0905C215.86 93.6514 215.342 93.436 214.709 93.436H212.069V93.4277Z"
@@ -586,8 +611,8 @@
                                         </g>
                                     </g>
                                     <g clip-path="url(#clip8_3830_1693)">
-                                        <rect x="90.25" y="82.25" width="84.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="90.25" y="82.25" width="84.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <g clip-path="url(#clip9_3830_1693)">
                                             <path d="M164.337 91.0217L167.741 97.7153L160.585 104.408L164.337 91.0217Z"
                                                 fill="#008C44" />
@@ -675,8 +700,8 @@
                                         </g>
                                     </g>
                                     <g clip-path="url(#clip10_3830_1693)">
-                                        <rect x="0.25" y="82.25" width="81.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="0.25" y="82.25" width="81.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <g clip-path="url(#clip11_3830_1693)">
                                             <path
                                                 d="M26.0718 101.37C27.1433 96.9959 24.3333 92.6127 19.7955 91.5798C15.2577 90.5469 10.7104 93.2555 9.6389 97.6297C8.56737 102.004 11.3774 106.387 15.9152 107.42C20.453 108.453 25.0003 105.744 26.0718 101.37Z"
@@ -690,8 +715,8 @@
                                         </g>
                                     </g>
                                     <g clip-path="url(#clip12_3830_1693)">
-                                        <rect x="184.25" y="40.25" width="72.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="184.25" y="40.25" width="72.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <g clip-path="url(#clip13_3830_1693)">
                                             <path
                                                 d="M246.836 53.9865C246.618 53.3065 246.126 52.6831 245.525 52.2298C244.924 51.7765 244.213 51.5498 243.503 51.5498H243.448C242.957 51.5498 242.52 51.6631 242.082 51.8331C241.645 52.0031 241.263 52.2865 240.935 52.6831C240.607 52.3431 240.225 52.0598 239.788 51.8331C239.351 51.6631 238.859 51.5498 238.422 51.5498H238.367C237.547 51.5498 236.728 51.8331 236.072 52.3998V52.1731C236.072 52.0598 236.018 51.8898 235.908 51.8331C235.799 51.7198 235.69 51.6631 235.58 51.6631H233.231C233.176 51.6631 233.122 51.6631 233.012 51.7198C232.903 51.7765 232.848 51.8331 232.794 51.8331C232.739 51.8898 232.685 51.9465 232.685 52.0031C232.685 52.0598 232.63 52.1165 232.63 52.2298V65.3765C232.63 65.5465 232.685 65.6598 232.794 65.7731C232.903 65.8865 233.012 65.9431 233.176 65.9431H235.526C235.635 65.9431 235.799 65.8865 235.854 65.8298C235.963 65.7731 236.018 65.6031 236.018 65.4898V56.0265C236.018 55.9698 236.018 55.9698 236.018 55.9131C236.018 55.6865 236.127 55.5165 236.291 55.3465C236.455 55.1765 236.619 55.1198 236.837 55.1198H237.274C237.438 55.1198 237.602 55.1765 237.766 55.2898C237.875 55.4031 237.93 55.4598 237.985 55.6298C238.039 55.7431 238.094 55.9131 238.039 56.0265V65.3765C238.039 65.5465 238.094 65.6598 238.203 65.7731C238.312 65.8865 238.422 65.9431 238.586 65.9431H240.99C241.099 65.9431 241.263 65.8865 241.372 65.7731C241.481 65.6598 241.536 65.5465 241.536 65.4331V56.0265C241.536 55.8565 241.591 55.7431 241.645 55.5731C241.7 55.4598 241.809 55.3465 241.919 55.2331C242.028 55.1198 242.192 55.1198 242.356 55.0631H242.793C243.011 55.0631 243.23 55.1765 243.394 55.3465C243.558 55.5165 243.612 55.7431 243.612 55.9698V65.3198C243.612 65.4898 243.667 65.6031 243.776 65.7165C243.886 65.8298 243.995 65.8865 244.159 65.8865H246.454C246.508 65.8865 246.618 65.8865 246.672 65.8298C246.727 65.8298 246.781 65.7731 246.836 65.7165C246.891 65.6598 246.945 65.6031 246.945 65.5465C246.945 65.4898 247 65.4331 247 65.3198V55.2898C247 54.8365 246.945 54.4398 246.836 53.9865Z"
@@ -711,8 +736,8 @@
                                         </g>
                                     </g>
                                     <g clip-path="url(#clip14_3830_1693)">
-                                        <rect x="94.25" y="40.25" width="82.5" height="33.5" rx="2.75" stroke="#D1D5D5"
-                                            stroke-width="0.5" />
+                                        <rect x="94.25" y="40.25" width="82.5" height="33.5" rx="2.75"
+                                            stroke="#D1D5D5" stroke-width="0.5" />
                                         <g clip-path="url(#clip15_3830_1693)">
                                             <path d="M164.305 50.2475L167.971 57.4838L160.265 64.7236L164.305 50.2475Z"
                                                 fill="#008C44" />
@@ -737,13 +762,16 @@
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_3830_1693">
-                                            <rect width="81" height="34" fill="white" transform="translate(179)" />
+                                            <rect width="81" height="34" fill="white"
+                                                transform="translate(179)" />
                                         </clipPath>
                                         <clipPath id="clip1_3830_1693">
-                                            <rect width="103" height="34" fill="white" transform="translate(68)" />
+                                            <rect width="103" height="34" fill="white"
+                                                transform="translate(68)" />
                                         </clipPath>
                                         <clipPath id="clip2_3830_1693">
-                                            <rect width="87" height="15.252" fill="white" transform="translate(76 9)" />
+                                            <rect width="87" height="15.252" fill="white"
+                                                transform="translate(76 9)" />
                                         </clipPath>
                                         <clipPath id="clip3_3830_1693">
                                             <rect width="61" height="34" fill="white" />
@@ -753,37 +781,48 @@
                                                 transform="translate(10 11)" />
                                         </clipPath>
                                         <clipPath id="clip5_3830_1693">
-                                            <rect width="87" height="34" fill="white" transform="translate(0 40)" />
+                                            <rect width="87" height="34" fill="white"
+                                                transform="translate(0 40)" />
                                         </clipPath>
                                         <clipPath id="clip6_3830_1693">
-                                            <rect width="62" height="34" fill="white" transform="translate(183 82)" />
+                                            <rect width="62" height="34" fill="white"
+                                                transform="translate(183 82)" />
                                         </clipPath>
                                         <clipPath id="clip7_3830_1693">
-                                            <rect width="43" height="17" fill="white" transform="translate(192 91)" />
+                                            <rect width="43" height="17" fill="white"
+                                                transform="translate(192 91)" />
                                         </clipPath>
                                         <clipPath id="clip8_3830_1693">
-                                            <rect width="85" height="34" fill="white" transform="translate(90 82)" />
+                                            <rect width="85" height="34" fill="white"
+                                                transform="translate(90 82)" />
                                         </clipPath>
                                         <clipPath id="clip9_3830_1693">
-                                            <rect width="70" height="17" fill="white" transform="translate(98 91)" />
+                                            <rect width="70" height="17" fill="white"
+                                                transform="translate(98 91)" />
                                         </clipPath>
                                         <clipPath id="clip10_3830_1693">
-                                            <rect width="82" height="34" fill="white" transform="translate(0 82)" />
+                                            <rect width="82" height="34" fill="white"
+                                                transform="translate(0 82)" />
                                         </clipPath>
                                         <clipPath id="clip11_3830_1693">
-                                            <rect width="65" height="19" fill="white" transform="translate(8 90)" />
+                                            <rect width="65" height="19" fill="white"
+                                                transform="translate(8 90)" />
                                         </clipPath>
                                         <clipPath id="clip12_3830_1693">
-                                            <rect width="73" height="34" fill="white" transform="translate(184 40)" />
+                                            <rect width="73" height="34" fill="white"
+                                                transform="translate(184 40)" />
                                         </clipPath>
                                         <clipPath id="clip13_3830_1693">
-                                            <rect width="53" height="17" fill="white" transform="translate(194 49)" />
+                                            <rect width="53" height="17" fill="white"
+                                                transform="translate(194 49)" />
                                         </clipPath>
                                         <clipPath id="clip14_3830_1693">
-                                            <rect width="83" height="34" fill="white" transform="translate(94 40)" />
+                                            <rect width="83" height="34" fill="white"
+                                                transform="translate(94 40)" />
                                         </clipPath>
                                         <clipPath id="clip15_3830_1693">
-                                            <rect width="65" height="17" fill="white" transform="translate(103 49)" />
+                                            <rect width="65" height="17" fill="white"
+                                                transform="translate(103 49)" />
                                         </clipPath>
                                     </defs>
                                 </svg>
@@ -791,7 +830,8 @@
                             <div class="payment-btn mt-xl-4">
                                 <div class="btn-blue">
                                     <span> <img decoding="async" alt="razorpay"
-                                            src="{{ asset('assets/front/images/razorpay-icon.svg') }}" /></span>Pay with
+                                            src="{{ asset('assets/front/images/razorpay-icon.svg') }}" /></span>Pay
+                                    with
                                     <small>Razorpay</small>
                                 </div>
                             </div>
@@ -813,7 +853,7 @@
             <div class="col-12 col-lg-12 col-xl-4 text-center">
                 <div class="copy-right">
                     <p>Managed By <a href="https://tourtripx.com/"><img decoding="async" alt="TourTripX"
-                                            src="{{ asset('assets/front/images/ttx-logo.png') }}" width="120"/></a></p>
+                                src="{{ asset('assets/front/images/ttx-logo.png') }}" width="120" /></a></p>
                 </div>
             </div>
             <div class="col-12 col-lg-12 col-xl-4 d-xl-flex justify-content-xl-end">

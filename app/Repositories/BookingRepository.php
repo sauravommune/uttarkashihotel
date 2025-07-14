@@ -131,6 +131,8 @@ class BookingRepository extends BaseRepository
     public function addMultipleBooking($request)
     {
 
+        // dd($request->all());
+
         $searchId       = $request->search_id;
         $searchData     = SearchLog::findOrFail($searchId);
         $checkIn        = $searchData->checkin_date;
@@ -179,43 +181,57 @@ class BookingRepository extends BaseRepository
             if ($roomDetails && $roomDetails->ratePlan->isNotEmpty()) {
 
                 $ratePlanCount = $roomDetails->ratePlan->count();
+
                 $totalAmountEp = $roomDetails->ratePlan->sum('total_amount_ep') / $ratePlanCount;
                 $totalAmountCp = $roomDetails->ratePlan->sum('total_amount_cp') / $ratePlanCount;
-                $totalAmountMap = $roomDetails->ratePlan->sum('total_amount_map') / $ratePlanCount;
+                $totalAmountMAP = $roomDetails->ratePlan->sum('total_amount_map') / $ratePlanCount;
+                $totalAmountAP = $roomDetails->ratePlan->sum('total_amount_ap') / $ratePlanCount;
+
 
                 $totalCostEP = $roomDetails->ratePlan->sum('b2b_rate_ep') / $ratePlanCount;
                 $totalCostCP = $roomDetails->ratePlan->sum('b2b_rate_cp') / $ratePlanCount;
                 $totalCostMAP = $roomDetails->ratePlan->sum('b2b_rate_map') / $ratePlanCount;
+                $totalCostAP = $roomDetails->ratePlan->sum('b2b_rate_ap') / $ratePlanCount;
+
 
                 $totalMarkupEP = $roomDetails->ratePlan->sum('markup_ep') / $ratePlanCount;
                 $totalMarkupCP = $roomDetails->ratePlan->sum('markup_cp') / $ratePlanCount;
                 $totalMarkupMAP = $roomDetails->ratePlan->sum('markup_map') / $ratePlanCount;
+                $totalMarkupAP = $roomDetails->ratePlan->sum('markup_ap') / $ratePlanCount;
 
-                //start code  Extra person bedPrice 
 
-                if ($roomDetails->ratePlan->count() > 0 && $roomDetails->ratePlan) {
-                    $ratePlan = $roomDetails->ratePlan;
+                // start code  Extra person bedPrice 
 
-                    // EP: Room Only
-                    $personExtraBedPriceEp = personExtraBedPriceEp($ratePlan);
+                // if ($roomDetails->ratePlan->count() > 0 && $roomDetails->ratePlan) {
+                //     $ratePlan = $roomDetails->ratePlan;
 
-                    $totalAmountEp  = $totalAmountEp  + $personExtraBedPriceEp['ep_total_extra_person_price'] ?? 0;
-                    $totalCostEP    = $totalCostEP    + $personExtraBedPriceEp['ep_extra_person_price'] ?? 0;
-                    $totalMarkupEP  = $totalMarkupEP  + $personExtraBedPriceEp['ep_extra_person_markup'] ?? 0;
+                //     // EP: Room Only
+                //     $personExtraBedPriceEp = personExtraBedPriceEp($ratePlan);
 
-                    // CP: With Breakfast
-                    $personExtraBedPriceCp = personExtraBedPriceCp($ratePlan);
-                    $totalAmountCp  = $totalAmountCp  + $personExtraBedPriceCp['cp_total_extra_person_price'] ?? 0;
-                    $totalCostCP    = $totalCostCP    + $personExtraBedPriceCp['cp_extra_person_price'] ?? 0;
-                    $totalMarkupCP  = $totalMarkupCP  + $personExtraBedPriceCp['cp_extra_person_markup'] ?? 0;
-                    // MAP: With Breakfast + Dinner
-                    $personExtraBedPriceMap = personExtraBedPriceMap($ratePlan);
-                    $totalAmountMap  = $totalAmountMap  + $personExtraBedPriceMap['map_total_extra_person_price'] ?? 0;
-                    $totalCostMAP    = $totalCostMAP    + $personExtraBedPriceMap['map_extra_person_price'] ?? 0;
-                    $totalMarkupMAP  = $totalMarkupMAP  + $personExtraBedPriceMap['map_extra_person_markup'] ?? 0;
-                }
+                //     $totalAmountEp  = $totalAmountEp  + $personExtraBedPriceEp['ep_total_extra_person_price'] ?? 0;
+                //     $totalCostEP    = $totalCostEP    + $personExtraBedPriceEp['ep_extra_person_price'] ?? 0;
+                //     $totalMarkupEP  = $totalMarkupEP  + $personExtraBedPriceEp['ep_extra_person_markup'] ?? 0;
 
-                //end code  Extra person bedPrice 
+                //     // CP: With Breakfast
+                //     $personExtraBedPriceCp = personExtraBedPriceCp($ratePlan);
+                //     $totalAmountCp  = $totalAmountCp  + $personExtraBedPriceCp['cp_total_extra_person_price'] ?? 0;
+                //     $totalCostCP    = $totalCostCP    + $personExtraBedPriceCp['cp_extra_person_price'] ?? 0;
+                //     $totalMarkupCP  = $totalMarkupCP  + $personExtraBedPriceCp['cp_extra_person_markup'] ?? 0;
+
+                //     // MAP: With Breakfast + Dinner
+                //     $personExtraBedPriceMap = personExtraBedPriceMap($ratePlan);
+                //     $totalAmountMAP  = $totalAmountMAP  + $personExtraBedPriceMap['map_total_extra_person_price'] ?? 0;
+                //     $totalCostMAP    = $totalCostMAP    + $personExtraBedPriceMap['map_extra_person_price'] ?? 0;
+                //     $totalMarkupMAP  = $totalMarkupMAP  + $personExtraBedPriceMap['map_extra_person_markup'] ?? 0;
+
+                //     // AP: With Breakfast + Dinner +Lunch
+                //     $personExtraBedPriceAp = personExtraBedPriceAp($ratePlan);
+                //     $totalAmountAP  = $totalAmountAP  + $personExtraBedPriceAp['ap_total_extra_person_price'] ?? 0;
+                //     $totalCostAP    = $totalCostAP   + $personExtraBedPriceAp['ap_extra_person_price'] ?? 0;
+                //     $totalMarkupAP  = $totalMarkupAP  + $personExtraBedPriceAp['ap_extra_person_markup'] ?? 0;
+                // }
+
+                // end code  Extra person bedPrice 
 
                 switch ($category) {
                     case 'Room Only':
@@ -230,9 +246,14 @@ class BookingRepository extends BaseRepository
                         $totalMarkup = $totalMarkupCP * $nights;
                         break;
                     case 'With Breakfast Dinner':
-                        $totalPrice = $totalAmountMap * $nights;
+                        $totalPrice = $totalAmountMAP* $nights;
                         $totalCost = $totalCostMAP * $nights;
                         $totalMarkup = $totalMarkupMAP * $nights;
+                        break;
+                    case 'With Breakfast Lunch Dinner':
+                        $totalPrice = $totalAmountAP * $nights;
+                        $totalCost = $totalCostAP * $nights;
+                        $totalMarkup = $totalMarkupAP * $nights;
                         break;
                 }
             }

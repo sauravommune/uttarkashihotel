@@ -9,7 +9,7 @@
             <!--begin::Body-->
             <div class="card-body">
                 <!--begin::Heading-->
-                <a href="{{route('login')}}" class="logo">
+                <a href="{{ route('login') }}" class="logo">
                     <img src="{{ asset('assets/media/logos/logo.svg') }}" alt="">
                 </a>
 
@@ -34,7 +34,7 @@
                             <span class="material-symbols-outlined">mail</span>
 
                             <x-input-error :messages="$errors->get('email')" class="mt-2 text-danger" />
-                           
+
                             <!--end::Email-->
                         </div>
                         <!--end::Input group=-->
@@ -47,15 +47,17 @@
                                 name="password" required autocomplete="current-password" :value="old('password')" /
                                 placeholder="Enter Password">
 
-                                {{-- <span class="material-icons-outlined" >visibility_off</span> --}}
-                                <span class="material-symbols-outlined" id="toggle_password">
-                                    visibility_off
-                                </span>
+                            {{-- <span class="material-icons-outlined" >visibility_off</span> --}}
+                            <span class="material-symbols-outlined" id="toggle_password">
+                                visibility_off
+                            </span>
 
                             <x-input-error :messages="$errors->get('password')" class="mt-2 text-danger" />
                             <!--end::Password-->
                         </div>
-                        {!! RecaptchaV3::field('login') !!}
+                        @if (app()->environment() !== 'local')
+                            {!! RecaptchaV3::field('login') !!}
+                        @endif
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="remember_me">
@@ -72,22 +74,24 @@
                         @endif
                         <!--end::Link-->
                     </div>
-                    <input type="hidden" name="login_type" value="{{encode('back')}}">
+                    <input type="hidden" name="login_type" value="{{ encode('back') }}">
                     <button class="btn btn-primary" type="submit">
                         Sign In
                     </button>
 
                     <hr>
-                    <a href="{{route('google.login')}}" class="btn btn-dark d-flex align-items-center justify-content-center gap-2">
-                        <img src="{{asset('assets/media/google.svg')}}" alt="">
+                    <a href="{{ route('google.login') }}"
+                        class="btn btn-dark d-flex align-items-center justify-content-center gap-2">
+                        <img src="{{ asset('assets/media/google.svg') }}" alt="">
                         Sign In With Google
                     </a>
                     <p>
                         By signing in or creating an account,
-                        you agree with our <a href="javascript:void(0)">Terms & Conditions</a>  and <a href="javascript:void(0)">Privacy Statement</a> 
+                        you agree with our <a href="javascript:void(0)">Terms & Conditions</a>  and <a
+                            href="javascript:void(0)">Privacy Statement</a>
                     </p>
                     <p>
-                        All rights reserved.<br>Copyright {{date('Y')}} – hottel.in</a> 
+                        All rights reserved.<br>Copyright {{ date('Y') }} – hottel.in</a>
                     </p>
                 </div>
             </div>

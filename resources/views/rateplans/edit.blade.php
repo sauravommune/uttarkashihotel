@@ -37,6 +37,17 @@
         </div>
     </div>
 
+      <div class="mb-3">
+        <label class="form-label">
+            AP Rates &nbsp;
+            <span class="text-color-secondary fw-semibold fs-8">(Includes room, breakfast,lunch & dinner)</span>
+        </label>
+        <div class="d-flex align-items-center gap-2">
+            <input type="number" class="form-control" value="{{ $ratePlan->b2b_rate_ap??0 }}" name="b2b_rate_ap" placeholder="EP Rates" min="0" required>
+            <input type="number" class="form-control" value="{{ $ratePlan->markup_ap??0 }}" name="markup_ap" placeholder="MAP Markup" min="0" required>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6 mb-3">
             <label class="form-label">

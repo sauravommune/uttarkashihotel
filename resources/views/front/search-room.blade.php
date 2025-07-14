@@ -1,10 +1,11 @@
+{{-- @dd($allAvailableRoom) --}}
 @if (isset($allAvailableRoom) && !empty($allAvailableRoom))
     @foreach ($allAvailableRoom as $index =>$room)
   
     {{-- @dd(checkImageExists($room['rooms']['roomImages'])); --}}
     @if($room['rooms']['roomImages']->count() >0 && checkImageExists($room['rooms']['roomImages']))
         <span id="hotelId" data-hotel_id="{{$room['rooms']?->hotel_id}}"></span>
-          <span class="nights" data-nights="{{$room['nights']}}"></span>
+        <span class="nights" data-nights="{{$room['nights']}}"></span>
 
         <div class="main-box mb-xl-3 mb-3 bor">
             <div class="row g-0">
@@ -104,6 +105,11 @@
                                 'category' => 'With Breakfast Dinner',
                                 'id' => 'break-fast-dinner-box'
                                 ],
+                                'total_price_with_break_fast_lunch_and_dinner' => [
+                                'title' => 'With Breakfast, Lunch ,Dinner (AP Plan)',
+                                'category' => 'With Breakfast Lunch Dinner',
+                                'id' => 'break-fast-lunch-dinner-box'
+                                ],
                             ]
                         @endphp
                         <div class="parent-section">
@@ -141,7 +147,7 @@
                                                                 <button class="btn btn-primary quantity-btn minusBtn" data-type_btn="{{ $title['category'] }}" data-section="{{$index+1}}" data-amount="{{$room[$key]}}">
                                                                     <span class="icon-minus"></span>
                                                                 </button>
-                                                                <input type="number" class="form-control mx-2 quantity-input" data-amount="{{$room[$key]}}" value="{{ $key=='total_price' ? 0 : 0 }}"readonly>
+                                                                <input type="number" class="form-control mx-2 quantity-input" data-amount="{{$room[$key]}}" value="{{ $key=='total_price' ? 0 : 0 }}" readonly>
                                                                 <button class="btn btn-primary quantity-btn plusBtn" data-amount="{{$room[$key]}}" data-availability="{{$room['availableRoom']}}" >
                                                                     <span class="icon-plus"></span>
                                                                 </button>

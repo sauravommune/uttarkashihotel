@@ -27,6 +27,7 @@ class RatePlansRequest extends FormRequest
             'b2b_rate_ep' => 'required|numeric|gt:0',
             'b2b_rate_cp' => 'required|numeric',
             'b2b_rate_map' => 'required|numeric',
+            'b2b_rate_ap' => 'required|numeric',
             'non_refundable_rate' => 'required|numeric',
             'weekly_rate' => 'required|numeric',
             'no_of_extra_beds' => 'required_if:is_extra_bed_allowed,on',
