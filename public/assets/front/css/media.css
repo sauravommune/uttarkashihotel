@@ -1,0 +1,86 @@
+@media (max-width: 1200px) {
+    
+    .guest-input {
+        font-size: 14px;
+    }
+
+    .guest-dropdown {
+        width: 100%;
+        max-width: none;
+    }
+
+    .controls a {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+
+    .controls span {
+        font-size: 14px;
+    }
+    .right-item-box .user-list h4 {
+        font-size: 14px
+    }
+
+    .detail-section .room-feature li {
+        width: 100%
+    }
+
+    .section-13 .title-bottom {
+        font-size: 14px
+    }
+
+    .section-13 .text-bottom {
+        font-size: 14px
+    }
+
+    .section-13 .main-wrapper .detail-part .middle-part h3 {
+        font-size: 18px
+    }
+
+    .section-13 .main-wrapper .table tr td {
+        text-wrap: nowrap
+    }
+
+    .section-13 .rating-part .title-card .fabulous {
+        font-size: 12px;
+        display: flex;
+        align-items: center
+    }
+
+    .section-13 .rating-part .title-card .verified small {
+        font-size: 12px
+    }
+
+    .section-13 .rating-part .title-card .marriott {
+        font-size: 12px !important
+    }
+
+    .section-13 .box-right-main .accordion-title {
+        font-size: 12px
+    }
+
+    .section-13 .box-right-main .total-price {
+        font-size: 13px
+    }
+
+    .section-13 .space-box .amenities-section a {
+        font-size: 14px !important
+    }
+
+    .section-13 .right-item-box .coupon-list p {
+        font-size: 12px
+    }
+
+    .section-13 .right-item-box .coupon-section .box .form-control {
+        height: 44px
+    }
+
+    .section-13 .right-item-box .coupon-section .box button {
+        top: 9px
+    }
+
+    .breadcrumb-section .breadcrumb .breadcrumb-item {
+        font-size: 12px;
+    }
+}

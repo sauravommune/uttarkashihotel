@@ -1,0 +1,1139 @@
+.search-details-page .seach-results .row .search-results-right .result-box .result-box-container {
+    justify-content: unset
+}
+
+.search-details-page .seach-results .row .search-results-right .result-box .result-box-container .result-box-container-right {
+    width: 100%;
+}
+
+.result-box-container {
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-box-container-left {
+    flex: 0 0 150px;
+    position: relative;
+}
+
+
+
+
+.skeleton-circle {
+    border-radius: 8px;
+}
+
+.result-box-container-right {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    /* padding-left: 20px; */
+    gap: 1rem;
+}
+
+.content {
+    flex: 1;
+}
+
+.skeleton-title.skeleton-hotel-name {
+    width: 150px;
+    height: 32px;
+    background-color: #e0e0e0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.skeleton-line {
+    width: 100%;
+    height: 12px;
+    background-color: #e0e0e0;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.skeleton-amenities {
+    width: 100px;
+    height: 12px;
+    background-color: #e0e0e0;
+    margin-bottom: 8px;
+}
+
+.skeleton-rating {
+    width: 80px;
+    height: 12px;
+    background-color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.content-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.skeleton-badge {
+    width: 50px;
+    height: 30px;
+    background-color: #e0e0e0;
+    margin-bottom: 10px;
+        border-radius: 4px;
+
+}
+
+.skeleton-price {
+    width: 80px;
+    height: 20px;
+    background-color: #e0e0e0;
+        border-radius: 4px;
+
+}
+
+.skeleton-small-text {
+    width: 100px;
+    height: 20px;
+    background-color: #e0e0e0;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.skeleton-rating_star {
+    width: 38px;
+    height: 30px;
+    background-color: #e0e0e0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.skeleton-parking {
+    width: 50px;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.skeleton-shimmer {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f2f2f2 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+}
+
+.skeleton-title.skeleton-hotel-name,
+.skeleton-line,
+.skeleton-amenities,
+.skeleton-rating,
+.skeleton-badge,
+.skeleton-price,
+.skeleton-small-text,
+.skeleton-rating_star,
+.skeleton-img,
+.skeleton-parking {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f2f2f2 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+}
+
+
+
+
+
+.search-details-page .seach-results .row .search-results-right .result-box .result-box-container:hover{
+    border: 1px solid #FF541E;
+    transition: 0.3s all;
+}
+
+#search-results a:hover .result-box-container .price-night{
+    color: #1A1F24;
+}
+#search-results a:active .result-box-container .price-night{
+    color: #1A1F24;
+}
+
+.section-3 .image .content h3 {
+    font-size: 16px;
+    color: #1A1F24;
+    font-family: 'PlusJakartaSans-SemiBold';
+}
+
+.section-3 .image .content p {
+    font-size: 14px;
+    padding-top: 8px;
+    color: #1A1F24;
+    font-family: 'PlusJakartaSans-Medium';
+}
+
+
+.section-4 .content h3 {
+    font-size: 16px;
+    color: #1A1F24;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-4 .content p {
+    font-size: 14px;
+    padding-top: 10px;
+    color: #3E4C56;
+    font-family: 'PlusJakartaSans-Regular'
+}
+
+.search-details-page .seach-results .row .search-results-right .top-box .top-box-right .form-group input{
+    padding: 0.75rem 0.95rem 0.75rem 2.6rem;
+}
+
+
+.box-18{
+    width: 18px;
+    height: 18px;
+}
+
+.bg-orange{
+    background: #FDB759;
+}
+
+.bg-green{
+    background: #008000;
+}
+
+
+.box-18{
+    width: 18px;
+    height: 18px;
+}
+
+.bg-orange{
+    background: #FDB759;
+}
+
+.bg-green{
+    background: #008000;
+}
+
+
+.section-13 .primary-border {
+    border: 1px solid #FF541E;
+    padding: 8px 15px;
+    border-radius: 4px
+}
+
+.section-13 .primary-border:hover {
+    background: #FF541E;
+    color: #ffffff
+}
+
+.section-13 .rating-part .verified {
+    font-family: 'PlusJakartaSans-Regular';
+    font-size: 14px
+}
+
+.section-13 .rating-part .fabulous {
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-13 .invoice .text p {
+    color: #FF541E
+}
+
+.section-13 .invoice .icon span {
+    color: #FF541E
+}
+
+.section-13 .download .text p {
+    color: #3E4C56
+}
+
+.section-13 .download .icon span {
+    color: #3E4C56
+}
+
+.section-13 .floating-form {
+    padding: 15px
+}
+
+.section-13 .floating-form .repeat-section {
+    position: relative
+}
+
+.section-13 .floating-form .repeat-section .icon {
+    position: absolute;
+    right: 15px;
+    top: 12px
+}
+
+.section-13 .floating-form .repeat-section .icon span {
+    font-size: 18px
+}
+
+.section-13 .floating-form .repeat-section label {
+    color: #3E4C56;
+    font-size: 12px;
+    padding: 0px 5px;
+    margin-left: 15px;
+    position: relative;
+    z-index: 1;
+    background-color: #ffffff
+}
+
+.section-13 .floating-form .repeat-section .form-select {
+    height: 50px;
+    margin-top: -18px;
+    padding-left: 22px
+}
+
+.section-13 .floating-form .repeat-section .form-control {
+    margin-top: -18px;
+    border-radius: 6px;
+    height: 50px;
+    color: #1A1F24;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-Medium'
+}
+
+.section-13 .floating-form .repeat-section ::placeholder {
+    color: #1A1F24;
+    opacity: 1
+}
+
+.section-13 .floating-form .repeat-section ::-ms-input-placeholder {
+    color: #1A1F24
+}
+
+.section-13 .floating-form .repeat-section:nth-child(3) label {
+    background-color: unset
+}
+
+.section-13 .floating-form .custom-field:nth-child(4) .form-control {
+    background: unset
+}
+
+.section-13 .floating-form .custom-field:nth-child(4) .icon {
+    top: 20px;
+    right: 25px
+}
+
+.section-13 .floating-form .custom-field:nth-child(4) .icon span {
+    font-size: 22px
+}
+
+.section-13 .main-wrapper {
+    margin: 12px;
+    padding: 10px
+}
+
+.section-13 .main-wrapper .image {
+    border-radius: 4px;
+    width: 100%;
+    min-height: 205px
+}
+
+.section-13 .main-wrapper .detail-part {
+    border-bottom: 1px solid #E0E0EB;
+    padding-bottom: 15px
+}
+
+.section-13 .main-wrapper .detail-part .middle-part h3 {
+    font-size: 20px;
+    font-family: 'PlusJakartaSans-SemiBold';
+    color: #1A1F24
+}
+
+.section-13 .main-wrapper .detail-part .middle-part .rating {
+    margin: 0px 0px;
+    background-color: #32A16C;
+    border-radius: 8px;
+    padding: 5px 8px;
+    display: inline-block
+}
+
+.section-13 .main-wrapper .detail-part .middle-part .rating span {
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-13 .main-wrapper .detail-part .middle-part .travel-city p {
+    font-size: 14px;
+    margin-bottom: 0px;
+    padding: 0px;
+    color: #3E4C56
+}
+
+.section-13 .main-wrapper .detail-part .middle-part .booking-id {
+    position: relative;
+    padding-left: 40px
+}
+
+.section-13 .main-wrapper .detail-part .middle-part .booking-id:before {
+    content: "";
+    padding: 4px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    left: 20px;
+    top: 9px;
+    position: absolute
+}
+
+.section-13 .main-wrapper .detail-part .middle-part .booking-id b,.section-13 .main-wrapper .detail-part .middle-part .booking-id small {
+    font-size: 14px;
+    margin-bottom: 0px;
+    font-weight: normal;
+    padding: 0px;
+    color: #3E4C56
+}
+
+.section-13 .main-wrapper .detail-part .middle-part .btn-dark {
+    border-radius: 5px;
+    padding: 8px 20px
+}
+
+.section-13 .main-wrapper .hotel-part .text small {
+    font-size: 14px;
+    color: #3E4C56
+}
+
+.section-13 .main-wrapper .hotel-part .icon span {
+    font-size: 16px;
+    color: #3E4C56
+}
+
+.section-13 .main-wrapper .hotel-part .main-date {
+    color: #1A1F24;
+    font-size: 13px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-13 .main-wrapper .badge {
+    padding: 8px 10px;
+    border-radius: 5px
+}
+
+.section-13 .main-wrapper .badge:hover {
+    color: #ffffff
+}
+
+.section-13 .main-wrapper:nth-child(3) {
+    border: 1px solid #E0E0EB
+}
+
+.section-13 .main-wrapper .table-section .table>:not(:first-child) {
+    border-top: 0px
+}
+
+
+.section-13 .common .title {
+    border-bottom: 0
+}
+
+
+.section-13 .hotel-detail-list .space-box .title-card {
+    color: #1A1F24;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-13 .hotel-detail-list .space-box .title-card h2 {
+    color: #1A1F24;
+    
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-13 .hotel-detail-list .space-box .title-card p {
+    color: #6E7E8E;
+    font-family: 'PlusJakartaSans-Regular'
+}
+
+.section-13 .hotel-detail-list .space-box .rating-part h3 {
+    color: #1A1F24;
+    font-size: 16px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-13 .hotel-detail-list .space-box .rating-part span {
+    color: #FFC531;
+    font-size: 18px
+}
+
+.section-13 .hotel-detail-list .space-box .rating-part .rating {
+    background: #32A16C;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.875rem;
+    padding: 4px 8px
+}
+
+.section-13 .hotel-detail-list .space-box .rating-part .rating span {
+    color: #ffffff;
+    font-size: 12px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.section-13 .hotel-detail-list .space-box .rating-part .star-rating-area {
+    border: 0px
+}
+
+.section-13 .hotel-detail-list .space-box .rating-part p {
+    font-size: 0.875rem;
+    color: #3E4C56;
+    line-height: 1.25rem
+}
+
+
+.section-13 .hotel-detail-list .space-box .amenities-section {
+    border-top: 1px solid #E0E0EB;
+    margin-top: 20px
+}
+
+.section-13 .hotel-detail-list .space-box .amenities-section a {
+    color: #1A1F24;
+    font-size: 16px;
+    font-family: 'PlusJakartaSans-Regular'
+}
+
+.section-13 .hotel-detail-list .space-box .amenities-section a span {
+    color: #1A1F24;
+    font-size: 22px;
+    font-family: 'PlusJakartaSans-Regular'
+}
+
+.section-13 .hotel-detail-list .space-box .amenities-section a:hover {
+    color: #FF541E
+}
+
+.section-13 .hotel-detail-list .space-box .amenities-section a:hover span {
+    color: #FF541E
+}
+
+.section-13 .hotel-detail-list .space-box .amenities-section .ul-section li {
+    width: 50%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #3E4C56;
+    display: inline-block
+}
+
+.section-13 .hotel-detail-list .space-box .amenities-section .ul-section li span {
+    color: #1A1F24;
+    font-size: 22px
+}
+
+.section-13 .payment-options {
+}
+
+
+.section-13 .title-bottom {
+    font-family: 'PlusJakartaSans-SemiBold';
+    font-size: 20px;
+    color: #1A1F24
+}
+
+.section-13 .text-bottom {
+    color: #3E4C56;
+    font-size: 14px
+}
+
+.section-13 .right-item-box {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 120px
+}
+
+.section-13 .right-item-box .btn-black {
+    border-radius: 8px;
+    padding: 10px 20px
+}
+
+.section-13 .right-item-box .user-list:last-child {
+    border-bottom: 1px solid #E0E0EB
+}
+
+.section-13 .right-item-box .btn-transparent {
+    font-size: 12px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    color: #3E4C56
+}
+
+.section-13 .right-item-box .btn-transparent span {
+    font-size: 10px
+}
+
+.section-13 .right-item-box .cal {
+    height: 25px;
+    border-radius: 100px;
+    border: 1px solid #3E4C56;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.section-13 .right-item-box .cal .text {
+    font-size: 14px
+}
+
+.section-13 .accordion-title small {
+    font-family: 'PlusJakartaSans-Regular';
+    font-size: 12px
+}
+
+
+.modal-section .password-icon {
+    position: relative
+}
+
+.make-payment .box-right-main {
+    position: sticky;
+    top: 120px
+}
+
+.make-payment .box-right-main .right-item-box {
+    background-color: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #F1F1F4;
+    padding: 5px;
+    position: unset
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box {
+    border-radius: 16px;
+    border: 1px solid #E0E0EB;
+    background: #ffffff
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box .common-card {
+    border: 0px;
+    box-shadow: none;
+    padding: 12px
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box .accordion-part {
+    border-bottom: 1px solid #E0E0EB
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box .accordion-part .accordion-body {
+    padding: 0px 0px 10px 0px
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box .accordion-part .accordion-button {
+    padding-left: 0px;
+    padding-right: 0px
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box .total-box {
+    background: #fff3ec;
+    background: linear-gradient(90deg, #fff3ec 0%, #ffdac6 100%);
+    padding: 15px 12px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 15px
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box .total-box .bottom-box .text {
+    color: #1A1F24;
+    font-size: 16px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.make-payment .box-right-main .right-item-box .main-card-box .total-box .bottom-box .amount {
+    color: #1A1F24;
+    font-size: 16px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.make-payment .box-right-main .coupons-section {
+    background-color: unset
+}
+/*
+.make-payment .box-right-main .base-fare-icon .accordion-button:after {
+    left: unset;
+    right: 150px;
+    top: 15px
+}
+*/
+.make-payment .box-right-main .taxes-fees .accordion-button:after {
+    top: 15px;
+    left: 200px
+}
+
+.make-payment .box-right-main .discount .accordion-button:after {
+    top: 15px;
+    left: 70px
+}
+
+.dark-bg-back {
+    background: #292321
+}
+
+
+.right-item-box .user-list {
+    padding: 20px 15px 0px 15px
+}
+
+.right-item-box .user-list h4 {
+    font-size: 16px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.right-item-box .user-list a {
+    color: #1A1F24;
+    font-size: 12px
+}
+
+.right-item-box .user-list a:hover {
+    color: #FF541E
+}
+
+.right-item-box .user-list .gender-info {
+    padding-bottom: 0px;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-Medium';
+    color: #1A1F24;
+    text-transform: uppercase
+}
+
+.right-item-box .user-list:first-child {
+    padding-top: 15px
+}
+
+.right-item-box .user-list:last-child {
+    padding-bottom: 15px
+}
+
+.right-item-box .user-list .form-check-input {
+    height: 20px;
+    width: 20px;
+    border-radius: 0px;
+    margin-right: 10px
+}
+
+.right-item-box .user-list .form-check-input:checked {
+    background-color: #FF541E;
+    border: 1px solid #FF541E
+}
+
+.right-item-box .opacity-set {
+    opacity: 0.5
+}
+
+.right-item-box .children {
+    border-top: 1px solid #E0E0EB
+}
+
+.right-item-box .rating {
+    margin: 0px 0px;
+    background-color: #32A16C;
+    border-radius: 4px;
+    padding: 5px 8px;
+    display: inline-block;
+    font-size: 12px;
+    color: #ffffff
+}
+
+.right-item-box .verified {
+    padding-left: 25px;
+    color: #3E4C56;
+    font-size: 16px;
+    font-family: 'PlusJakartaSans-Medium';
+    position: relative
+}
+
+.right-item-box .verified:after {
+    content: "";
+    padding: 3px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    left: 10px;
+    top: 10px;
+    position: absolute
+}
+
+.right-item-box .ul-section {
+    padding: 15px;
+    height: 100%
+}
+
+.right-item-box .ul-section .rooms {
+    color: #3E4C56;
+    font-size: 14px
+}
+
+.right-item-box .price small {
+    color: #1A1F24;
+    font-size: 18px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.right-item-box .accordion-part {
+    padding: 0px 0px
+}
+
+.right-item-box .accordion-part .accordion-item {
+    border: 0px
+}
+
+.right-item-box .accordion-part .accordion-button:not(.collapsed) {
+    box-shadow: unset;
+    background: #ffffff;
+    color: #1A1F24;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-Medium'
+}
+
+.right-item-box .accordion-part .total-price {
+    color: #1A1F24;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-Medium'
+}
+
+.right-item-box .accordion-part .caredit-card-num {
+    color: #6E7E8E;
+    font-size: 12px;
+    font-family: 'PlusJakartaSans-Medium'
+}
+
+.right-item-box .accordion-part .accordion-button::after {
+    position: absolute;
+    left: 100px
+}
+
+.right-item-box .accordion-part .accordion-button {
+    color: #1A1F24;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-Medium';
+    padding: 15px 15px
+}
+
+.right-item-box .accordion-part .accordion-body {
+    padding-top: 0px;
+    padding: 0px 15px
+}
+
+
+.right-item-box .accordion-part .accordion-body .amount {
+    padding-top: 0px;
+    color: #3E4C56;
+    font-size: 12px
+}
+
+.right-item-box .accordion-part .accordion-body .amount span {
+    color: #3E4C56;
+    opacity: 0.7
+}
+
+.right-item-box .accordion-part .accordion-body .accordion-button:focus {
+    box-shadow: 0px !important
+}
+
+.right-item-box .credit-card-item {
+    padding: 0px;
+    border-top: 1px solid #E0E0EB
+}
+
+.right-item-box .center-text {
+    padding: 15px 15px 15px 15px
+}
+
+.right-item-box .center-text .fee p {
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-Medium';
+    color: #1A1F24
+}
+
+.right-item-box .center-text .fee .firtbook {
+    color: #4CAF50;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.right-item-box .center-text .amount p {
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-Medium';
+    color: #1A1F24
+}
+
+.right-item-box .center-text .green-text p {
+    color: #4CAF50
+}
+
+.right-item-box .coupon-section {
+    padding: 15px
+}
+
+.right-item-box .coupon-section .box {
+    position: relative
+}
+
+.right-item-box .coupon-section .box .form-control {
+    border-radius: 6px;
+    height: 50px;
+    color: #1A1F24;
+    font-size: 14px;
+    padding-right: 60px
+}
+
+.right-item-box .coupon-section .box button {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+    display: inline-block;
+    height: unset;
+    border: 0px;
+    background-color: unset;
+    color: #1A1F24;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-SemiBold';
+    padding: 0px;
+    margin: 0px
+}
+
+.right-item-box .coupon-list {
+    padding: 0px 15px 15px 15px
+}
+
+.right-item-box .coupon-list .text {
+    color: #1A1F24;
+    font-size: 14px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}
+
+.right-item-box .coupon-list p {
+    color: #3E4C56;
+    font-size: 14px;
+    padding-top: 5px
+}
+
+.right-item-box .coupon-list .coupan-one {
+    color: #1A1F24;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: dashed 2px #E0E0EB;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: 'PlusJakartaSans-Bold';
+    background: #F6F6F6
+}
+
+.right-item-box .coupon-list .save-mony {
+    color: #4CAF50;
+    font-size: 12px;
+    font-family: 'PlusJakartaSans-SemiBold';
+    text-transform: uppercase
+}/*
+
+.common-card .space-box .title-card {
+    margin: 10px 0px;
+    padding: 5px 15px 15px 15px;
+    border-bottom: 1px solid #E0E0EB;
+    color: #1A1F24;
+    font-size: 20px;
+    font-family: 'PlusJakartaSans-SemiBold'
+}*/
+
+.breadcrumb-section .breadcrumb .breadcrumb-item.active {
+    color: #FF541E;
+}
+
+.section-12 .main-card .payment-details .table-part {
+    border-radius: 8px;
+    margin: 0 !important;
+    border: 0 !important;
+
+}
+.bg-primary {
+    background-color: #0d6efd!important
+}
+.co-traveller .table thead{
+    background: #f4f4f4;
+    font-size: 14px;
+    color: #6E7E8E;
+}
+
+.co-traveller .table thead th {
+    padding: 10px 12px 10px 32px
+}
+
+.co-traveller .table tbody td {
+    padding: 10px 12px 10px 32px
+}
+
+.co-traveller .table tbody{
+    font-size: 14px !important;
+}
+
+.section-12 .main-card .payment-details .table-part .card-name{
+    font-size: 14px !important;
+}
+
+
+.section-10 .main-box .recommended-section .quantity-section-second .quantity-btn {
+    border-radius: 8px;
+    background-color: #F4F4F4;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 0px 15px;
+    border: 0px;
+    margin: 0px;
+    line-height: 0px
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second .quantity-btn:hover {
+    color: #ffffff;
+    background-color: #FF541E
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second .quantity-btn span {
+    font-size: 12px
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second .quantity-btn:focus {
+    box-shadow: unset !important;
+    background-color: #FF541E;
+    color: #ffffff
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second .quantity-btn:active {
+    box-shadow: unset !important;
+    background-color: #FF541E;
+    color: #ffffff
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second .quantity-input {
+    height: 36px;
+    width: 44px;
+    color: #1A1F24;
+    padding: 10px 13px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #F4F4F4
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second input[type="number"]::-webkit-inner-spin-button,
+.section-10 .main-box .recommended-section .quantity-section-second input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.section-10 .main-box .recommended-section .quantity-section-second .quantity-input-second{
+    height: 36px;
+    width: 48px;
+    color: #1A1F24;
+    padding: 10px 13px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #F4F4F4
+}
+
+
+.section-10 .main-box .recommended-section .quantity-section-third .quantity-btn {
+    border-radius: 8px;
+    background-color: #F4F4F4;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 0px 15px;
+    border: 0px;
+    margin: 0px;
+    line-height: 0px
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third .quantity-btn:hover {
+    color: #ffffff;
+    background-color: #FF541E
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third .quantity-btn span {
+    font-size: 12px
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third .quantity-btn:focus {
+    box-shadow: unset !important;
+    background-color: #FF541E;
+    color: #ffffff
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third .quantity-btn:active {
+    box-shadow: unset !important;
+    background-color: #FF541E;
+    color: #ffffff
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third .quantity-input {
+    height: 36px;
+    width: 48px;
+    color: #1A1F24;
+    padding: 10px 13px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #F4F4F4
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third input[type="number"]::-webkit-inner-spin-button,
+.section-10 .main-box .recommended-section .quantity-section-third input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.section-10 .main-box .recommended-section .quantity-section-third .quantity-input-third{
+    height: 36px;
+    width: 48px;
+    color: #1A1F24;
+    padding: 10px 13px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #F4F4F4
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    border-radius: 8px;
+}
+
+.right-image {
+    position: relative;
+}
+

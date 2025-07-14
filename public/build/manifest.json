@@ -1,0 +1,329 @@
+{
+  "public/assets/front/images/consult-now.png": {
+    "file": "assets/consult-now-DR0t4rrb.png",
+    "src": "public/assets/front/images/consult-now.png"
+  },
+  "public/assets/front/images/termsandconditions.png": {
+    "file": "assets/termsandconditions-KfQl5wCl.png",
+    "src": "public/assets/front/images/termsandconditions.png"
+  },
+  "public/assets/front/images/testinomial.webp": {
+    "file": "assets/testinomial-C5mJ3qLj.webp",
+    "src": "public/assets/front/images/testinomial.webp"
+  },
+  "resources/fonts/fontello/fontello.eot": {
+    "file": "assets/fontello-DpXRd8As.eot",
+    "src": "resources/fonts/fontello/fontello.eot"
+  },
+  "resources/fonts/fontello/fontello.svg": {
+    "file": "assets/fontello-DhxDKidc.svg",
+    "src": "resources/fonts/fontello/fontello.svg"
+  },
+  "resources/fonts/fontello/fontello.ttf": {
+    "file": "assets/fontello-Xwv6pVMZ.ttf",
+    "src": "resources/fonts/fontello/fontello.ttf"
+  },
+  "resources/fonts/fontello/fontello.woff": {
+    "file": "assets/fontello-DJQX9lAF.woff",
+    "src": "resources/fonts/fontello/fontello.woff"
+  },
+  "resources/fonts/fontello/fontello.woff2": {
+    "file": "assets/fontello-Dy9VFD3E.woff2",
+    "src": "resources/fonts/fontello/fontello.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Bold.eot": {
+    "file": "assets/PlusJakartaSans-Bold-C1j5PleG.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Bold.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Bold.ttf": {
+    "file": "assets/PlusJakartaSans-Bold-FRtMnxVU.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Bold.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Bold.woff": {
+    "file": "assets/PlusJakartaSans-Bold-IFeTnTSF.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Bold.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Bold.woff2": {
+    "file": "assets/PlusJakartaSans-Bold-MzkP1Jau.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Bold.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.eot": {
+    "file": "assets/PlusJakartaSans-BoldItalic-DpEvF7Ul.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.ttf": {
+    "file": "assets/PlusJakartaSans-BoldItalic-bLKYE1Q5.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.woff": {
+    "file": "assets/PlusJakartaSans-BoldItalic-DQgGotjA.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.woff2": {
+    "file": "assets/PlusJakartaSans-BoldItalic-BCe8b0ie.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-BoldItalic.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.eot": {
+    "file": "assets/PlusJakartaSans-ExtraBold-DVl6ZQKF.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.ttf": {
+    "file": "assets/PlusJakartaSans-ExtraBold-ZtwIjZby.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.woff": {
+    "file": "assets/PlusJakartaSans-ExtraBold-DbOfD5Ge.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.woff2": {
+    "file": "assets/PlusJakartaSans-ExtraBold-C03cp7uh.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBold.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.eot": {
+    "file": "assets/PlusJakartaSans-ExtraBoldItalic-p5fsJQ7y.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.ttf": {
+    "file": "assets/PlusJakartaSans-ExtraBoldItalic-ClGW8bdw.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.woff": {
+    "file": "assets/PlusJakartaSans-ExtraBoldItalic-DH2KqW08.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.woff2": {
+    "file": "assets/PlusJakartaSans-ExtraBoldItalic-DlYmsxty.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraBoldItalic.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.eot": {
+    "file": "assets/PlusJakartaSans-ExtraLight-BRT7e5W_.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.ttf": {
+    "file": "assets/PlusJakartaSans-ExtraLight-BLsoF2QQ.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.woff": {
+    "file": "assets/PlusJakartaSans-ExtraLight-jN0su9Qw.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.woff2": {
+    "file": "assets/PlusJakartaSans-ExtraLight-Cl_pfdNs.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLight.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.eot": {
+    "file": "assets/PlusJakartaSans-ExtraLightItalic-CfhTR64w.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.ttf": {
+    "file": "assets/PlusJakartaSans-ExtraLightItalic-2rhZX1px.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.woff": {
+    "file": "assets/PlusJakartaSans-ExtraLightItalic-DxpuPwnF.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.woff2": {
+    "file": "assets/PlusJakartaSans-ExtraLightItalic-CN8iXKRr.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-ExtraLightItalic.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Italic.eot": {
+    "file": "assets/PlusJakartaSans-Italic-CYlpLi27.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Italic.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Italic.ttf": {
+    "file": "assets/PlusJakartaSans-Italic-DJGouBVL.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Italic.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Italic.woff": {
+    "file": "assets/PlusJakartaSans-Italic-fAsuFlkh.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Italic.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Italic.woff2": {
+    "file": "assets/PlusJakartaSans-Italic-DrqgUpad.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Italic.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Light.eot": {
+    "file": "assets/PlusJakartaSans-Light-CP4xK9E5.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Light.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Light.ttf": {
+    "file": "assets/PlusJakartaSans-Light-DSG0j_rA.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Light.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Light.woff": {
+    "file": "assets/PlusJakartaSans-Light-C-Nb3oOb.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Light.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Light.woff2": {
+    "file": "assets/PlusJakartaSans-Light-CsV171Iq.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Light.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-LightItalic.eot": {
+    "file": "assets/PlusJakartaSans-LightItalic-D2c75dc2.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-LightItalic.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-LightItalic.ttf": {
+    "file": "assets/PlusJakartaSans-LightItalic-DhPHzg2S.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-LightItalic.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-LightItalic.woff": {
+    "file": "assets/PlusJakartaSans-LightItalic-BSomU3Li.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-LightItalic.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-LightItalic.woff2": {
+    "file": "assets/PlusJakartaSans-LightItalic-Bw_MM9wk.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-LightItalic.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Medium.eot": {
+    "file": "assets/PlusJakartaSans-Medium-rq2EyRP3.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Medium.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Medium.ttf": {
+    "file": "assets/PlusJakartaSans-Medium-CIw00qaF.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Medium.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Medium.woff": {
+    "file": "assets/PlusJakartaSans-Medium-USR-xvqF.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Medium.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Medium.woff2": {
+    "file": "assets/PlusJakartaSans-Medium-5PqAaVtz.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Medium.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.eot": {
+    "file": "assets/PlusJakartaSans-MediumItalic-B0dPKZe3.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.ttf": {
+    "file": "assets/PlusJakartaSans-MediumItalic-DMDtSdRm.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.woff": {
+    "file": "assets/PlusJakartaSans-MediumItalic-Cw0Nfvon.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.woff2": {
+    "file": "assets/PlusJakartaSans-MediumItalic-HYGeu7j6.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-MediumItalic.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Regular.eot": {
+    "file": "assets/PlusJakartaSans-Regular-DxKF1mYd.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Regular.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Regular.ttf": {
+    "file": "assets/PlusJakartaSans-Regular-CXQx0qXN.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Regular.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Regular.woff": {
+    "file": "assets/PlusJakartaSans-Regular-DsjHXI1l.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Regular.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-Regular.woff2": {
+    "file": "assets/PlusJakartaSans-Regular-l6V2M2qN.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-Regular.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBold.eot": {
+    "file": "assets/PlusJakartaSans-SemiBold-H6XBcwcI.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBold.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBold.ttf": {
+    "file": "assets/PlusJakartaSans-SemiBold-BnEM8AJR.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBold.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBold.woff": {
+    "file": "assets/PlusJakartaSans-SemiBold-C2ui4fMr.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBold.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBold.woff2": {
+    "file": "assets/PlusJakartaSans-SemiBold-Cji-Is6M.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBold.woff2"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.eot": {
+    "file": "assets/PlusJakartaSans-SemiBoldItalic-C5lkKgUI.eot",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.eot"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.ttf": {
+    "file": "assets/PlusJakartaSans-SemiBoldItalic-jyZ_4yoY.ttf",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.ttf"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.woff": {
+    "file": "assets/PlusJakartaSans-SemiBoldItalic-Bt4ShGt_.woff",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.woff"
+  },
+  "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.woff2": {
+    "file": "assets/PlusJakartaSans-SemiBoldItalic-DyLSlhC_.woff2",
+    "src": "resources/fonts/jakarta/PlusJakartaSans-SemiBoldItalic.woff2"
+  },
+  "resources/fonts/new-fontello-icon/fontello.eot": {
+    "file": "assets/fontello-TwWPVTds.eot",
+    "src": "resources/fonts/new-fontello-icon/fontello.eot"
+  },
+  "resources/fonts/new-fontello-icon/fontello.svg": {
+    "file": "assets/fontello-CXDzC4SC.svg",
+    "src": "resources/fonts/new-fontello-icon/fontello.svg"
+  },
+  "resources/fonts/new-fontello-icon/fontello.ttf": {
+    "file": "assets/fontello-PAk7Yj41.ttf",
+    "src": "resources/fonts/new-fontello-icon/fontello.ttf"
+  },
+  "resources/fonts/new-fontello-icon/fontello.woff": {
+    "file": "assets/fontello-BruXeWZ0.woff",
+    "src": "resources/fonts/new-fontello-icon/fontello.woff"
+  },
+  "resources/fonts/new-fontello-icon/fontello.woff2": {
+    "file": "assets/fontello-Be0xh5Wn.woff2",
+    "src": "resources/fonts/new-fontello-icon/fontello.woff2"
+  },
+  "resources/fonts/new-fontello/fontello.eot": {
+    "file": "assets/fontello-Bpfda6h7.eot",
+    "src": "resources/fonts/new-fontello/fontello.eot"
+  },
+  "resources/fonts/new-fontello/fontello.svg": {
+    "file": "assets/fontello-DETa70SZ.svg",
+    "src": "resources/fonts/new-fontello/fontello.svg"
+  },
+  "resources/fonts/new-fontello/fontello.ttf": {
+    "file": "assets/fontello-RC7UAU6s.ttf",
+    "src": "resources/fonts/new-fontello/fontello.ttf"
+  },
+  "resources/fonts/new-fontello/fontello.woff": {
+    "file": "assets/fontello-Dr6Qs-fp.woff",
+    "src": "resources/fonts/new-fontello/fontello.woff"
+  },
+  "resources/fonts/new-fontello/fontello.woff2": {
+    "file": "assets/fontello-BLEqoOoF.woff2",
+    "src": "resources/fonts/new-fontello/fontello.woff2"
+  },
+  "resources/fonts/new-fontellos/fontello.eot": {
+    "file": "assets/fontello-DNhJ2IgY.eot",
+    "src": "resources/fonts/new-fontellos/fontello.eot"
+  },
+  "resources/fonts/new-fontellos/fontello.svg": {
+    "file": "assets/fontello-DzNkyXZP.svg",
+    "src": "resources/fonts/new-fontellos/fontello.svg"
+  },
+  "resources/fonts/new-fontellos/fontello.ttf": {
+    "file": "assets/fontello-BsjSH_XF.ttf",
+    "src": "resources/fonts/new-fontellos/fontello.ttf"
+  },
+  "resources/fonts/new-fontellos/fontello.woff": {
+    "file": "assets/fontello-D8_DKvw4.woff",
+    "src": "resources/fonts/new-fontellos/fontello.woff"
+  },
+  "resources/fonts/new-fontellos/fontello.woff2": {
+    "file": "assets/fontello-BXtnWTE7.woff2",
+    "src": "resources/fonts/new-fontellos/fontello.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BjCBnTiP.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-C3ypGkGo.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true
+  }
+}

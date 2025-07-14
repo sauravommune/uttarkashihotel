@@ -1,0 +1,2 @@
+<img alt="Logo" src="{{ asset('assets/media/logos/default.png') }}" class="theme-light-show h-40px" />
+{{-- <img alt="Logo" src="{{ asset('assets/media/logos/default-dark.svg') }}" class="theme-dark-show h-25px" /> --}}

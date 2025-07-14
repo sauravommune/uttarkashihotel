@@ -1,0 +1,83 @@
+
+  /* Extra large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {
+    .section-35 .hotel-name{
+        font-size: 16px;
+    }
+    .section-35 .hotel-detail .ul-section ul li{
+        width: 50%;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+    .section-35 .hotel-detail .borde-right{
+        border:0px;
+    }
+    .section-35 .hotel-detail .rating-area .bg-green{
+        display: inline-block;
+    }
+    .section-35 .right-section .text{
+        font-size: 12px;
+    }
+    .section-35 .search-result .hotel-card .custom-card-text .hotel-name h2{
+        font-size: 14px;
+    }
+    .section-35 .search-result .hotel-card .custom-card-text .hotel-name span{
+        font-size: 12px;
+    }
+    .section-35 .hotte-detail-card .room-feature .ul-section ul li{
+        font-size: 12px;
+    }
+    .section-35 .hotte-detail-card .recommended-section .title{
+        font-size: 14px;
+    }
+    .section-35 .hotte-detail-card .recommended-section .custom-badge{
+        font-size: 12px;
+    }
+    .section-35 .hotte-detail-card .btn-black{
+        font-size: 12px;
+        padding: calc(.0.5rem + 1px) calc(1.5rem + 1px);
+    }
+    .section-35 .right-card-custom .inner-wrapper .total-count .right-part{
+        font-size: 18px;
+    }
+    .section-35  .select-btn{
+        padding: 10px 10px;
+    }
+    .section-35 .hotte-detail-card .price-section .price{
+        font-size: 16px;
+    }
+    .section-33 .main-content-box .content-repeat:nth-child(3){
+        padding-left: 10px;
+        border: 0px;
+    }
+}
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    
+}
+
+
+  
+
+/* Small devices (phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    
+}
+
+  
+/* Extra small devices (phones, max width 575.98px) */
+@media (max-width: 575.98px) {
+    .section-35 .hotel-name{
+        font-size: 14px;
+    }
+}
+  
+  
+  

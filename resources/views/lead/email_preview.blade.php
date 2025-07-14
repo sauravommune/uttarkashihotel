@@ -1,0 +1,1 @@
+@include('emails.emails.bookings.insurance')

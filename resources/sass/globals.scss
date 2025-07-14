@@ -1,0 +1,89 @@
+//---Color
+$primary_color:#FF541E;
+$secondary_color:#007B97;
+$tertiary_color:#005C72;
+$star_color:#FFC531;
+$star_color_hover:#fabb1c;
+$primary_grey:#F6F6F6;
+$secondary_grey:#EBEBEB;
+$tertiary_grey:#A7A9AC;
+$quaternary_grey:#555555;
+$primary-blue:#1459D8;
+$primary_dark_bg:#292321;
+
+
+$primary_grey_two:#EBF3F8;
+
+$primary_black:#1A1F24;
+$primary_white:#ffffff;
+
+$primary_light_bg:#f2f2f2;
+
+
+$primary_fill_color:#6E7E8E;
+$primary_fill_two:#F1F1F1;
+$primary_fill_f5:#F5F5F5;
+$primary_fill_three:#FFE0D6;
+$primary_fill_three-hover:#FFDADA;
+$primary_fill_four:#3E4C56;
+
+$primary_fill_border:#E0E0E0;
+$stroke_color:#E0E0EB;
+$stroke_color_two:#E9E9EB;
+
+$theme_color:#F76335;
+$theme_green:#32A16C;
+$theme_green-light:#E5FFF1;
+$theme_red:#FF4141;
+$theme_dark_red:#FF1E1E;
+$light_bg_color:#F9F9F9;
+$star_color:#FFC531;
+$primary_btn_color:#FCDE90;
+$primary_bg_btn:#FFF8F6;
+$pritmary_bg_color_one:#F4F4F4;
+$primary_star_color:#FFCB12;
+$primary_recommended:#FFFCF4;
+//---Fonts
+$primary_font:'PlusJakartaSans-Regular';
+$secondary_font:'PlusJakartaSans-SemiBold';
+$medium_font:'PlusJakartaSans-Medium';
+$bold_font:'PlusJakartaSans-Bold';
+
+
+//---Font Family
+/* Bootstrap Styles */
+:root {
+	--bs-white: #fff;
+	--bs-gray: #6c757d;
+	--bs-secondary: #6c757d;
+	--bs-success: #198754;
+	--bs-info: #0dcaf0;
+	--bs-warning: #ffc107;
+	--bs-danger: #dc3545;
+	--bs-light: #f8f9fa;
+	--bs-dark: #212529;
+	--bs-secondary-rgb: 108, 117, 125;
+	--bs-success-rgb: 25, 135, 84;
+	--bs-info-rgb: 13, 202, 240;
+	--bs-warning-rgb: 255, 193, 7;
+	--bs-danger-rgb: 220, 53, 69;
+	--bs-light-rgb: 248, 249, 250;
+	--bs-dark-rgb: 33, 37, 41;
+	--bs-white-rgb: 255, 255, 255;
+	--bs-black-rgb: 0, 0, 0;
+	--bs-body-color-rgb: 33, 37, 41;
+	--bs-body-bg-rgb: 255, 255, 255;
+	--bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	--bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+	--bs-body-font-family: var(--bs-font-sans-serif);
+	--bs-body-font-size: 1rem;
+	--bs-body-font-weight: 400;
+	--bs-body-line-height: 1.5;
+	--bs-body-color: #212529;
+	--bs-body-bg: #fff;
+}
+
+@mixin smooth($duration: .3s) {
+	-webkit-transition: all $duration ease;
+}

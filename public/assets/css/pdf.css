@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    /* background-color: #dfdfdf !important; */
+    height: 100vh;
+    user-select:none;
+}
+
+.max-width {
+    max-width: 46.2rem;
+    /* /* max-height: 52.625rem; */
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    background-image: url('../front/images/bg-cover-ticket.svg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 38%;
+}
+.section-80 .max-width {
+    background-position:center center;
+}
+.bor{
+    border:1px solid red;
+}
+.custom-border-top{
+    border-top:1px solid #D9D9D9;
+}
+.custom-border{
+    border:1px solid #D9D9D9;
+}
+.fs-12 {
+    font-size: 1.2rem !important;
+}
+.fs-7 {
+    font-size: 0.875rem !important;
+}
+
+.fs-8 {
+    font-size: 0.750rem !important;
+}
+
+.fs-9 {
+    font-size: 0.563rem !important;
+}
+
+.fs-10 {
+    font-size: 0.625rem !important;
+}
+
+.page-header {
+    width: 100%;
+    padding: 1rem 2rem 0;
+}
+
+.page-content {
+    width: 100%;
+    padding: 1rem 2rem 1rem;
+}
+
+.page-footer {
+    width: 100%;
+    padding: 1rem 2rem 1rem;
+}
+
+.gap-28 {
+    gap: 1.75rem;
+}
+
+.pb-18 {
+    padding-bottom: 1.125rem !important;
+}
+
+.pt-18 {
+    padding-top: 1.125rem !important;
+}
+
+.text-color {
+    color: #1A1F24 !important;
+}
+
+.text-color-secondary {
+    color: #3E4C56 !important;
+}
+
+.bg-light-yellow {
+    background-color: #FFE8AC;
+}
+
+.text-success {
+    color: #00A355;
+}
+
+.border-custom {
+    border: 1px solid #D9D9D9 !important;
+}
+
+.border-bottom-custom {
+    border-bottom: 1px solid #D9D9D9 !important;
+}
+
+.p-4-16 {
+    padding: 0.25rem 1rem;
+}
+
+.table tbody tr td {
+    text-align: left !important;
+}
+
+.table {
+    background: transparent !important;
+}
+
+.table>:not(caption)>*>* {
+    background: transparent !important;
+}
+
+.text-star {
+    color: #FFC531;
+}
+
+.text-no-star {
+    color: #cfcfcf;
+}
+
+.text-important {
+    color: #FF541E;
+}
+
+.ol,
+ul {
+    padding-left: unset !important;
+}
+
+.box-18 {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-green {
+    background: #4AC087;
+}
+
+.circle-yellow {
+    background: #FFB661;
+}
+
+.circle-red {
+    background: #FF6C6C;
+}
+
+.line {
+    height: 1px;
+    width: 78%;
+    background: #D9D9D9;
+    position: relative;
+}
+
+.line::after {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    content: "";
+    background: #D9D9D9;
+    right: 0;
+    top: -4px;
+}
+
+.line::before {
+    position: absolute;
+    height: 10px;
+    border-radius: 50%;
+    width: 10px;
+    content: "";
+    background: #D9D9D9;
+    left: 0;
+    top: -4px;
+}
+
+.border-bottom-custom-dark {
+    border-bottom: 1px solid #1A1F24;
+}
+
+.gap-54 {
+    gap: 54px;
+}
+
+.gap-10 {
+    gap: 10px
+}
+
+.non-refund-bg {
+    background: #FF6C6C;
+}
+
+.refund-bg {
+    background: #4AC087;
+}
+
+.room-feature{
+   padding-left: 18px !important;
+}
+.room-feature li{
+    font-size: 12px;
+    color: #3E4C56;
+}
+
+.property_rules{
+   padding-left: 18px !important;
+}
+.property_rules li{
+    font-size: 12px;
+    color: #3E4C56;
+    padding: 0.3rem 0;
+}
+.bor{
+    border:1px solid red;
+}
+.payment-break{
+    border-bottom:1px solid #1A1F24;
+    padding-bottom:15px;
+}
+.payment-cal{
+    font-size: 12px;
+    line-height: 1.6em;
+}
+.border-top-dash{
+    border-top: 2px dashed #D9D9D9; 
+}
+.border-t-b{
+    border-top:1px solid #D9D9D9;
+    border-bottom:1px solid #D9D9D9;
+}
+.pb-15{
+    padding-bottom: 15px;
+}
+.section-80 .page-content .hotel-name b{
+    font-weight:600;
+}
+.section-80 .page-content .hotel-name{
+    font-size:12px;
+    line-height:1.6em;
+}
+.section-80 .page-content .title-text{
+    font-size:18px;
+    font-weight:700;
+}
