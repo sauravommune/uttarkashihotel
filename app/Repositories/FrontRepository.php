@@ -15,13 +15,27 @@ class FrontRepository extends BaseRepository
 
     public function getCityWithHotel()
     {
+        // return City::with('state')
+        //     ->whereHas('getHotel', fn($query) => $query->where('status', 'active')->whereHas('rooms', fn($query) => $query->where('status', 1)))
+        //     ->withCount(['getHotel' => function ($query) {
+        //         $query->whereHas('rooms', fn($query) => $query->where('status', 1));
+        //         $query->where('status', 'active');
+        //     }])
+        //     ->get();
+        $checkIn = Carbon::today()->toDateString();
+        $checkOut = Carbon::tomorrow()->toDateString();
+
         return City::with('state')
-            ->whereHas('getHotel', fn($query) => $query->where('status', 'active')->whereHas('rooms', fn($query) => $query->where('status', 1)))
-            ->withCount(['getHotel' => function ($query) {
-                $query->whereHas('rooms', fn($query) => $query->where('status', 1));
-                $query->where('status', 'active');
-            }])
-            ->get();
+            ->whereHas('getHotel', function ($hotelQuery) use ($checkIn, $checkOut) {
+                $hotelQuery->where('status', 'active')
+                    ->whereHas('rooms', function ($roomQuery) use ($checkIn, $checkOut) {
+                        $roomQuery->where('status', 1)
+                            ->whereHas('ratePlan', function ($ratePlanQuery) use ($checkIn, $checkOut) {
+                                $ratePlanQuery->where('pricing_date', '>=', $checkIn)
+                                    ->where('pricing_date', '<', $checkOut);
+                            });
+                    });
+            })->where('status', 1)->get();
     }
 
     public function SearchCity($request)
@@ -167,7 +181,9 @@ class FrontRepository extends BaseRepository
         // Fetch hotel details with necessary relationships and conditions
         $hotelDetails = Hotel::whereHas('room', function ($query) use ($checkIn, $checkOut, $roomCount, $totalGuests) {
             // Ensure the room has valid rate plans
-            $query->where('stay_guest', '>=', $totalGuests)->whereHas('ratePlan', function ($subQuery) use ($checkIn, $checkOut, $roomCount) {
+
+            // $query->where('stay_guest', '>=', $totalGuests)
+            $query->whereHas('ratePlan', function ($subQuery) use ($checkIn, $checkOut, $roomCount) {
                 $subQuery->where('pricing_date', '>=', $checkIn)
                     ->where('pricing_date', '<', $checkOut);
                 // ->where('availability', '>=', $roomCount);
@@ -178,10 +194,12 @@ class FrontRepository extends BaseRepository
             },
             'room' => function ($query)  use ($totalGuests) {
 
-                $query->has('ratePlan')->where('stay_guest', '>=', $totalGuests);;
+                $query->has('ratePlan');
+                // $query->has('ratePlan')->where('stay_guest', '>=', $totalGuests);
             },
             'room' => function ($query) use ($checkIn, $checkOut, $roomCount, $totalGuests) {
-                $query->where('stay_guest', '>=', $totalGuests)->whereHas('ratePlan', function ($subQuery) use ($checkIn, $checkOut, $roomCount) {
+                // $query->where('stay_guest', '>=', $totalGuests)
+                $query->whereHas('ratePlan', function ($subQuery) use ($checkIn, $checkOut, $roomCount) {
                     $subQuery->where('pricing_date', '>=', $checkIn)
                         ->where('pricing_date', '<', $checkOut);
                     // ->where('availability', '>=', $roomCount);
@@ -228,7 +246,7 @@ class FrontRepository extends BaseRepository
         //     $personExtraBedPriceEp = personExtraBedPriceEp($hotelDetails->room->ratePlan);
         //     $averageRoomRate = $averageRoomRate+$personExtraBedPriceEp['ep_average_extra_person_price'];
         // }
-       //end add this extraBedPrice add new code
+        //end add this extraBedPrice add new code
 
         $totalPrice = $averageRoomRate * $roomCount;
 
@@ -255,7 +273,8 @@ class FrontRepository extends BaseRepository
         $totalGuests = ($searchData->adultCount ?? 1) + ($searchData->childCount ?? 0);
 
         $similarHotel = Hotel::whereHas('room', function ($query) use ($totalGuests) {
-            $query->where('status', 1)->where('stay_guest', '>=', $totalGuests);
+            $query->where('status', 1);
+            // ->where('stay_guest', '>=', $totalGuests);
         })->whereHas('room.plan', function ($filter) use ($checkIn, $checkOut, $roomCount) {
             $filter->where('pricing_date', '>=', $checkIn)
                 ->where('pricing_date', '<', $checkOut)
@@ -301,7 +320,8 @@ class FrontRepository extends BaseRepository
                 $query->where('pricing_date', '>=', $checkIn)->where('pricing_date', '<', $checkOut);
                 // ->where('availability', '>=', $roomCount);
 
-            }])->where('status', 1)->where('stay_guest', '>=', $totalGest);
+            }])->where('status', 1);
+            // ->where('stay_guest', '>=', $totalGest);
         }, 'getRoom.ratePlan', 'getRoom.roomType', 'getRoom.roomImages', 'getRoom.addAmenity.amenityName'])->where('slug', $slug)->first();
         $availableRooms = [];
 
@@ -344,7 +364,7 @@ class FrontRepository extends BaseRepository
 
 
                 //start code  Extra person bedPrice 
-                
+
                 // if ($rooms->ratePlan && $rooms->ratePlan->count() > 0) {
                 //     $ratePlan = $rooms->ratePlan;
 
@@ -742,11 +762,14 @@ class FrontRepository extends BaseRepository
         }, 'getRoom' => function ($query) use ($searchData) {
 
             $query->whereHas('ratePlan', function ($query) use ($searchData) {
-                $query->where('pricing_date', '>=', $searchData->checkin_date)->where('pricing_date', '<', $searchData->checkout_date)->where('availability', '>=', $searchData->roomCount);
+                $query->where('pricing_date', '>=', $searchData->checkin_date)->where('pricing_date', '<', $searchData->checkout_date);
+                // ->where('availability', '>=', $searchData->roomCount);
             });
             $query->with(['ratePlan' => function ($query) use ($searchData) {
-                $query->where('pricing_date', '>=', $searchData->checkin_date)->where('pricing_date', '<', $searchData->checkout_date)->where('availability', '>=', $searchData->roomCount);
-            }])->where('status', 1)->where('stay_guest', '>=', ($searchData->adultCount + $searchData->childCount));
+                $query->where('pricing_date', '>=', $searchData->checkin_date)->where('pricing_date', '<', $searchData->checkout_date);
+                // ->where('availability', '>=', $searchData->roomCount);
+            }])->where('status', 1);
+            // ->where('stay_guest', '>=', ($searchData->adultCount + $searchData->childCount));
         }, 'getRoom.ratePlan', 'getRoom.roomType', 'getRoom.roomImages', 'getRoom.addAmenity.amenityName'])->where('id', $request->hotel_id)->first();
         $availableRooms = [];
         foreach ($hotels->getRoom as $rooms) {
@@ -769,7 +792,7 @@ class FrontRepository extends BaseRepository
                         $mapAmount = $planAmount->total_amount_map ?? 0;
                         $totalAmountMap += $mapAmount;
                     }
-                     if (isset($planAmount->total_amount_ap)) {
+                    if (isset($planAmount->total_amount_ap)) {
                         $mapAmount = $planAmount->total_amount_ap ?? 0;
                         $totalAmountAp += $mapAmount;
                     }
@@ -779,27 +802,27 @@ class FrontRepository extends BaseRepository
                 $totalPriceMap = $this->averageRoomRate($totalAmountMap, $totalRatePlanCount);
                 $totalPriceAp = $this->averageRoomRate($totalAmountAp, $totalRatePlanCount);
 
-            //      //start code  Extra person bedPrice 
-            //     if ($rooms->ratePlan && $rooms->ratePlan->count() > 0) {
-            //         $ratePlan = $rooms->ratePlan;
+                //      //start code  Extra person bedPrice 
+                //     if ($rooms->ratePlan && $rooms->ratePlan->count() > 0) {
+                //         $ratePlan = $rooms->ratePlan;
 
-            //         // EP: Room Only
-            //         $personExtraBedPriceEp = personExtraBedPriceEp($ratePlan);
-            //         $totalPriceEp  = $totalPriceEp  + $personExtraBedPriceEp['ep_average_extra_person_price'] ?? 0;
+                //         // EP: Room Only
+                //         $personExtraBedPriceEp = personExtraBedPriceEp($ratePlan);
+                //         $totalPriceEp  = $totalPriceEp  + $personExtraBedPriceEp['ep_average_extra_person_price'] ?? 0;
 
-            //         // CP: With Breakfast
-            //         $personExtraBedPriceCp = personExtraBedPriceCp($ratePlan);
-            //         $totalPriceCp  = $totalPriceCp  + $personExtraBedPriceCp['cp_average_extra_person_price'] ?? 0;
+                //         // CP: With Breakfast
+                //         $personExtraBedPriceCp = personExtraBedPriceCp($ratePlan);
+                //         $totalPriceCp  = $totalPriceCp  + $personExtraBedPriceCp['cp_average_extra_person_price'] ?? 0;
 
-            //         // MAP: With Breakfast + Dinner
-            //         $personExtraBedPriceMap = personExtraBedPriceMap($ratePlan);
-            //         $totalPriceMap  = $totalPriceMap  + $personExtraBedPriceMap['map_average_extra_person_price'] ?? 0;
-            //         // AP: With Breakfast + Lunch + Dinner
-            //         $personExtraBedPriceAp = personExtraBedPriceAp($ratePlan);
-            //         $totalPriceAp  = $totalPriceAp  + $personExtraBedPriceAp['ap_average_extra_person_price'] ?? 0;
-            //     }
-            //     end code  Extra person bedPrice 
-            
+                //         // MAP: With Breakfast + Dinner
+                //         $personExtraBedPriceMap = personExtraBedPriceMap($ratePlan);
+                //         $totalPriceMap  = $totalPriceMap  + $personExtraBedPriceMap['map_average_extra_person_price'] ?? 0;
+                //         // AP: With Breakfast + Lunch + Dinner
+                //         $personExtraBedPriceAp = personExtraBedPriceAp($ratePlan);
+                //         $totalPriceAp  = $totalPriceAp  + $personExtraBedPriceAp['ap_average_extra_person_price'] ?? 0;
+                //     }
+                //     end code  Extra person bedPrice 
+
             }
 
             $availableRooms[] = [
@@ -826,4 +849,3 @@ class FrontRepository extends BaseRepository
         return $hotel;
     }
 }
-    

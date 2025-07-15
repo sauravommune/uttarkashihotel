@@ -75,7 +75,7 @@ class SearchRepository
                     // Join with rooms and add room conditions
                     ->whereHas('rooms', function ($query) use ($checkIn, $checkOut, $totalGuests, $request) {
                         $query->where('status', 1)
-                            ->where('stay_guest', '>=', $totalGuests)
+                            // ->where('stay_guest', '>=', $totalGuests)
                             ->when($request->bed_type, function ($q) use ($request) {
                                 $q->whereHas(
                                     'getBed',
@@ -90,7 +90,7 @@ class SearchRepository
                     })
                     ->with(['rooms' => function ($query) use ($checkIn, $checkOut, $totalGuests, $request) {
                         $query->where('status', 1)
-                            ->where('stay_guest', '>=', $totalGuests)
+                            // ->where('stay_guest', '>=', $totalGuests)
                             ->when($request->bed_type, function ($q) use ($request) {
                                 $q->whereHas(
                                     'getBed',
@@ -186,10 +186,10 @@ class SearchRepository
             $averageRoomRate = $this->averageRoomRate($totalAmountEp, $totalRatePlanCount);
 
               //start add this extraBedPrice add new code
-              if($availableRoom->ratePlan->count()>0){
-                  $personExtraBedPriceEp = personExtraBedPriceEp($availableRoom->ratePlan);
-                  $averageRoomRate = $averageRoomRate+$personExtraBedPriceEp['ep_average_extra_person_price'];
-              }
+            //   if($availableRoom->ratePlan->count()>0){
+            //       $personExtraBedPriceEp = personExtraBedPriceEp($availableRoom->ratePlan);
+            //       $averageRoomRate = $averageRoomRate+$personExtraBedPriceEp['ep_average_extra_person_price'];
+            //   }
             //end add this extraBedPrice add new code
 
             $room_count = $request->roomCount ?? 1;

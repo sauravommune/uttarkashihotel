@@ -100,4 +100,17 @@ class CityController extends Controller
             return response()->json(['status' => 500, 'message' => $e->getMessage()], 500);
         }
     }
+
+      public function updateStatus(Request $request)
+    {
+        try {
+            $city = City::find($request->id);
+            $city->status = $request->status == 'inactive' ? 0 : 1;
+
+            $city->save();
+            return response()->json(['status' => 200, 'message' => 'Status Updated Successfully'], 200);
+        } catch (Exception $e) {
+            return response()->json(['status' => 500, 'message' => $e->getMessage()], 500);
+        }
+    }
 }

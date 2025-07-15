@@ -11,7 +11,6 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use App\Helpers\general_helper;
 
 class CityDataTable extends DataTable
 {
@@ -27,8 +26,15 @@ class CityDataTable extends DataTable
             ->editColumn('name', function ($data) {
                 return ucwords($data->name??'');
             })
+           
             ->addColumn('state_name', function($data){
                 return ucwords($data->state->name??'');
+            })
+            
+            ->addColumn('status', function ($q) {
+                  return '<div class="form-check form-switch">
+                          <input class="form-check-input custom-pointer changeStatus" type="checkbox" role="switch" id="flexSwitchCheckChecked" data_id = "'.$q->id.'" data-url = "'.route('update.city.status').'" '.($q->status ==1 ? "checked" : "").'>
+                         </div>';
             })
             ->addColumn('actions', function ($data) {
                 $string = '<div class="d-flex align-items-center gap-3">';
@@ -41,7 +47,7 @@ class CityDataTable extends DataTable
 
                 return $string;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['status','actions']);
     }
 
     /**
@@ -83,6 +89,7 @@ class CityDataTable extends DataTable
             // Column::make('id'),
             Column::make('name'),
             Column::make('state_name')->title('State'),
+             Column::make('status')->title('status'),
             Column::make('meta_title')->title('Meta Title'),
             Column::make('meta_description')->title('Meta Description'),
             Column::computed('actions')

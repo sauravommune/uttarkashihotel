@@ -9,7 +9,7 @@
         $ep = $configs->get('ep') ?? '';
         $cp = $configs->get('cp') ?? '';
         $map = $configs->get('map') ?? '';
-        $ap = $configs->get('map') ?? '';
+        $ap = $configs->get('ap') ?? '';
 
     @endphp
 

@@ -45,9 +45,9 @@ use App\Http\Controllers\TaxCalculatorController;
 use App\Http\Controllers\GmailCredentialController;
 
 
-Route::get('/',[FrontController::class,'index'])->name('home')->middleware('check_referral_booking');
+Route::get('/', [FrontController::class, 'index'])->name('home')->middleware('check_referral_booking');
 
-route::get('email-view', function(){
+route::get('email-view', function () {
     $booking = App\Models\Booking::with([
         'bookingContact',
         'transactions' => function ($query) {
@@ -66,11 +66,11 @@ Route::get('/google-places-search', [GooglePlaceSearch::class, 'searchAjax'])->n
 
 
 
-        Route::get('/send-email', [GmailCredentialController::class, 'showEmailForm'])->name('gmail.form');
-        Route::post('/send-email', [GmailCredentialController::class, 'sendEmail'])->name('gmail.send');
-        Route::get('/google/credentials', [GmailCredentialController::class, 'showForm'])->name('google.credentials.form');
-        Route::post('/google/credentials', [GmailCredentialController::class, 'saveCredentials'])->name('google.credentials.save');
-        Route::get('/google/callback', [GmailCredentialController::class, 'handleCallback']);
+Route::get('/send-email', [GmailCredentialController::class, 'showEmailForm'])->name('gmail.form');
+Route::post('/send-email', [GmailCredentialController::class, 'sendEmail'])->name('gmail.send');
+Route::get('/google/credentials', [GmailCredentialController::class, 'showForm'])->name('google.credentials.form');
+Route::post('/google/credentials', [GmailCredentialController::class, 'saveCredentials'])->name('google.credentials.save');
+Route::get('/google/callback', [GmailCredentialController::class, 'handleCallback']);
 
 // Auth Routes
 Route::middleware(['auth', 'restrict_user'])->group(function () {
@@ -100,7 +100,7 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
         Route::post('/change/status', [HotelController::class, 'changeStatus'])->name('hotel.status.update');
         Route::post('/change/papular', [HotelController::class, 'changePapular'])->name('hotel.papular.update');
         Route::post('/change/recommended', [HotelController::class, 'changeRecommended'])->name('hotel.recommended.update');
-        Route::post('/update-soldOut',[HotelController::class,'updateSoldOut'])->name('hotel.updateSoldOut');
+        Route::post('/update-soldOut', [HotelController::class, 'updateSoldOut'])->name('hotel.updateSoldOut');
 
         Route::get('/details/{id}', [HotelController::class, 'viewDetails'])->name('hotel.view.details');
         Route::get('/image/add/form', [HotelController::class, 'addImageForm'])->name('hotel.add.image.form');
@@ -113,20 +113,20 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
             Route::get('add/{hotelId}/{roomId?}', [RoomController::class, 'create'])->name('rooms.add');
             Route::post('save', [RoomController::class, 'save'])->name('room.save')->middleware('permission:Rooms-Add');
             Route::delete('delete/{id}', [RoomController::class, 'deleteRoom'])->name('delete.room')->middleware('permission:Rooms-Delete');
-            Route::post('/update-status',[RoomController::class,'updateStatus'])->name('rooms.updateStatus');
-            Route::post('/update-soldout',[RoomController::class,'updatesoldout'])->name('rooms.updateSoldout');
-            
+            Route::post('/update-status', [RoomController::class, 'updateStatus'])->name('rooms.updateStatus');
+            Route::post('/update-soldout', [RoomController::class, 'updatesoldout'])->name('rooms.updateSoldout');
+
             // Hotel Availability
             Route::get('availability/{roomId}/{ratePlanId?}/', [RoomAvailabilityController::class, 'create'])->name('rooms.availability.create');
             Route::post('availability/save', [RoomAvailabilityController::class, 'store'])->name('rooms.availability.save');
             Route::get('{hotelId}', [RoomController::class, 'index'])->name('rooms')->middleware('permission:Rooms-View');
         });
 
-         Route::prefix('review')->group(function () {
-            Route::get('add/{hotelId?}/{hotelReviewId?}',[HotelReviewController::class,'create'])->name('create.hotelReview');
-            Route::post('save',[HotelReviewController::class,'store'])->name('save.hotelReview');
-            Route::delete('delete/{id?}',[HotelReviewController::class,'deleteHotelReview'])->name('delete.review');
-            Route::get('{hotelId?}',[HotelReviewController::class,'index'])->name('hotelReview');
+        Route::prefix('review')->group(function () {
+            Route::get('add/{hotelId?}/{hotelReviewId?}', [HotelReviewController::class, 'create'])->name('create.hotelReview');
+            Route::post('save', [HotelReviewController::class, 'store'])->name('save.hotelReview');
+            Route::delete('delete/{id?}', [HotelReviewController::class, 'deleteHotelReview'])->name('delete.review');
+            Route::get('{hotelId?}', [HotelReviewController::class, 'index'])->name('hotelReview');
         });
         //Api key create url
         Route::get('/serverKey', [ServerKeyController::class, 'serverKey'])->name('serverkey.index');
@@ -139,26 +139,26 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
         route::post('/upload', [RoomController::class, 'upload'])->name('rooms.upload')->middleware('permission:Rooms-View');
         Route::post('/modify-room-availability', [RoomController::class, 'changeAvailability'])->name('modify.room.availability');
         Route::get('/modify-room/{id}', [RoomController::class, 'modifyRoom'])->name('modify.room');
-        Route::delete('delete-image/{imageId?}',[RoomController::class,'deleteImage'])->name('delete.roomImage');
-        Route::get('delete-bed',[RoomController::class,'deleteBed'])->name('delete.roomBed');
-        Route::get('/room-type/unique',[RoomController::class,'uniqueRoomType']);
+        Route::delete('delete-image/{imageId?}', [RoomController::class, 'deleteImage'])->name('delete.roomImage');
+        Route::get('delete-bed', [RoomController::class, 'deleteBed'])->name('delete.roomBed');
+        Route::get('/room-type/unique', [RoomController::class, 'uniqueRoomType']);
     });
 
     Route::get('/unique/email', [HotelController::class, 'uniqueEmail'])->name('email.unique');
 
-    Route::prefix('bed-type')->group(function(){
+    Route::prefix('bed-type')->group(function () {
         Route::get('/', [BedTypeController::class, 'index'])->name('bedType');
         Route::get('/add/{id?}', [BedTypeController::class, 'create'])->name('add.bedType');
         Route::post('/save', [BedTypeController::class, 'store'])->name('save.bedType');
         Route::delete('/remove/{id}', [BedTypeController::class, 'destroy'])->name('bedType.destroy');
     });
 
-    
+
     Route::prefix('amenities')->group(function () {
-        Route::get('/',[AmenitiesController::class,'listAmenities'])->name('list.amenities');
-        Route::get('/save/{id?}',[AmenitiesController::class,'save'])->name('amenities.save');
+        Route::get('/', [AmenitiesController::class, 'listAmenities'])->name('list.amenities');
+        Route::get('/save/{id?}', [AmenitiesController::class, 'save'])->name('amenities.save');
         Route::post('/add', [AmenitiesController::class, 'create'])->name('amenities.add');
-        Route::delete('delete-amenity/{id}',[AmenitiesController::class,'deleteAmenity'])->name('delete.amenity');
+        Route::delete('delete-amenity/{id}', [AmenitiesController::class, 'deleteAmenity'])->name('delete.amenity');
     });
     Route::prefix('hotelmanager')->group(function () {
         Route::get('/manager-dashboard', [ManagerController::class, 'dashboard'])->name('hotelmanager.dashboard');
@@ -183,7 +183,7 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
     Route::delete('reservations/cancel/{id}', [ReservationController::class, 'cancel'])->name('reservations.cancel');
     Route::get('reservations/update_payment_status/{type?}', [ReservationController::class, 'update_payment_status'])->name('reservations.update_payment_status');
 
-    Route::prefix('promotion')->group(function(){
+    Route::prefix('promotion')->group(function () {
         Route::get('/', [PromotionController::class, 'index'])->name('promotion.index');
         Route::get('basic_deal/{type?}', [PromotionController::class, 'basic_deal'])->name('promotion.basic_deal');
         Route::post('save', [PromotionController::class, 'store'])->name('promotion.save');
@@ -191,8 +191,8 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
         Route::post('promotion/delete/{id}', [PromotionController::class, 'delete'])->name('promotion.delete');
     });
 
-    Route::prefix('rate-plan')->group(function(){
-            
+    Route::prefix('rate-plan')->group(function () {
+
         Route::get('index', [RatePlanController::class, 'index'])->name('ratePlan.index');
         Route::get('create/{hotelId?}/{roomType?}', [RatePlanController::class, 'create'])->name('ratePlan.create');
         Route::post('store', [RatePlanController::class, 'store'])->name('ratePlan.store');
@@ -206,34 +206,34 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
         Route::post('update/{ratePlan?}', [RatePlanController::class, 'update'])->name('ratePlan.update');
         Route::get('extra-bed/{hotelId?}/{roomType?}', [RatePlanController::class, 'extraBed'])->name('extra.bed');
         Route::post('update-extra-bed-price', [RatePlanController::class, 'extraBedPriceUpdate'])->name('extraBedPrice.update');
-        
+
         Route::get('show-extra-bed/{planId?}', [RatePlanController::class, 'showExtraBed'])->name('show.extra.bed');
         Route::post('update-single-extra-bed-price', [RatePlanController::class, 'singleExtraBedPriceUpdate'])->name('singleExtraBedPrice.update');
     });
 
 
-     Route::prefix('sitemap')->group(function(){   
-            Route::get('index',[HotelController::class,'sitemap'])->name('site.map');
-            Route::get('generate',[HotelController::class,'generateSitemap'])->name('generate.sitemap');
-        });
+    Route::prefix('sitemap')->group(function () {
+        Route::get('index', [HotelController::class, 'sitemap'])->name('site.map');
+        Route::get('generate', [HotelController::class, 'generateSitemap'])->name('generate.sitemap');
+    });
 
     // leads routes
     Route::prefix('leads')->group(function () {
         // lead guest route
-        Route::prefix('guest')->group(function(){
+        Route::prefix('guest')->group(function () {
             Route::get('datatable/{bookingId}', [GuestController::class, 'guestDatatable'])->name('lead.guest.datatable');
             Route::get('index/{bookingId}/{guest?}', [GuestController::class, 'guestForm'])->name('lead.guest');
             Route::post('save', [GuestController::class, 'saveGuest'])->name('lead.guest.save');
         });
 
         // lead contact info route
-        Route::prefix('contact-info')->group(function(){
+        Route::prefix('contact-info')->group(function () {
             Route::get('index/{bookingId}/{contact?}', [GuestController::class, 'contactForm'])->name('lead.contact');
             Route::post('save', [GuestController::class, 'saveContact'])->name('lead.contact.save');
         });
 
         // leads transactions route
-        Route::prefix('transactions')->group(function(){
+        Route::prefix('transactions')->group(function () {
             Route::get('datatable/{bookingId}', [TransactionsController::class, 'transactionsDatatable'])->name('lead.transactions.datatable');
             Route::get('index/{bookingId}/{payment?}', [TransactionsController::class, 'transactionsForm'])->name('lead.transactions');
             Route::post('save', [TransactionsController::class, 'saveTransaction'])->name('lead.transactions.save');
@@ -248,16 +248,16 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
         });
 
         //leads change hotel 
-        Route::prefix('change')->group(function(){
-            Route::get('hotel/{bookingId?}',[LeadController::class,'changeHotel'])->name('leads.change.hotel');
-            Route::get('hotel/rooms/{bookingId}/{selectedHotel?}',[LeadController::class,'hotelRooms'])->name('leads.change.hotel.rooms');
-            Route::get('rate-plan/{bookingId}',[LeadController::class,'getRatePlans'])->name('leads.change.rate.plan');
-            Route::get('recommend/hotel/{bookingId?}',[LeadController::class,'recommendHotel'])->name('leads.recommend.hotel');
-            Route::post('save/recommend/hotel',[LeadController::class,'savedRecommendHotel'])->name('save.recommend.hotel');
+        Route::prefix('change')->group(function () {
+            Route::get('hotel/{bookingId?}', [LeadController::class, 'changeHotel'])->name('leads.change.hotel');
+            Route::get('hotel/rooms/{bookingId}/{selectedHotel?}', [LeadController::class, 'hotelRooms'])->name('leads.change.hotel.rooms');
+            Route::get('rate-plan/{bookingId}', [LeadController::class, 'getRatePlans'])->name('leads.change.rate.plan');
+            Route::get('recommend/hotel/{bookingId?}', [LeadController::class, 'recommendHotel'])->name('leads.recommend.hotel');
+            Route::post('save/recommend/hotel', [LeadController::class, 'savedRecommendHotel'])->name('save.recommend.hotel');
         });
 
         // followup resource route
-        Route::prefix('followup')->as('followup.')->group(function(){
+        Route::prefix('followup')->as('followup.')->group(function () {
             Route::get('create/{bookingId}/{followup?}', [FollowUpController::class, 'create'])->name('create');
             Route::delete('{followUp}', [FollowUpController::class, 'destroy'])->name('destroy');
             Route::post('/', [FollowUpController::class, 'store'])->name('store');
@@ -275,7 +275,6 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
         Route::get('vendor/status/{bookingId}', [LeadVendorController::class, 'vendorStatus'])->name('lead.vendor.status');
         Route::get('details/{bookingId?}', [LeadController::class, 'leadDetail'])->name('lead.detail')->middleware('permission:Lead-view');
         Route::get('remarks/{bookingId}/{userId}', [LeadController::class, 'leadRemarks'])->name('lead.remarks');
-        
     });
 
     Route::get('/email-preview/{bookingId}/{option}/', [EmailHandlerController::class, 'emailPreview'])->name('email.preview');
@@ -283,13 +282,13 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
 
     //lead models
     // Route::get('cancel/booking/status/{$bookingId}',[LeadController::class,'cancelBooking'])->name('cancel.booking');
-    Route::get('cancel/{booking}/booking',[LeadController::class,'cancelBooking'])->name('cancel.booking');
-    Route::post('booking/cancel/save',[LeadController::class,'cancelBookingSave'])->name('cancel.booking.save');
-    Route::get('change-booking-date/{bookingId?}',[LeadController::class,'changeBookingDate'])->name('change.booking.date');
-    Route::get('change-booking-status/{bookingId}',[LeadController::class,'changeBookingStatus'])->name('change.booking.status');
-    Route::post('save-booking-status',[LeadController::class,'saveBookingStatus'])->name('save.booking.status');
-    Route::post('update-booking-date', [LeadController::class,'updateBookingDate'])->name('update.booking.date');
-    Route::post('change-room-hotel',[LeadController::class,'changeRoomHotel'])->name('save.change.room.hotel');
+    Route::get('cancel/{booking}/booking', [LeadController::class, 'cancelBooking'])->name('cancel.booking');
+    Route::post('booking/cancel/save', [LeadController::class, 'cancelBookingSave'])->name('cancel.booking.save');
+    Route::get('change-booking-date/{bookingId?}', [LeadController::class, 'changeBookingDate'])->name('change.booking.date');
+    Route::get('change-booking-status/{bookingId}', [LeadController::class, 'changeBookingStatus'])->name('change.booking.status');
+    Route::post('save-booking-status', [LeadController::class, 'saveBookingStatus'])->name('save.booking.status');
+    Route::post('update-booking-date', [LeadController::class, 'updateBookingDate'])->name('update.booking.date');
+    Route::post('change-room-hotel', [LeadController::class, 'changeRoomHotel'])->name('save.change.room.hotel');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -331,31 +330,33 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
         Route::post('smtp/update', [SmtpSettingController::class, 'updateSmtp'])->name('settings.updateSmtp');
 
         Route::post('/aws/update', [SmtpSettingController::class, 'updateAws'])->name('settings.updateAws');
-        Route::get('google/login',[SettingController::class,'googleLogin'])->name('google.login.form');
-        Route::post('google/login',[SettingController::class,'googleLoginSave'])->name('save.google.login');
-        
-        
+        Route::get('google/login', [SettingController::class, 'googleLogin'])->name('google.login.form');
+        Route::post('google/login', [SettingController::class, 'googleLoginSave'])->name('save.google.login');
+
+
         //user
         Route::resource('roles', RoleController::class);
 
-        Route::get('city',[CityController::class,'city'])->name('list.city');
-        Route::get('save/{id?}',[CityController::class,'save'])->name('add.city');
-        Route::post('add',[CityController::class,'create'])->name('save.city');
-        Route::delete('delete-city/{id}',[CityController::class,'deleteCity'])->name('delete.city');
+        Route::get('city', [CityController::class, 'city'])->name('list.city');
+        Route::get('save/{id?}', [CityController::class, 'save'])->name('add.city');
+        Route::post('add', [CityController::class, 'create'])->name('save.city');
+        Route::delete('delete-city/{id}', [CityController::class, 'deleteCity'])->name('delete.city');
+        Route::post('/update-status', [CityController::class, 'updateStatus'])->name('update.city.status');
 
-        Route::get('room-category',[RoomCategoryController::class,'roomCategory'])->name('list.room_category');
-        Route::get('save-room-category/{id?}',[RoomCategoryController::class,'saveRoomCategory'])->name('add.room_category');
-        Route::post('add-room-category',[RoomCategoryController::class,'createRoomCategory'])->name('save.room_category');
-        Route::post('room/category/status',[RoomCategoryController::class,'changeStatus'])->name('room.category.changeStatus');
 
-        Route::delete('delete-room-category/{id}',[RoomCategoryController::class,'deleteRoomCategory'])->name('delete.room_category');
+        Route::get('room-category', [RoomCategoryController::class, 'roomCategory'])->name('list.room_category');
+        Route::get('save-room-category/{id?}', [RoomCategoryController::class, 'saveRoomCategory'])->name('add.room_category');
+        Route::post('add-room-category', [RoomCategoryController::class, 'createRoomCategory'])->name('save.room_category');
+        Route::post('room/category/status', [RoomCategoryController::class, 'changeStatus'])->name('room.category.changeStatus');
 
-        Route::get('campaigns/index',[CampaignsController::class,'index'])->name('campaigns.index');
+        Route::delete('delete-room-category/{id}', [RoomCategoryController::class, 'deleteRoomCategory'])->name('delete.room_category');
+
+        Route::get('campaigns/index', [CampaignsController::class, 'index'])->name('campaigns.index');
         Route::get('campaigns/basic_deal', [CampaignsController::class, 'basic_deal'])->name('campaigns.basic_deal');
         Route::get('campaigns/pause/{id}', [CampaignsController::class, 'pause'])->name('campaigns.pause');
         Route::post('campaigns/delete/{id}', [CampaignsController::class, 'delete'])->name('campaigns.delete');
     });
-        
+
     Route::prefix('users')->group(function () {
         Route::get('index', [UserController::class, 'index'])->name('users.index')->middleware('permission:User-View');
         Route::get('create', [UserController::class, 'create'])->name('users.create');
@@ -378,7 +379,7 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
     Route::delete('/banks/{id}', [BankController::class, 'destroy'])->name('banks.destroy');
 
     //update status
-    Route::post('change/status/{id}',[SettingController::class,'changeStatus'])->name('ChangeStatus');
+    Route::post('change/status/{id}', [SettingController::class, 'changeStatus'])->name('ChangeStatus');
 
     Route::prefix('booking')->group(function () {
         Route::get('index', [AdminBookingController::class, 'index'])->name('booking.index');
@@ -419,45 +420,45 @@ Route::middleware(['auth', 'restrict_user'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     // frontend routes
-    Route::get('manage-booking/{bookingId?}',[BookingController::class,'manageBooking'])->name('manage.booking');
+    Route::get('manage-booking/{bookingId?}', [BookingController::class, 'manageBooking'])->name('manage.booking');
     Route::get('/download-invoice/{bookingId?}', [BookingController::class, 'downloadInvoice'])->name('download.invoice');
-    
+
     // frontend profile route
-    Route::get('user-profile',[ProfileController::class,'userProfile'])->name('user.profile');
-    Route::post('update-profile',[ProfileController::class,'UpdateProfile'])->name('update.profile');
-    Route::post('update-password',[ProfileController::class,'updatePassword'])->name('update.password');
-    
-    Route::get('delete-coTraveler/{id?}',[ProfileController::class,'deleteCoTraveler'])->name('delete.cotraveler');
-    Route::get('traveler-details/{id?}',[ProfileController::class,'travelerDetails'])->name('traveler.details');
+    Route::get('user-profile', [ProfileController::class, 'userProfile'])->name('user.profile');
+    Route::post('update-profile', [ProfileController::class, 'UpdateProfile'])->name('update.profile');
+    Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update.password');
+
+    Route::get('delete-coTraveler/{id?}', [ProfileController::class, 'deleteCoTraveler'])->name('delete.cotraveler');
+    Route::get('traveler-details/{id?}', [ProfileController::class, 'travelerDetails'])->name('traveler.details');
     // end frontend route
 });
 
-Route::get('terms-and-conditions/',[FrontController::class,'termsAndCondition'])->name('terms-and-conditions');
-Route::get('cancellation-policy/',[FrontController::class,'cancellingAndRefund'])->name('cancellation-policy');
-Route::get('privacy-policy/',[FrontController::class,'privacyPolicy'])->name('privacy-policy');
-Route::get('contact-us/',[FrontController::class,'contactUs'])->name('contact-us');
-Route::get('consult-now/',[FrontController::class,'consultNow'])->name('consult-now');
+Route::get('terms-and-conditions/', [FrontController::class, 'termsAndCondition'])->name('terms-and-conditions');
+Route::get('cancellation-policy/', [FrontController::class, 'cancellingAndRefund'])->name('cancellation-policy');
+Route::get('privacy-policy/', [FrontController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('contact-us/', [FrontController::class, 'contactUs'])->name('contact-us');
+Route::get('consult-now/', [FrontController::class, 'consultNow'])->name('consult-now');
 Route::get('faq/', [FrontController::class, 'faq'])->name('faq');
 
-Route::get('search-room',[FrontController::class,'searchRoom'])->name('search.room');
-Route::get('hotel-list-consult-now',[frontController::class,'hotelListForConsultNow'])->name('hotel.list.consult.now');
+Route::get('search-room', [FrontController::class, 'searchRoom'])->name('search.room');
+Route::get('hotel-list-consult-now', [frontController::class, 'hotelListForConsultNow'])->name('hotel.list.consult.now');
 
-Route::get('add-details/{hotelId?}/{roomId?}/{roomTypeId?}/{searchId?}',[FrontController::class,'addDetails'])->name('hotel.addDetails')->middleware('check_referral_booking');
+Route::get('add-details/{hotelId?}/{roomId?}/{roomTypeId?}/{searchId?}', [FrontController::class, 'addDetails'])->name('hotel.addDetails')->middleware('check_referral_booking');
 
-Route::match(['get','post'],'add-details-multiple-room',[FrontController::class,'addBookingMultiple'])->name('add_booking_multiple');
+Route::match(['get', 'post'], 'add-details-multiple-room', [FrontController::class, 'addBookingMultiple'])->name('add_booking_multiple');
 
-Route::post('add-booking',[BookingController::class,'addBookingDetails'])->name('add_booking.details');
+Route::post('add-booking', [BookingController::class, 'addBookingDetails'])->name('add_booking.details');
 
-Route::post('add-booking-multiple',[BookingController::class,'addBookingMultipleDetails'])->name('add_booking_multiple.details');
+Route::post('add-booking-multiple', [BookingController::class, 'addBookingMultipleDetails'])->name('add_booking_multiple.details');
 Route::post('add-consult-now', [BookingController::class, 'addConsultNow'])->name('add_consult_now.details');
 
-Route::get('make-payment/{bookingId?}', [BookingController::class,'makePayment'])->name('add.paymentPage');
+Route::get('make-payment/{bookingId?}', [BookingController::class, 'makePayment'])->name('add.paymentPage');
 Route::post('apply-coupon', [BookingController::class, 'applyCoupon'])->name('apply.coupon');
-Route::post('order-create', [PaymentController::class,'orderCreate'])->name('order.create');
+Route::post('order-create', [PaymentController::class, 'orderCreate'])->name('order.create');
 
-Route::post('payment-callback',[PaymentController::class,'paymentCallBack'])->name('payment.callback');
+Route::post('payment-callback', [PaymentController::class, 'paymentCallBack'])->name('payment.callback');
 
-Route::get('hotel-details/{slug}/{searchId?}',[FrontController::class,'hotelDetails'])->name('hotel.details')->middleware('check_referral_booking');
+Route::get('hotel-details/{slug}/{searchId?}', [FrontController::class, 'hotelDetails'])->name('hotel.details')->middleware('check_referral_booking');
 require __DIR__ . '/auth.php';
 
 Route::get('/hotel-data/{id?}', [SecretPageController::class, 'index'])->name('secret.page');
@@ -467,9 +468,9 @@ Route::get('hotel-data-list', [SecretPageController::class, 'dataList'])->name('
 Route::post('/save/hotel-data', [SecretPageController::class, 'store'])->name('secret.page.store');
 Route::get('/page/unlock', [SecretPageController::class, 'unlock'])->name('secret.page.unlock');
 Route::post('/page/unlock', [SecretPageController::class, 'unlockPage'])->name('page.unlock');
-Route::get('external-hotels',[SecretPageController::class,'hotels'])->name('external.hotels');
-Route::delete('remove-external-hotels/{id}',[SecretPageController::class,'delete'])->name('remove.external.hotels');
+Route::get('external-hotels', [SecretPageController::class, 'hotels'])->name('external.hotels');
+Route::delete('remove-external-hotels/{id}', [SecretPageController::class, 'delete'])->name('remove.external.hotels');
 
 
-Route::match(['get','post'],'hotels-in-{city?}/', [FrontController::class, 'searchResult'])->name('searchResultCity')->middleware('check_referral_booking');
-Route::match(['get','post'],'{rating?}-star-hotels-in-{city?}/', [FrontController::class, 'searchResult'])->name('searchResult')->middleware('check_referral_booking');
+Route::match(['get', 'post'], 'hotels-in-{city?}/', [FrontController::class, 'searchResult'])->name('searchResultCity')->middleware('check_referral_booking');
+Route::match(['get', 'post'], '{rating?}-star-hotels-in-{city?}/', [FrontController::class, 'searchResult'])->name('searchResult')->middleware('check_referral_booking');
