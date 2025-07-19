@@ -15,13 +15,7 @@ class FrontRepository extends BaseRepository
 
     public function getCityWithHotel()
     {
-        // return City::with('state')
-        //     ->whereHas('getHotel', fn($query) => $query->where('status', 'active')->whereHas('rooms', fn($query) => $query->where('status', 1)))
-        //     ->withCount(['getHotel' => function ($query) {
-        //         $query->whereHas('rooms', fn($query) => $query->where('status', 1));
-        //         $query->where('status', 'active');
-        //     }])
-        //     ->get();
+
         $checkIn = Carbon::today()->toDateString();
         $checkOut = Carbon::tomorrow()->toDateString();
 
@@ -83,19 +77,17 @@ class FrontRepository extends BaseRepository
             $query->whereDate('pricing_date', '=', $date)
                 ->where('b2b_rate_ep', '>', 0)
                 ->where('availability', '>', 0);
-        })
-            ->with([
-                'room',
-                'room.plan' => function ($query) use ($date) {
-                    $query->whereDate('pricing_date', '=', $date)
-                        ->where('availability', '>', 0)
-                        ->where('b2b_rate_ep', '>', 0);
-                },
-                'hotelImg' => function ($query) {
-                    $query->where('imageable_type', 'App\Models\Hotel');
-                }
-            ])
-            ->where('status', 'active')
+        })->with([
+            'room',
+            'room.plan' => function ($query) use ($date) {
+                $query->whereDate('pricing_date', '=', $date)
+                    ->where('availability', '>', 0)
+                    ->where('b2b_rate_ep', '>', 0);
+            },
+            'hotelImg' => function ($query) {
+                $query->where('imageable_type', 'App\Models\Hotel');
+            }
+        ])->where('status', 'active')
             ->where('papular', 1)
             ->get();
 
@@ -108,8 +100,7 @@ class FrontRepository extends BaseRepository
                     $filter->whereDate('pricing_date', '=', $date)
                         ->where('b2b_rate_ep', '>', 0)
                         ->where('availability', '>', 0);
-                })
-                ->with([
+                })->with([
                     'room',
                     'room.plan' => function ($query) use ($date) {
                         $query->whereDate('pricing_date', '=', $date)
@@ -241,12 +232,12 @@ class FrontRepository extends BaseRepository
         $totalRatePlans = $hotelDetails->room->ratePlan->count();
         $averageRoomRate = $totalRatePlans > 0 ? $totalAmountEp / $totalRatePlans : 0;
 
-        //start add this extraBedPrice add new code
-        // if($hotelDetails->room->ratePlan->count() > 0){
-        //     $personExtraBedPriceEp = personExtraBedPriceEp($hotelDetails->room->ratePlan);
-        //     $averageRoomRate = $averageRoomRate+$personExtraBedPriceEp['ep_average_extra_person_price'];
-        // }
         //end add this extraBedPrice add new code
+
+        $stayGuest =  $hotelDetails->room->stay_guest;
+
+        $extraPersonCharge = calculateExtraPersonPrice($hotelDetails->room->ratePlan, $totalGuests, $stayGuest, $roomCount, 'ep');
+
 
         $totalPrice = $averageRoomRate * $roomCount;
 
@@ -256,6 +247,8 @@ class FrontRepository extends BaseRepository
             'details'               => $hotelDetails,
             'total_price'           => $totalPrice,
             'per_night_price'       => $averageRoomRate,
+            'extra_person_price'     => $extraPersonCharge['ep_average_extra_person_price'] ?? 0,
+
             'totalRoom'             => $roomCount,
             'totalGuests'           => $totalGuests,
             'nights'                => $nights,
@@ -357,34 +350,40 @@ class FrontRepository extends BaseRepository
                     }
                 }
 
+
                 $totalPriceEp = $this->averageRoomRate($totalAmountEp, $totalRatePlanCount);
                 $totalPriceCp = $this->averageRoomRate($totalAmountCp, $totalRatePlanCount);
                 $totalPriceMap = $this->averageRoomRate($totalAmountMap, $totalRatePlanCount);
                 $totalPriceAp = $this->averageRoomRate($totalAmountAp, $totalRatePlanCount);
 
 
-                //start code  Extra person bedPrice 
+                //end add this extraBedPrice add new code
 
-                // if ($rooms->ratePlan && $rooms->ratePlan->count() > 0) {
-                //     $ratePlan = $rooms->ratePlan;
+                $stayGuest =  $rooms->stay_guest;
 
-                //     // EP: Room Only
-                //     $personExtraBedPriceEp = personExtraBedPriceEp($ratePlan);
-                //     $totalPriceEp  = $totalPriceEp  + $personExtraBedPriceEp['ep_average_extra_person_price'] ?? 0;
 
-                //     // CP: With Breakfast
-                //     $personExtraBedPriceCp = personExtraBedPriceCp($ratePlan);
-                //     $totalPriceCp  = $totalPriceCp  + $personExtraBedPriceCp['cp_average_extra_person_price'] ?? 0;
+                // start code  Extra person bedPrice 
 
-                //     // MAP: With Breakfast + Dinner
-                //     $personExtraBedPriceMap = personExtraBedPriceMap($ratePlan);
-                //     $totalPriceMap  = $totalPriceMap  + $personExtraBedPriceMap['map_average_extra_person_price'] ?? 0;
+                if ($rooms->ratePlan && $rooms->ratePlan->count() > 0) {
+                    $ratePlan = $rooms->ratePlan;
+                    // EP: Room Only
 
-                //      // AP: With Breakfast + Dinner
-                //     $personExtraBedPriceAp = personExtraBedPriceAp($ratePlan);
-                //     $totalPriceAp  = $totalPriceAp  + $personExtraBedPriceAp['ap_average_extra_person_price'] ?? 0;
+                    $personExtraBedPriceEp = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'ep');
 
-                // }
+                    $totalPriceEp  = ($totalPriceEp * $roomCount)  + $personExtraBedPriceEp['ep_average_extra_person_price'] ?? 0;
+
+                    // CP: With Breakfast
+                    $personExtraBedPriceCp = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'cp');
+                    $totalPriceCp  = ($totalPriceCp * $roomCount)  + $personExtraBedPriceCp['cp_average_extra_person_price'] ?? 0;
+
+                    // MAP: With Breakfast + Dinner
+                    $personExtraBedPriceMap =  calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'map');
+                    $totalPriceMap  = ($totalPriceMap * $roomCount) + $personExtraBedPriceMap['map_average_extra_person_price'] ?? 0;
+
+                    // AP: With Breakfast + Dinner
+                    $personExtraBedPriceAp =  calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'ap');
+                    $totalPriceAp  = ($totalPriceAp * $roomCount)  + $personExtraBedPriceAp['ap_average_extra_person_price'] ?? 0;
+                }
 
                 // end code  Extra person bedPrice 
             }
@@ -394,6 +393,7 @@ class FrontRepository extends BaseRepository
                 'per_night_price' => $totalPriceEp,
                 'rooms' => $rooms,
                 'nights'        => (int)($nights == 0 ? 1 : $nights),
+                'room_count'     => $roomCount ?? 1,
                 'total_price_with_break_fast' => $totalPriceCp,
                 'total_price_with_break_fast_and_dinner' => $totalPriceMap,
                 'total_price_with_break_fast_lunch_and_dinner' => $totalPriceAp,
@@ -802,26 +802,34 @@ class FrontRepository extends BaseRepository
                 $totalPriceMap = $this->averageRoomRate($totalAmountMap, $totalRatePlanCount);
                 $totalPriceAp = $this->averageRoomRate($totalAmountAp, $totalRatePlanCount);
 
-                //      //start code  Extra person bedPrice 
-                //     if ($rooms->ratePlan && $rooms->ratePlan->count() > 0) {
-                //         $ratePlan = $rooms->ratePlan;
+                $stayGuest =  $rooms->stay_guest;
+                $roomCount =  $searchData->roomCount;
+                $totalGest =  $searchData->adultCount + $searchData->childCount;
 
-                //         // EP: Room Only
-                //         $personExtraBedPriceEp = personExtraBedPriceEp($ratePlan);
-                //         $totalPriceEp  = $totalPriceEp  + $personExtraBedPriceEp['ep_average_extra_person_price'] ?? 0;
+                // start code  Extra person bedPrice 
 
-                //         // CP: With Breakfast
-                //         $personExtraBedPriceCp = personExtraBedPriceCp($ratePlan);
-                //         $totalPriceCp  = $totalPriceCp  + $personExtraBedPriceCp['cp_average_extra_person_price'] ?? 0;
+                if ($rooms->ratePlan && $rooms->ratePlan->count() > 0) {
+                    $ratePlan = $rooms->ratePlan;
+                    // EP: Room Only
 
-                //         // MAP: With Breakfast + Dinner
-                //         $personExtraBedPriceMap = personExtraBedPriceMap($ratePlan);
-                //         $totalPriceMap  = $totalPriceMap  + $personExtraBedPriceMap['map_average_extra_person_price'] ?? 0;
-                //         // AP: With Breakfast + Lunch + Dinner
-                //         $personExtraBedPriceAp = personExtraBedPriceAp($ratePlan);
-                //         $totalPriceAp  = $totalPriceAp  + $personExtraBedPriceAp['ap_average_extra_person_price'] ?? 0;
-                //     }
-                //     end code  Extra person bedPrice 
+                    $personExtraBedPriceEp = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'ep');
+
+                    $totalPriceEp  = ($totalPriceEp * $roomCount)  + $personExtraBedPriceEp['ep_average_extra_person_price'] ?? 0;
+
+                    // CP: With Breakfast
+                    $personExtraBedPriceCp = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'cp');
+                    $totalPriceCp  = ($totalPriceCp * $roomCount)  + $personExtraBedPriceCp['cp_average_extra_person_price'] ?? 0;
+
+                    // MAP: With Breakfast + Dinner
+                    $personExtraBedPriceMap =  calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'map');
+                    $totalPriceMap  = ($totalPriceMap * $roomCount) + $personExtraBedPriceMap['map_average_extra_person_price'] ?? 0;
+
+                    // AP: With Breakfast + Dinner
+                    $personExtraBedPriceAp =  calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'ap');
+                    $totalPriceAp  = ($totalPriceAp * $roomCount)  + $personExtraBedPriceAp['ap_average_extra_person_price'] ?? 0;
+                }
+
+                // end code  Extra person bedPrice 
 
             }
 
@@ -833,6 +841,7 @@ class FrontRepository extends BaseRepository
                 'total_price_with_break_fast_and_dinner' => $totalPriceMap,
                 'total_price_with_break_fast_lunch_and_dinner' => $totalPriceAp,
                 'rooms' => $rooms,
+                'room_count'     => $roomCount ?? 1,
                 'roomId' => $hotels->getRoom['0']?->room_type,
                 // 'availableRoom'=>$rooms->ratePlan['0']->availability??1,
                 'availableRoom' =>  lowestAvailableRoom($rooms->ratePlan),

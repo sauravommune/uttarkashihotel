@@ -131,8 +131,7 @@
                                             @if (!empty($hotelDetails['details']?->map_url))
                                                 <div class="text">
                                                     <a target="_blank"
-                                                        href="{{ $hotelDetails['details']?->map_url ?? '' }}">View
-                                                        on
+                                                        href="{{ $hotelDetails['details']?->map_url ?? '' }}">View on
                                                         map</a>
                                                 </div>
                                             @endif
@@ -245,12 +244,8 @@
                                     @foreach ($hotelDetails['details']['hotelImages'] as $key => $hotelImg)
                                         <div class="image-wrapper">
                                             <div class="mx-2">
-                                                <a data-bs-target="#exampleModalToggle3" data-bs-toggle="modal"
-                                                    data-bs-dismiss="modal" href="javascript:void(0);"
-                                                    data-title="Hotel Image {{ $key + 1 }}">
-                                                    <img src="{{ asset('storage/' . $hotelImg['image'] ?? '') }}"
-                                                        alt="{{ ImageAltTag($hotelDetails['details'], $hotelImg->alt_tag) }}"
-                                                        height="200" width="300">
+                                                <a data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" data-bs-dismiss="modal" href="javascript:void(0);"  data-title="Hotel Image {{ $key + 1 }}">
+                                                    <img src="{{ asset('storage/' . $hotelImg['image'] ?? '') }}"  alt="{{ ImageAltTag($hotelDetails['details'], $hotelImg->alt_tag) }}" height="200" width="300">
                                                 </a>
                                             </div>
                                         </div>
@@ -273,8 +268,7 @@
                                                 <li class="">
                                                     <div class="d-flex align-items-center">
                                                         <div>
-                                                            <span
-                                                                class="material-symbols-outlined fs-5 me-1 pt-xl-1 pt-0">{{ $amenity->amenityName?->icode ?? 'spa' }}</span>
+                                                            <span  class="material-symbols-outlined fs-5 me-1 pt-xl-1 pt-0">{{ $amenity->amenityName?->icode ?? 'spa' }}</span>
                                                         </div>
                                                         <div class="ps-1">
                                                             {{ $amenity->amenityName?->name ?? '' }}
@@ -368,7 +362,7 @@
                                                             <p class="d-flex flex-wrap align-items-center">
                                                                 <b>{{ intval($hotelDetails['details']['rating']) ?? '' }}</b><span
                                                                     class="bi bi-star-fill fs-8 text-warning rated pe-2 ps-1"></span><b
-                                                                    class=>Property</b>
+                                                                    class="">Property</b>
                                                             </p>
 
                                                         </div>
@@ -389,13 +383,10 @@
 
                                     <div class="refundable-section mt-3">
                                         <div>
-
-
                                         </div>
                                     </div>
 
                                     <div class="price mt-3">
-
                                         <div>
                                             @php
                                                 $roomCount = $searchData->roomCount ?? 1;
@@ -527,7 +518,6 @@
                         </div>
                         <!-- copied section -->
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-9" id="target_div">
-
 
                             {{-- @dd($allAvailableRoom) --}}
                             <div class="choose-room-section mt-xl-3 mt-2">
@@ -746,7 +736,8 @@
                                 </div>
                             </div>
                             <div id="appendRoom">
-                                @include('front.search-room')
+                                {{-- @include('front.search-room') --}}
+                                @include('front.search-room-modify')
                             </div>
                         </div>
 
@@ -789,16 +780,14 @@
 
                                         <div>
                                             <a href="javascript:void(0);" title="Select an option"
-                                                class="btn btn-grey w-100">Select an
-                                                option</a>
+                                                class="btn btn-grey w-100">Select an option</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                      <div id="room-not-found" class="no-record-found d-none">
+                        <div id="room-not-found" class="no-record-found d-none">
                             <div class="main">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <div class="text-center">
@@ -809,7 +798,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
 
                     </div>
                 </div>
@@ -830,7 +819,6 @@
                     </div>
                     <div class="col-12 mt-4">
                         <div class="row">
-
                             <div class="col-12 p-0">
                                 <div class="card-group hotel-reviews-google ">
                                     @if (isset($hotelDetails['details']?->hotelReview) && count($hotelDetails['details']?->hotelReview) > 0)
@@ -898,7 +886,6 @@
             </div>
         </section>
     @endif
-
     <section class="section-14 py-xl-5 py-3">
         <div class="container main-section-10 py-xl-4 py-3">
             <div class="row ">
@@ -1129,7 +1116,6 @@
 
 @section('scripts')
     <script>
-
         function sliderImg() {
 
             $(".room-img").slick({
@@ -1231,45 +1217,6 @@
             });
         });
 
-        function updateTotal($input, amount, roomType, category, roomId, roomTypeId) {
-            var quantity = parseInt($input.val()) || 0;
-            var totalAmount = amount * quantity;
-            var uniqueKey = `${roomType}-${category}`.replace(/\s+/g, '-').toLowerCase();
-            var $existingElement = $(`#summary_${uniqueKey}`);
-            if (quantity > 0) {
-                $('#hide-section').removeClass("d-none");
-                var totalAmount = totalAmount * totalNights();
-                var hotelId = $('#hotelId').data('hotel_id');
-                var html = `<div id="summary_${uniqueKey}" class="d-flex justify-content-between align-items-center w-100 mb-2">
-
-                        <div class="left-part">
-                               ${quantity} x ${roomType} (${category})
-                        </div>
-                         <div class="right-part total-price" data-amount="${totalAmount}">
-                             ₹ ${totalAmount}
-                        </div>
-                        <input type="hidden" name="hotelId" value="${hotelId}">
-                        <input type="hidden" name="quantity[]" value="${quantity}">
-                        <input type="hidden" name="roomId[]" value="${roomId}">
-                        <input type="hidden" name="roomType[]" value="${roomType}">
-                        <input type="hidden" name="roomTypeId[]" value="${roomTypeId}">
-                        <input type="hidden" name="category[]" value="${category}">
-                        <input type="hidden" name="totalAmount[]" value="${totalAmount}">
-                    </div>`;
-
-                if ($existingElement.length > 0) {
-                    $existingElement.replaceWith(html);
-                } else {
-                    $('#append_price_section').append(html);
-                }
-            } else {
-                $existingElement.remove();
-            }
-            calculateGrandTotal(totalAmount);
-            calculateTotalRoomQuantity();
-
-        }
-
         function firstRoomShowPrice() {
             var section = 1;
             $(`#only-room-box-${section}`).removeClass("d-none");
@@ -1281,12 +1228,24 @@
             var amount = $(`#section-only-room-box-${section}`).data('amount');
             // var planeId = $(`#section-only-room-box-${section}`).data('plane-id');
             var roomId = $(`#section-only-room-box-${section}`).data('room-id');
-            var quantity = parseInt($input.val());
+            // var quantity = parseInt($input.val());
+            var roomQty = roomCount();
 
-            if (quantity == 0) {
+
+            if (roomQty == 0) {
                 $input.val(1);
             }
             updateTotal($input, amount, roomType, category, roomId, roomTypeId);
+        }
+
+
+        function totalNights() {
+            return $('.nights').data('nights') || 1;
+        }
+
+        function roomCount() {
+            return $('.roomCount').data('room_count') || 1;
+
         }
 
         $(document).ready(function() {
@@ -1296,308 +1255,144 @@
 
         });
 
-        function totalNights() {
+        function updateTotal(_input, amount, roomType, category, roomId, roomTypeId) {
+            const uniqueKey = `${roomType}-${category}`.replace(/\s+/g, '-').toLowerCase();
+            const $existingElement = $(`#summary_${uniqueKey}`);
 
-            var nights = $('.nights').data('nights');
-            return nights;
+            var roomQty = roomCount();
 
+            const totalAmount = amount * totalNights();
+            const hotelId = $('#hotelId').data('hotel_id');
+
+            const html = `<div id="summary_${uniqueKey}" class="d-flex justify-content-between align-items-center w-100 mb-2">
+            <div class="left-part">${roomQty} x ${roomType} (${category})</div>
+            <div class="right-part total-price" data-amount="${totalAmount}">₹ ${totalAmount}</div>
+            <input type="hidden" name="hotelId" value="${hotelId}">
+            <input type="hidden" name="quantity[]" value="${roomQty}">
+            <input type="hidden" name="roomId[]" value="${roomId}">
+            <input type="hidden" name="roomType[]" value="${roomType}">
+            <input type="hidden" name="roomTypeId[]" value="${roomTypeId}">
+            <input type="hidden" name="category[]" value="${category}">
+            <input type="hidden" name="totalAmount[]" value="${totalAmount}">
+            </div>`;
+
+            if ($existingElement.length > 0) {
+                $existingElement.replaceWith(html);
+            } else {
+                $('#append_price_section').append(html);
+            }
+
+            calculateGrandTotal();
+            calculateTotalRoomQuantity();
         }
 
-        $(document).on("click", ".total_price", function() {
-
-            var currentValue = 0;
-            $(this).parents('.parent-section').find('input[type="number"]').each(function() {
-                currentValue += (parseInt($(this).val()) || 0);
-            });
-            var availability = parseInt($(this).data('availability'));
-            $(this).closest('.room-section').find('small.availability-error').text('');
-            if (currentValue >= availability) {
-                // $('small.availability-error').text('Only ' + availability + ' rooms are available');
-                $(this).closest('.room-section').find('small.availability-error').text('Only ' + availability +
-                    ' rooms are available');
-                return;
-            }
-
-            var section = $(this).data("section");
-
-            $(`#only-room-box-${section}`).removeClass("d-none");
-            $(`#select-only-room-box-${section}`).addClass("d-none");
-            var $input = $(`#section-only-room-box-${section}`).find("input[type='number']");
-            var roomType = $(`#section-only-room-box-${section}`).data('type');
-            var roomTypeId = $(`#section-only-room-box-${section}`).data('type-id');
-
-            var category = $(`#section-only-room-box-${section}`).data('category');
-            var amount = $(`#section-only-room-box-${section}`).data('amount');
-            // var planeId = $(`#section-only-room-box-${section}`).data('plane-id');
-            var roomId = $(`#section-only-room-box-${section}`).data('room-id');
-            var quantity = parseInt($input.val());
-
-            if (quantity == 0) {
-                $input.val(1);
-            }
-            updateTotal($input, amount, roomType, category, roomId, roomTypeId);
-        });
-
-        $(document).on("click", ".total_price_with_break_fast", function() {
-
-            var currentValue = 0;
-            $(this).parents('.parent-section').find('input[type="number"]').each(function() {
-                currentValue += (parseInt($(this).val()) || 0);
-            });
-            var availability = parseInt($(this).data('availability'));
-            // $('small.availability-error').text('');
-            $(this).closest('.room-section').find('small.availability-error').text('');
-            if (currentValue >= availability) {
-                // $('small.availability-error').text('Only ' + availability + ' rooms are available');
-                $(this).closest('.room-section').find('small.availability-error').text('Only ' + availability +
-                    ' rooms are available');
-                return;
-            }
-
-            var section = $(this).data("section");
-            $(`#break-fast-box-${section}`).removeClass("d-none");
-            $(`#select-break-fast-box-${section}`).addClass("d-none");
-            var $input = $(`#section-break-fast-box-${section}`).find("input[type='number']");
-            var roomType = $(`#section-break-fast-box-${section}`).data('type');
-            var roomTypeId = $(`#section-break-fast-box-${section}`).data('type-id');
-
-            var category = $(`#section-break-fast-box-${section}`).data('category');
-            var amount = $(`#section-break-fast-box-${section}`).data('amount');
-            // var planeId = $(`#break-fast-box-${section}`).data('plane-id');
-            var roomId = $(`#section-break-fast-box-${section}`).data('room-id');
-            var quantity = parseInt($input.val());
-
-            if (quantity == 0) {
-                $input.val(1);
-            }
-
-            updateTotal($input, amount, roomType, category, roomId, roomTypeId);
-        });
-
-        $(document).on("click", ".total_price_with_break_fast_and_dinner", function() {
-
-            var currentValue = 0;
-            $(this).parents('.parent-section').find('input[type="number"]').each(function() {
-                currentValue += (parseInt($(this).val()) || 0);
-            });
-            var availability = parseInt($(this).data('availability'));
-            // $('small.availability-error').text('');
-            $(this).closest('.room-section').find('small.availability-error').text('');
-            if (currentValue >= availability) {
-                // $('small.availability-error').text('Only ' + availability + ' rooms are available');
-                $(this).closest('.room-section').find('small.availability-error').text('Only ' + availability +
-                    ' rooms are available');
-                return;
-            }
-
-            var section = $(this).data("section");
-            $(`#break-fast-dinner-box-${section}`).removeClass("d-none");
-            $(`#select-break-fast-dinner-box-${section}`).addClass("d-none");
-            var $input = $(`#section-break-fast-dinner-box-${section}`).find("input[type='number']");
-            var roomType = $(`#section-break-fast-dinner-box-${section}`).data('type');
-            var roomTypeId = $(`#section-break-fast-dinner-box-${section}`).data('type-id');
-            var category = $(`#section-break-fast-dinner-box-${section}`).data('category');
-            var amount = $(`#section-break-fast-dinner-box-${section}`).data('amount');
-            var roomId = $(`#section-break-fast-dinner-box-${section}`).data('room-id');
-            var quantity = parseInt($input.val());
-            if (quantity == 0) {
-                $input.val(1);
-            }
-            updateTotal($input, amount, roomType, category, roomId, roomTypeId);
-        });
-
-
-        $(document).on("click", ".total_price_with_break_fast_lunch_and_dinner", function() {
-
-            var currentValue = 0;
-            $(this).parents('.parent-section').find('input[type="number"]').each(function() {
-                currentValue += (parseInt($(this).val()) || 0);
-            });
-            var availability = parseInt($(this).data('availability'));
-            // $('small.availability-error').text('');
-            $(this).closest('.room-section').find('small.availability-error').text('');
-            if (currentValue >= availability) {
-                // $('small.availability-error').text('Only ' + availability + ' rooms are available');
-                $(this).closest('.room-section').find('small.availability-error').text('Only ' + availability +
-                    ' rooms are available');
-                return;
-            }
-
-            var section = $(this).data("section");
-            $(`#break-fast-lunch-dinner-box-${section}`).removeClass("d-none");
-            $(`#select-break-fast-lunch-dinner-box-${section}`).addClass("d-none");
-            var $input = $(`#section-break-fast-lunch-dinner-box-${section}`).find("input[type='number']");
-            var roomType = $(`#section-break-fast-lunch-dinner-box-${section}`).data('type');
-            var roomTypeId = $(`#section-break-fast-lunch-dinner-box-${section}`).data('type-id');
-            var category = $(`#section-break-fast-lunch-dinner-box-${section}`).data('category');
-            var amount = $(`#section-break-fast-lunch-dinner-box-${section}`).data('amount');
-            var roomId = $(`#section-break-fast-lunch-dinner-box-${section}`).data('room-id');
-            var quantity = parseInt($input.val());
-            if (quantity == 0) {
-                $input.val(1);
-            }
-            updateTotal($input, amount, roomType, category, roomId, roomTypeId);
-        });
-
-        $(document).on("click", ".plusBtn", function() {
-
-            var $input = $(this).closest(
-                ".quantity-section").find(
-                "input[type='number']");
-
-            var roomType = $(this).closest(
-                ".quantity-section"
-            ).data('type');
-
-            var roomTypeId = $(this).closest(
-                ".quantity-section"
-            ).data('type-id');
-
-            var category = $(this).closest(
-                ".quantity-section"
-            ).data('category');
-
-            var roomId = $(this).closest(
-                ".quantity-section"
-            ).data('room-id');
-
-            var currentValue = 0;
-            $(this).parents('.parent-section').find('input[type="number"]').each(function() {
-                currentValue += (parseInt($(this).val()) || 0);
-            });
-            var availability = $(this).data('availability');
-            // $('small.availability-error').text('');
-            $(this).closest('.room-section').find('small.availability-error').text('');
-
-            if (currentValue < availability) {
-                let currentEntered = parseInt($input.val()) || 0;
-                $input.val(currentEntered + 1);
-                var amount = $(this).data('amount');
-                updateTotal($input, amount, roomType, category, roomId, roomTypeId);
-            } else {
-                // $('small.availability-error').text('Only ' + availability + ' rooms are available');
-                $(this).closest('.room-section').find('small.availability-error').text('Only ' + availability +
-                    ' rooms are available');
-                return;
-            }
-        });
-
-        $(document).on("click", ".minusBtn", function() {
-
-            // $('small.availability-error').text('');
-            $(this).closest('.room-section').find('small.availability-error').text('');
-
-            var $input = $(this).closest(".quantity-section").find("input[type='number']");
-
-            var roomType = $(this).closest(".quantity-section").data('type');
-
-            var roomTypeId = $(this).closest(".quantity-section").data('type-id');
-
-            var category = $(this).closest(".quantity-section").data('category');
-
-            var roomId = $(this).closest(".quantity-section").data('room-id');
-
-            var currentValue = parseInt($input.val()) || 0;
-            var amount = $(this).data('amount');
-
-            if (currentValue > 0) {
-                $input.val(currentValue - 1);
-                updateTotal($input, amount, roomType, category, roomId, roomTypeId);
-            }
-
-            if (currentValue == 0 || currentValue == 1) {
-                var section = $(this).data('section');
-                var type = $(this).data('type_btn');
-                if (type === "With Breakfast Dinner") {
-                    $(`#break-fast-dinner-box-${section}`).addClass("d-none");
-                    $(`#select-break-fast-dinner-box-${section}`).removeClass("d-none");
-                } else if (type === "With Breakfast") {
-                    $(`#break-fast-box-${section}`).addClass("d-none");
-                    $(`#select-break-fast-box-${section}`).removeClass("d-none");
-                } else if (type == "Room Only") {
-                    $(`#only-room-box-${section}`).addClass("d-none");
-                    $(`#select-only-room-box-${section}`).removeClass("d-none");
-                } else if (type == "With Breakfast Lunch Dinner") {
-
-                    $(`#break-fast-lunch-dinner-box-${section}`).addClass("d-none");
-                    $(`#select-break-fast-lunch-dinner-box-${section}`).removeClass("d-none");
-                }
-
-                updateTotal($input, amount, roomType, category, roomId, roomTypeId);
-            }
-        });
-
-        function calculateGrandTotal(totalAmount) {
-            var grandTotal = 0;
+        function calculateGrandTotal() {
+            let total = 0;
             $('#append_price_section .total-price').each(function() {
-                var amount = parseFloat($(this).data('amount')) || 0;
-                grandTotal += amount;
+                total += parseFloat($(this).data("amount")) || 0;
             });
 
-            if (grandTotal > 0) {
-                var amountHtml = ` <div class="d-flex justify-content-between align-items-center w-100">
-                        <div class="left-part">Total</div>
-                            <div class="right-part">
-                                ₹ ${grandTotal}
-                            </div>
-                        </div>`;
-            } else {
-                var amountHtml = '';
-            }
-            $('#total-amount-text').html(amountHtml);
-
+            const html = total > 0 ?
+                `<div class="d-flex justify-content-between align-items-center w-100">
+            <div class="left-part">Total</div>
+            <div class="right-part">₹ ${total}</div>
+           </div>` : '';
+            $('#total-amount-text').html(html);
         }
-
 
         function calculateTotalRoomQuantity() {
-            let totalQuantity = 0;
-            document.querySelectorAll('input[name="quantity[]"]').forEach(input => {
-                totalQuantity += parseInt(input.value) || 0;
-            });
+            const selected = $(".quantity-section:visible").length;
+            const nights = totalNights();
 
-            if (totalQuantity > 0) {
-
-                var totalNight = totalNights();
-                var roomText = totalQuantity === 1 ? "Room" : "Rooms"; // Check for singular or plural
-                var htmlRoomNight =
-                    `${totalQuantity} ${roomText} for ${totalNight} Night${totalNight > 1 ? 's' : ''}`; // Check plural for nights
-                $('#total-night-room').html(htmlRoomNight);
-                $('#please-select').addClass('d-none');
-
+            var roomQty = roomCount();
+            if (selected > 0) {
+                $('#total-night-room').html(
+                    `${roomQty} Room ${selected > 1 ? 's' : ''} for ${nights} Night${nights > 1 ? 's' : ''}`);
+                $('#please-select').addClass("d-none");
+                $('#hide-section').removeClass("d-none");
             } else {
-                $('#hide-section').addClass('d-none');
-                $('#please-select').removeClass('d-none');
+                $('#total-night-room').html('');
+                $('#please-select').removeClass("d-none");
+                $('#hide-section').addClass("d-none");
             }
         }
 
+        function removeTotalFromSummaryByIdAndSection(id, section) {
+            const $section = $(`#section-${id}-${section}`);
+            const roomType = $section.data("type");
+            const category = $section.data("category");
+            const uniqueKey = `${roomType}-${category}`.replace(/\s+/g, '-').toLowerCase();
+            $(`#summary_${uniqueKey}`).remove();
+        }
 
-        $(document).on("keyup", ".quantity-input, .quantity-input-second, .quantity-input-third", function() {
-            var $input = $(this);
+        function unselected(id, section) {
+            removeTotalFromSummaryByIdAndSection(id, section);
+            calculateGrandTotal();
+            calculateTotalRoomQuantity();
+        }
 
-            var roomType = $(this).closest(
-                ".quantity-section, .quantity-section-second, .quantity-section-third"
-            ).data('type');
+        // Deselect all other selected room blocks
+        function deselectAllOtherRooms(currentId, currentSection) {
+            $(".unselect-room-btn").each(function() {
+                const id = $(this).data("id");
+                const section = $(this).data("section");
 
-            var roomTypeId = $(this).closest(
-                ".quantity-section, .quantity-section-second, .quantity-section-third"
-            ).data('type');
+                // Skip the current one
+                if (id == currentId && section == currentSection) return;
 
-            var category = $(this).closest(
-                ".quantity-section, .quantity-section-second, .quantity-section-third"
-            ).data('category');
+                $(`#select-${id}-${section}`).removeClass("d-none");
+                $(`#${id}-${section}`).addClass("d-none");
 
-            var roomId = $(this).closest(
-                ".quantity-section, .quantity-section-second, .quantity-section-third"
-            ).data('room-id');
-            var currentValue = parseInt($input.val()) || 0;
-            if (currentValue > 10) {
-                $input.val(10);
-                currentValue = 10;
+                unselected(id, section);
+            });
+        }
+
+        function isRoomAvailable(availability, element) {
+            var roomQty = roomCount();
+            const $section = $(element).closest('.room-section');
+
+            $section.find('small.availability-error').text('');
+
+            if (roomQty > availability) {
+                $section.find('small.availability-error').text('Only ' + availability + ' rooms are available');
+                return false;
             }
-            var amount = $input.data('amount');
-            updateTotal($input, amount, roomType, category, roomId, roomTypeId);
+            return true;
+        }
+
+        $(document).on("click", ".select-room-btn", function() {
+
+
+            const section = $(this).data("section");
+            const id = $(this).data("id");
+
+            var availability = parseInt($(this).data('availability'));
+            if (!isRoomAvailable(availability, this)) {
+                return;
+            }
+            deselectAllOtherRooms(id, section);
+
+            $(`#select-${id}-${section}`).addClass("d-none");
+            $(`#${id}-${section}`).removeClass("d-none");
+
+            const $section = $(`#section-${id}-${section}`);
+            const roomType = $section.data("type");
+            const roomTypeId = $section.data("type-id");
+            const category = $section.data("category");
+            const amount = $section.data("amount");
+            const roomId = $section.data("room-id");
+
+            updateTotal(null, amount, roomType, category, roomId, roomTypeId);
         });
 
+        $(document).on("click", ".unselect-room-btn", function() {
+            const section = $(this).data("section");
+            const id = $(this).data("id");
+
+            $(`#select-${id}-${section}`).removeClass("d-none");
+            $(`#${id}-${section}`).addClass("d-none");
+            unselected(id, section);
+        });
 
         $(document).ready(function() {
             const $imageItems = $("#hotel-images-container .image-item");
@@ -1701,7 +1496,6 @@
         $(document).ready(function() {
             $('#searchBtn').on('click', function() {
                 var cityName = $('#data-city-name').data('city_name').toLowerCase();
-                // var citySlug = $('#data-city-slug').data('cityName');
 
                 var url = `{{ url('hotels-in-') }}${cityName}/`;
                 $('#searchForm').attr('action', url);
@@ -1716,18 +1510,6 @@
                     closeButton: ".btn-close-II",
                 });
             });
-
-            // $('body').on('click', 'a[data-bs-target="#room-modal-data-1"]', function(){
-
-            //     initializeMultipleSliders({
-            //         spinner: "#loading-spinner-II",
-            //         forSelector: ".slider-for-III",
-            //         navSelector: ".slider-nav-III",
-            //         closeButton: ".btn-close-III",
-            //     });
-            // });
-
-            // Listen for clicks on gallery items
             $('body').on('click', 'a[data-bs-target^="#room-modal-data-"]', function() {
                 const targetId = $(this).data('bs-target');
                 const modalIndex = targetId.split('-').pop();
@@ -1768,6 +1550,5 @@
                 });
             });
         });
-
     </script>
 @endsection

@@ -114,9 +114,9 @@ if (!function_exists('roomText')) {
     function roomText($room)
     {
         if ($room == 1) {
-            $roomText = 'room';
+            $roomText = 'Room';
         } elseif ($room > 1) {
-            $roomText = 'rooms';
+            $roomText = 'Rooms';
         } else {
             $roomText = '';
         }
@@ -157,9 +157,9 @@ if (!function_exists('nightText')) {
     function nightText($night)
     {
         if ($night == 1) {
-            $nightText = 'night';
+            $nightText = 'Night';
         } elseif ($night > 1) {
-            $nightText = 'nights';
+            $nightText = 'Nights';
         } else {
             $nightText = '';
         }
@@ -295,12 +295,10 @@ if (!function_exists('personExtraBedPriceEp')) {
 
     function personExtraBedPriceEp($ratePlans)
     {
-
         $totalPrice = 0;
         $totalMarkup = 0;
         $totalExtraPrice = 0;
         $count = 0;
-
         foreach ($ratePlans as $ratePlan) {
             $extraPerson = $ratePlan->RatePlanConfig->where('plan_type', 'ep')->first();
 
@@ -314,8 +312,8 @@ if (!function_exists('personExtraBedPriceEp')) {
             }
         }
         return [
-            'ep_extra_person_price' => $totalPrice,
-            'ep_extra_person_markup' => $totalMarkup,
+            'ep_extra_person_price' => $count > 0 ? round($totalPrice / $count, 2) : 0,
+            'ep_extra_person_markup' => $count>0?round($totalMarkup/ $count, 2) : 0,
             'ep_total_extra_person_price' => $totalExtraPrice,
             'ep_average_extra_person_price' => $count > 0 ? round($totalExtraPrice / $count, 2) : 0,
         ];
@@ -343,8 +341,8 @@ if (!function_exists('personExtraBedPriceCp')) {
         }
 
         return [
-            'cp_extra_person_price' => $totalPrice,
-            'cp_extra_person_markup' => $totalMarkup,
+            'cp_extra_person_price' => $count > 0 ? round($totalPrice / $count, 2) : 0,
+            'cp_extra_person_markup' => $count>0?round($totalMarkup/ $count, 2) : 0,
             'cp_total_extra_person_price' => $totalExtraPrice,
             'cp_average_extra_person_price' => $count > 0 ? round($totalExtraPrice / $count, 2) : 0,
         ];
@@ -373,14 +371,13 @@ if (!function_exists('personExtraBedPriceMap')) {
         }
 
         return [
-            'map_extra_person_price' => $totalPrice,
-            'map_extra_person_markup' => $totalMarkup,
+            'map_extra_person_price' => $count > 0 ? round($totalPrice / $count, 2) : 0,
+            'map_extra_person_markup' => $count > 0 ? round($totalMarkup / $count, 2) : 0,
             'map_total_extra_person_price' => $totalExtraPrice,
             'map_average_extra_person_price' => $count > 0 ? round($totalExtraPrice / $count, 2) : 0,
         ];
     }
 }
-
 
 if (!function_exists('personExtraBedPriceAp')) {
     function personExtraBedPriceAp($ratePlans)
@@ -404,10 +401,152 @@ if (!function_exists('personExtraBedPriceAp')) {
         }
 
         return [
-            'ap_extra_person_price' => $totalPrice,
-            'ap_extra_person_markup' => $totalMarkup,
+            'ap_extra_person_price' => $count > 0 ? round($totalPrice / $count, 2) : 0,
+            'ap_extra_person_markup' => $count > 0 ? round($totalMarkup / $count, 2) : 0,
             'ap_total_extra_person_price' => $totalExtraPrice,
             'ap_average_extra_person_price' => $count > 0 ? round($totalExtraPrice / $count, 2) : 0,
         ];
+    }
+}
+
+
+
+if (!function_exists('calculateExtraPersonPrice')) {
+
+    function calculateExtraPersonPrice($ratePlans, $totalGuests, $stayGuest, $totalRoom, $planType)
+    {
+
+        $guestsPerRoom = (int)ceil($totalGuests / $totalRoom);
+
+        if ($planType == 'ep') {
+
+            if ($guestsPerRoom <= $stayGuest || $ratePlans->isEmpty()) {
+
+                return [
+                    'ep_extra_person_price' => 0,
+                    'ep_extra_person_markup' => 0,
+                    'ep_total_extra_person_price' => 0,
+                    'ep_average_extra_person_price' => 0,
+                ];
+            }
+            $extraBedPrices = personExtraBedPriceEp($ratePlans);
+            return $extraBedPrices;
+        }
+        if ($planType == 'cp') {
+
+
+            if ($guestsPerRoom <= $stayGuest || $ratePlans->isEmpty()) {
+
+                return [
+                    'cp_extra_person_price' => 0,
+                    'cp_extra_person_markup' => 0,
+                    'cp_total_extra_person_price' => 0,
+                    'cp_average_extra_person_price' => 0,
+                ];
+            }
+
+            $extraBedPrices = personExtraBedPriceCp($ratePlans);
+            return $extraBedPrices;
+        }
+        if ($planType == 'map') {
+
+
+            if ($guestsPerRoom <= $stayGuest || $ratePlans->isEmpty()) {
+
+                return [
+                    'map_extra_person_price' => 0,
+                    'map_extra_person_markup' => 0,
+                    'map_total_extra_person_price' => 0,
+                    'map_average_extra_person_price' => 0,
+                ];
+            }
+            $extraBedPrices = personExtraBedPriceMap($ratePlans);
+            return $extraBedPrices;
+        }
+        if ($planType == 'ap') {
+
+
+            if ($guestsPerRoom <= $stayGuest || $ratePlans->isEmpty()) {
+
+                return [
+                    'ap_extra_person_price' => 0,
+                    'ap_extra_person_markup' => 0,
+                    'ap_total_extra_person_price' => 0,
+                    'ap_average_extra_person_price' => 0,
+                ];
+            }
+
+            $extraBedPrices = personExtraBedPriceAp($ratePlans);
+            return $extraBedPrices;
+        }
+    }
+}
+
+if (!function_exists('phoneCode')) {
+
+    function phoneCode()
+    {
+        $phoneCode = [
+            ["name" => "Afghanistan", "code" => "AF", "dial_code" => "+93"],
+            ["name" => "Albania", "code" => "AL", "dial_code" => "+355"],
+            ["name" => "Algeria", "code" => "DZ", "dial_code" => "+213"],
+            ["name" => "Andorra", "code" => "AD", "dial_code" => "+376"],
+            ["name" => "Angola", "code" => "AO", "dial_code" => "+244"],
+            ["name" => "Argentina", "code" => "AR", "dial_code" => "+54"],
+            ["name" => "Armenia", "code" => "AM", "dial_code" => "+374"],
+            ["name" => "Australia", "code" => "AU", "dial_code" => "+61"],
+            ["name" => "Austria", "code" => "AT", "dial_code" => "+43"],
+            ["name" => "Azerbaijan", "code" => "AZ", "dial_code" => "+994"],
+            ["name" => "Bahrain", "code" => "BH", "dial_code" => "+973"],
+            ["name" => "Bangladesh", "code" => "BD", "dial_code" => "+880"],
+            ["name" => "Belarus", "code" => "BY", "dial_code" => "+375"],
+            ["name" => "Belgium", "code" => "BE", "dial_code" => "+32"],
+            ["name" => "Brazil", "code" => "BR", "dial_code" => "+55"],
+            ["name" => "Canada", "code" => "CA", "dial_code" => "+1"],
+            ["name" => "China", "code" => "CN", "dial_code" => "+86"],
+            ["name" => "Denmark", "code" => "DK", "dial_code" => "+45"],
+            ["name" => "Egypt", "code" => "EG", "dial_code" => "+20"],
+            ["name" => "France", "code" => "FR", "dial_code" => "+33"],
+            ["name" => "Germany", "code" => "DE", "dial_code" => "+49"],
+            ["name" => "India", "code" => "IN", "dial_code" => "+91"],
+            ["name" => "Indonesia", "code" => "ID", "dial_code" => "+62"],
+            ["name" => "Iran", "code" => "IR", "dial_code" => "+98"],
+            ["name" => "Iraq", "code" => "IQ", "dial_code" => "+964"],
+            ["name" => "Ireland", "code" => "IE", "dial_code" => "+353"],
+            ["name" => "Israel", "code" => "IL", "dial_code" => "+972"],
+            ["name" => "Italy", "code" => "IT", "dial_code" => "+39"],
+            ["name" => "Japan", "code" => "JP", "dial_code" => "+81"],
+            ["name" => "Kenya", "code" => "KE", "dial_code" => "+254"],
+            ["name" => "Malaysia", "code" => "MY", "dial_code" => "+60"],
+            ["name" => "Mexico", "code" => "MX", "dial_code" => "+52"],
+            ["name" => "Netherlands", "code" => "NL", "dial_code" => "+31"],
+            ["name" => "New Zealand", "code" => "NZ", "dial_code" => "+64"],
+            ["name" => "Nigeria", "code" => "NG", "dial_code" => "+234"],
+            ["name" => "Norway", "code" => "NO", "dial_code" => "+47"],
+            ["name" => "Pakistan", "code" => "PK", "dial_code" => "+92"],
+            ["name" => "Philippines", "code" => "PH", "dial_code" => "+63"],
+            ["name" => "Poland", "code" => "PL", "dial_code" => "+48"],
+            ["name" => "Portugal", "code" => "PT", "dial_code" => "+351"],
+            ["name" => "Qatar", "code" => "QA", "dial_code" => "+974"],
+            ["name" => "Russia", "code" => "RU", "dial_code" => "+7"],
+            ["name" => "Saudi Arabia", "code" => "SA", "dial_code" => "+966"],
+            ["name" => "Singapore", "code" => "SG", "dial_code" => "+65"],
+            ["name" => "South Africa", "code" => "ZA", "dial_code" => "+27"],
+            ["name" => "Spain", "code" => "ES", "dial_code" => "+34"],
+            ["name" => "Sweden", "code" => "SE", "dial_code" => "+46"],
+            ["name" => "Switzerland", "code" => "CH", "dial_code" => "+41"],
+            ["name" => "Thailand", "code" => "TH", "dial_code" => "+66"],
+            ["name" => "Turkey", "code" => "TR", "dial_code" => "+90"],
+            ["name" => "United Arab Emirates", "code" => "AE", "dial_code" => "+971"],
+            ["name" => "United Kingdom", "code" => "GB", "dial_code" => "+44"],
+            ["name" => "United States", "code" => "US", "dial_code" => "+1"],
+            ["name" => "Vietnam", "code" => "VN", "dial_code" => "+84"],
+            ["name" => "Yemen", "code" => "YE", "dial_code" => "+967"],
+            ["name" => "Zimbabwe", "code" => "ZW", "dial_code" => "+263"],
+            ["name" => "Nepal", "code" => "NP", "dial_code" => "+977"],
+
+        ];
+
+        return $phoneCode;
     }
 }

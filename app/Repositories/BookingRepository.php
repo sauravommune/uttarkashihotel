@@ -131,8 +131,6 @@ class BookingRepository extends BaseRepository
     public function addMultipleBooking($request)
     {
 
-        // dd($request->all());
-
         $searchId       = $request->search_id;
         $searchData     = SearchLog::findOrFail($searchId);
         $checkIn        = $searchData->checkin_date;
@@ -182,8 +180,8 @@ class BookingRepository extends BaseRepository
 
                 $ratePlanCount = $roomDetails->ratePlan->count();
 
-                $totalAmountEp = $roomDetails->ratePlan->sum('total_amount_ep') / $ratePlanCount;
-                $totalAmountCp = $roomDetails->ratePlan->sum('total_amount_cp') / $ratePlanCount;
+                $totalAmountEP = $roomDetails->ratePlan->sum('total_amount_ep') / $ratePlanCount;
+                $totalAmountCP = $roomDetails->ratePlan->sum('total_amount_cp') / $ratePlanCount;
                 $totalAmountMAP = $roomDetails->ratePlan->sum('total_amount_map') / $ratePlanCount;
                 $totalAmountAP = $roomDetails->ratePlan->sum('total_amount_ap') / $ratePlanCount;
 
@@ -200,57 +198,78 @@ class BookingRepository extends BaseRepository
                 $totalMarkupAP = $roomDetails->ratePlan->sum('markup_ap') / $ratePlanCount;
 
 
-                // start code  Extra person bedPrice 
+                // start code extra person price
+                $totalGest = $booking->total_guest;
+                $stayGuest = $roomDetails->stay_guest;
+                $roomCount = $booking->total_room;
 
-                // if ($roomDetails->ratePlan->count() > 0 && $roomDetails->ratePlan) {
-                //     $ratePlan = $roomDetails->ratePlan;
+                if ($roomDetails->ratePlan->count() > 0 && $roomDetails->ratePlan) {
 
-                //     // EP: Room Only
-                //     $personExtraBedPriceEp = personExtraBedPriceEp($ratePlan);
+                    $ratePlan = $roomDetails->ratePlan;
+                    // ✅ EP: Room Only
+                    $epData = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'ep');
+                    $extraPersonAmountEP   = ($epData['ep_average_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonCostEP     = ($epData['ep_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonMarkupEP   = ($epData['ep_extra_person_markup'] ?? 0) * $nights;
 
-                //     $totalAmountEp  = $totalAmountEp  + $personExtraBedPriceEp['ep_total_extra_person_price'] ?? 0;
-                //     $totalCostEP    = $totalCostEP    + $personExtraBedPriceEp['ep_extra_person_price'] ?? 0;
-                //     $totalMarkupEP  = $totalMarkupEP  + $personExtraBedPriceEp['ep_extra_person_markup'] ?? 0;
+                    // ✅ CP: With Breakfast
+                    $cpData = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'cp');
+                    $extraPersonAmountCP   = ($cpData['cp_average_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonCostCP     = ($cpData['cp_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonMarkupCP   = ($cpData['cp_extra_person_markup'] ?? 0) * $nights;
 
-                //     // CP: With Breakfast
-                //     $personExtraBedPriceCp = personExtraBedPriceCp($ratePlan);
-                //     $totalAmountCp  = $totalAmountCp  + $personExtraBedPriceCp['cp_total_extra_person_price'] ?? 0;
-                //     $totalCostCP    = $totalCostCP    + $personExtraBedPriceCp['cp_extra_person_price'] ?? 0;
-                //     $totalMarkupCP  = $totalMarkupCP  + $personExtraBedPriceCp['cp_extra_person_markup'] ?? 0;
+                    // ✅ MAP: With Breakfast + Dinner
+                    $mapData = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'map');
+                    $extraPersonAmountMAP  = ($mapData['map_average_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonCostMAP    = ($mapData['map_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonMarkupMAP  = ($mapData['map_extra_person_markup'] ?? 0) * $nights;
 
-                //     // MAP: With Breakfast + Dinner
-                //     $personExtraBedPriceMap = personExtraBedPriceMap($ratePlan);
-                //     $totalAmountMAP  = $totalAmountMAP  + $personExtraBedPriceMap['map_total_extra_person_price'] ?? 0;
-                //     $totalCostMAP    = $totalCostMAP    + $personExtraBedPriceMap['map_extra_person_price'] ?? 0;
-                //     $totalMarkupMAP  = $totalMarkupMAP  + $personExtraBedPriceMap['map_extra_person_markup'] ?? 0;
+                    // ✅ AP: With All Meals
+                    $apData = calculateExtraPersonPrice($ratePlan, $totalGest, $stayGuest, $roomCount, 'ap');
+                    $extraPersonAmountAP   = ($apData['ap_average_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonCostAP     = ($apData['ap_extra_person_price'] ?? 0) * $nights;
+                    $extraPersonMarkupAP   = ($apData['ap_extra_person_markup'] ?? 0) * $nights;
+                }
+            // end  code extra person price
 
-                //     // AP: With Breakfast + Dinner +Lunch
-                //     $personExtraBedPriceAp = personExtraBedPriceAp($ratePlan);
-                //     $totalAmountAP  = $totalAmountAP  + $personExtraBedPriceAp['ap_total_extra_person_price'] ?? 0;
-                //     $totalCostAP    = $totalCostAP   + $personExtraBedPriceAp['ap_extra_person_price'] ?? 0;
-                //     $totalMarkupAP  = $totalMarkupAP  + $personExtraBedPriceAp['ap_extra_person_markup'] ?? 0;
-                // }
-
-                // end code  Extra person bedPrice 
 
                 switch ($category) {
                     case 'Room Only':
 
-                        $totalPrice = $totalAmountEp * $nights;
+                        $extraPersonAmount = $extraPersonAmountEP;
+                        $extraPersonCost = $extraPersonCostEP;
+                        $extraPersonMarkup = $extraPersonMarkupEP;
+
+                        $totalPrice = $totalAmountEP * $nights;
                         $totalCost = $totalCostEP * $nights;
                         $totalMarkup = $totalMarkupEP * $nights;
                         break;
                     case 'With Breakfast':
-                        $totalPrice = $totalAmountCp * $nights;
+
+                        $extraPersonAmount = $extraPersonAmountCP;
+                        $extraPersonCost = $extraPersonCostCP;
+                        $extraPersonMarkup = $extraPersonMarkupCP;
+
+                        $totalPrice = $totalAmountCP * $nights;
                         $totalCost = $totalCostCP * $nights;
                         $totalMarkup = $totalMarkupCP * $nights;
                         break;
                     case 'With Breakfast Dinner':
-                        $totalPrice = $totalAmountMAP* $nights;
+
+                        $extraPersonAmount = $extraPersonAmountMAP;
+                        $extraPersonCost = $extraPersonCostMAP;
+                        $extraPersonMarkup = $extraPersonMarkupMAP;
+
+                        $totalPrice = $totalAmountMAP * $nights;
                         $totalCost = $totalCostMAP * $nights;
                         $totalMarkup = $totalMarkupMAP * $nights;
                         break;
                     case 'With Breakfast Lunch Dinner':
+
+                        $extraPersonAmount = $extraPersonAmountAP;
+                        $extraPersonCost = $extraPersonCostAP;
+                        $extraPersonMarkup = $extraPersonMarkupAP;
+
                         $totalPrice = $totalAmountAP * $nights;
                         $totalCost = $totalCostAP * $nights;
                         $totalMarkup = $totalMarkupAP * $nights;
@@ -258,6 +277,8 @@ class BookingRepository extends BaseRepository
                 }
             }
 
+
+            // dd($totalPrice * $quantity,$extraPersonAmount);
             $bookedRoomDetails[] = [
                 'lead_id'           => $booking->id,
                 'room_id'           => $roomId,
@@ -265,14 +286,14 @@ class BookingRepository extends BaseRepository
                 'room_category'     => $request->roomTypeId[$key],
                 'booking_id'        => $booking->booking_id,
                 'break_fast_type'   => $category,
-                'total_price'       => $totalPrice * $quantity,
-                'vendor_cost'       => $totalCost * $quantity,
-                'markup'            => $totalMarkup * $quantity,
+                'total_price'       => ($totalPrice * $quantity) + $extraPersonAmount,
+                'vendor_cost'       => ($totalCost * $quantity) + $extraPersonCost,
+                'markup'            => ($totalMarkup * $quantity) + $extraPersonMarkup,
                 'created_at'        => now(),
                 'updated_at'        => now(),
             ];
         }
-
+        // dd($bookedRoomDetails);
         DB::table('booked_room_details')->insert($bookedRoomDetails);
         return $booking->booking_id;
     }

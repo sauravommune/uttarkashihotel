@@ -21,8 +21,6 @@ class FrontController extends Controller
     public function index(FrontRepository $frontRepository)
     {
 
-
-
         $searchData = Session::get('searchData') ?? [];
 
         addVendors(['tinyMCE', 'jquery-validate']);
@@ -31,13 +29,16 @@ class FrontController extends Controller
         $popularHotel = $frontRepository->popularHotel();
 
 
+        // dd($searchData);
+
+
         return view('front.index', compact('city', 'searchData', 'popularHotel'));
     }
 
     public function makePayment()
     {
         return view('front.make-payment');
-    }
+    }   
 
     public function sortResult($request, $searchResult)
     {
@@ -191,6 +192,7 @@ class FrontController extends Controller
         } else {
             $amenityBedTyeData = $frontRepository->getAllAmenityBedType($searchResult);
             $viewPage = $agent->isDesktop() ? 'front.search-result' : 'front.search-result-md';
+
             return view($viewPage, compact('searchResult', 'citiesWithHotelCount', 'amenityBedTyeData', 'meta', 'searchData'));
         }
     }
@@ -199,10 +201,12 @@ class FrontController extends Controller
     {
 
         $searchId = $searchId ?? session('search_id');
+        $roomCount = session('roomCount',1);
 
         $agent = new Agent();
         $searchId = decode($searchId);
         $hotelDetails = $frontRepository->hotelDetails($slug, $searchId);
+
 
         $searchData = $hotelDetails['searchData'];
         if ($hotelDetails['status'] == false) {
@@ -210,12 +214,14 @@ class FrontController extends Controller
             return redirect(url('hotels-in-' . $searchData->city?->name));
         }
         $allAvailableRoom = $frontRepository->getAllAvailableRoomsWithHotels($slug, $searchData?->id);
+
         $citiesWithHotelCount = $frontRepository->getCityWithHotel();
         $meta = [
             'title' => $hotelDetails['details']?->hotelMeta?->meta_title ?? 'Book ' . $hotelDetails['details']?->name . ' Hotel in ' . $hotelDetails['details']?->cityDetails->name . ' - Get Best Deals on Hottel.in',
             'description' => $hotelDetails['details']?->hotelMeta?->meta_description ?? 'Book your stay at ' . $hotelDetails['details']?->name . ' Hotel in ' . $hotelDetails['details']?->cityDetails->name . ' on Hottel.in. Enjoy comfortable rooms, top-notch service, and the best deals for your stay.'
         ];
-        return view('front.hotel-detail', compact('agent', 'hotelDetails', 'searchData', 'allAvailableRoom', 'citiesWithHotelCount', 'meta'));
+
+        return view('front.hotel-detail-modify', compact('agent', 'hotelDetails', 'searchData', 'allAvailableRoom', 'citiesWithHotelCount', 'meta'));
     }
 
     public function addDetails($hotelId = null, $roomId = null, $roomTypeId = null, $searchId = null, FrontRepository $frontRepository)
@@ -229,11 +235,14 @@ class FrontController extends Controller
     public function searchRoom(Request $request, FrontRepository $frontRepository)
     {
 
-        // dd($request->all());
+
         $allAvailableRoom = $frontRepository->searchRoom($request);
         $roomId = $request->room_id;
         $searchId = !empty($allAvailableRoom['0']['search_id'])?encode($allAvailableRoom['0']['search_id']):'';
-        $html = view('front.search-room', compact('allAvailableRoom', 'roomId',))->render();
+                
+        // $html = view('front.search-room', compact('allAvailableRoom', 'roomId',))->render();
+        $html = view('front.search-room-modify', compact('allAvailableRoom', 'roomId',))->render();
+
         return response()->json(['status' => 200, 'data' => $html,'searchId'=>$searchId], 200);
     }
 

@@ -534,43 +534,71 @@ $(".hotel-reviews-google").slick({
             $dropdown.toggleClass("open", isOpen);
         });
 
+        
         // $dropdown.on("click", ".increment", function () {
         //     const type = $(this).data("type");
-        //     if (type === "adult") adultsCount = incrementCount(adultsCount);
+        //    if (type === "adult") adultsCount = incrementCount(adultsCount);
         //     if (type === "child") childrenCount = incrementCount(childrenCount);
-        //     if (type === "room") roomCount = incrementCount(roomCount);
+        //     if (type === "room"){
+        //         adultsCount=incrementCount(roomCount); 
+        //         roomCount = incrementCount(roomCount);
+        //       } 
         //     updateValues();
         // });
+
         // $dropdown.on("click", ".decrement", function () {
         //     const type = $(this).data("type");
         //     if (type === "adult") adultsCount = decrementCount(adultsCount, 1);
-        //     if (type === "child")
-        //         childrenCount = decrementCount(childrenCount, 0);
+        //     if (type === "child") childrenCount = decrementCount(childrenCount, 0);
         //     if (type === "room") roomCount = decrementCount(roomCount, 1);
         //     updateValues();
         // });
 
-        
-        $dropdown.on("click", ".increment", function () {
-            const type = $(this).data("type");
-           if (type === "adult") adultsCount = incrementCount(adultsCount);
-            if (type === "child") childrenCount = incrementCount(childrenCount);
-            if (type === "room"){
-                adultsCount=incrementCount(roomCount); 
-                roomCount = incrementCount(roomCount);
-              } 
-            updateValues();
-        });
+ function calculateRoomCount(adults) {
+             if (adults <= 3) return 1;
+             return Math.ceil((adults - 3) / 2) + 1;
+            }
 
-        $dropdown.on("click", ".decrement", function () {
-            const type = $(this).data("type");
-            if (type === "adult") adultsCount = decrementCount(adultsCount, 1);
-            if (type === "child") childrenCount = decrementCount(childrenCount, 0);
-            if (type === "room") roomCount = decrementCount(roomCount, 1);
-            updateValues();
-        });
+            $dropdown.on("click", ".increment", function () {
+                const type = $(this).data("type");
 
+                if (type === "adult") {
+                    adultsCount = incrementCount(adultsCount);
+                    roomCount = calculateRoomCount(adultsCount);
+                }
 
+                if (type === "child") {
+                    childrenCount = incrementCount(childrenCount);
+                }
+
+                if (type === "room") {
+                       adultsCount=incrementCount(roomCount); 
+                       roomCount = incrementCount(roomCount);
+                }
+
+                updateValues();
+            });
+
+            $dropdown.on("click", ".decrement", function () {
+                const type = $(this).data("type");
+
+                if (type === "adult") {
+                    adultsCount = decrementCount(adultsCount, 1);
+                    roomCount = calculateRoomCount(adultsCount);
+                }
+
+                if (type === "child") {
+                    childrenCount = decrementCount(childrenCount, 0);
+                    
+                }
+
+                if (type === "room") {
+                    roomCount = decrementCount(roomCount, 1); // Manual override
+                }
+
+                updateValues();
+            });
+            
         $dropdown.on("change", "select.child-age-select", function () {
             const $this = $(this);
             const selectedIndex = $this.closest(".child-age").index();

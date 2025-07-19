@@ -123,7 +123,7 @@
                                                     <div class="price-section mt-1">
                                                         <div class="price">
                                                             <b>₹ {{$room[$key]}}</b>
-                                                            <small class="ps-2">per night</small>
+                                                            <small class="ps-2">Per Night</small>
                                                         </div>
                                                     </div>
                                                 </div>
